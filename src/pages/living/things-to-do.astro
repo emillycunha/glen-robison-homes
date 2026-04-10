@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import { facts } from '../../data/facts.js';
+
+const faqs = [
+  {
+    q: 'Can you tube the Comal River year-round?',
+    a: `The Comal is spring-fed and runs at a steady 70°F twelve months of the year, so technically yes, but the commercial outfitters that rent tubes and run shuttles operate roughly May through September. Outside that window, locals still float on warm winter days, just without the rental infrastructure. The Guadalupe River, by contrast, is dam-released from Canyon Lake and varies with flow schedules, so its tubing season is more weather-dependent.`,
+    sources: facts.climate.sources,
+  },
+  {
+    q: 'Is Gruene Hall still open?',
+    a: `Yes. Gruene Hall has operated continuously since 1878, making it the oldest continually operating dance hall in Texas. It still hosts live music most nights, country, Americana, Texas singer-songwriter, and the occasional national act, and there's no cover for many afternoon sets. The historic Gruene district around the hall has restaurants, antique shops, and Guadalupe River access within walking distance.`,
+  },
+  {
+    q: "What's the best season to visit Canyon Lake?",
+    a: `Late spring through early fall is peak boating and lakeside dining season at Canyon Lake, with May and September often offering the best mix of warm water and lighter crowds. Winter is quieter but still beautiful for hiking the Guadalupe River trails and visiting the Heritage Museum. The lake sits about 15 minutes north of New Braunfels and is one of the cleanest, deepest reservoirs in Texas.`,
+  },
+  {
+    q: 'How crowded does Schlitterbahn get in summer?',
+    a: `Schlitterbahn is the largest waterpark in Texas and draws visitors from across the country, so July and early August weekends are the busiest. Locals know to go on weekday mornings or in late August once school starts back up. The park sits right on the Comal River, so even on busy days you can cool off in the natural river sections.`,
+  },
+  {
+    q: 'What is Wurstfest and when does it happen?',
+    a: `Wurstfest is a 10-day German heritage festival held each November in New Braunfels, and it's one of the largest of its kind in the United States. It celebrates the city's German founding heritage with food, music, dance halls, and a permanent festival grounds. For relocators, it's the single best snapshot of how seriously New Braunfels takes its history and how authentic the small-city culture really is.`,
+  },
+];
+---
+
+<Layout title="Things to Do in New Braunfels TX | Glen Robison" description="Schlitterbahn, the Comal and Guadalupe rivers, Gruene Hall, Hill Country wineries, and the lifestyle that draws people to New Braunfels.">
+  <PageHero
+    eyebrow="Lifestyle"
+    title="Things to Do in New Braunfels." image="/images/hero-things-to-do.png"
+    intro="Two rivers, the oldest dance hall in Texas, the largest waterpark in the state, and a Hill Country lifestyle most cities can't match."
+  >
+    <div class="quick-answer mt-10">
+      <p>New Braunfels offers a rare mix of river recreation (Comal and Guadalupe), the largest waterpark in Texas (Schlitterbahn), historic dance halls and music venues (Gruene Hall, since 1878), Hill Country wineries, and Canyon Lake just minutes away. It's a year-round destination for residents and the reason most tourists end up wanting to move here.</p>
+    </div>
+  </PageHero>
+
+  <!-- Detail 1: Rivers (image left) -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/comal-river-tubing.png" alt="Comal River tubing in New Braunfels" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">70 Degrees Year-Round</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">River Life</p>
+        <h2 class="mb-6">Two rivers. <span class="text-gold-bright">One city.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">The Comal River is spring-fed and holds a steady 70 degrees year-round, making it one of the most reliable recreational rivers in the state. It's also the shortest navigable river in Texas. From tube chutes and swim parks to shaded stretches where the current does the work, the Comal is the centerpiece of life in New Braunfels. Schlitterbahn, the largest waterpark in Texas, sits right on its banks.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">The Guadalupe River runs alongside the city as well, dam-released from Canyon Lake with longer tubing runs and a different character. Multiple outfitters operate shuttle services and tube rentals from May through September. Between the two rivers, New Braunfels has more accessible water recreation than any other city in the Hill Country.</p>
+        <a href="/contact" class="btn-outline">Plan a Visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 2: Gruene Hall & Music (image right) -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative md:order-2">
+        <img src="/images/gruene-hall.png" alt="Gruene Hall, oldest dance hall in Texas" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Since 1878</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">Music & History</p>
+        <h2 class="mb-6">The oldest dance hall <span class="text-gold-bright">in Texas.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Gruene Hall opened in 1878 and has operated continuously ever since, making it the oldest continually running dance hall in Texas. It hosts live music most nights of the week -- country, Americana, Texas singer-songwriter, and the occasional national touring act -- and many afternoon sets carry no cover charge. The hall itself is a Texas landmark, and the experience of hearing live music in a building older than the state's electric grid is hard to replicate anywhere else.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">The Gruene Historic District surrounding the hall is a destination in its own right, with restaurants, antique shops, and direct access to the Guadalupe River within walking distance. Beyond Gruene, New Braunfels hosts Wurstfest each November, a 10-day German heritage festival and one of the largest in the United States. The downtown district adds its own layer of live music, local dining, and seasonal events throughout the year.</p>
+        <a href="/living/why-move-to-new-braunfels" class="btn-outline">Why Move Here</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 3: Canyon Lake & Outdoors (image left) -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/canyon-lake.png" alt="Canyon Lake in the Texas Hill Country" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">15 Min North</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Lake & Outdoors</p>
+        <h2 class="mb-6">Canyon Lake. <span class="text-gold-bright">Wineries. Trails.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Canyon Lake sits about 15 minutes north of New Braunfels and is one of the cleanest, deepest reservoirs in Texas. Boating, lakeside dining, and swimming are the draw from spring through fall, and the Guadalupe River trails below the dam offer some of the best hiking in the region year-round. The lake is large enough to feel uncrowded even on summer weekends, and several marinas and parks provide easy public access.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">The Hill Country surrounding New Braunfels is home to dozens of wineries within a 30-mile drive, with tasting rooms and vineyard tours running through every season. Between the lake, the trails, and the wine country, the outdoor recreation here extends well beyond the rivers. For residents who want lake life without lake-town isolation, Canyon Lake delivers proximity to both water and a real city.</p>
+        <a href="/communities/canyon-lake" class="btn-outline">Explore Canyon Lake</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 4: Seasons / Climate (image right) -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative md:order-2">
+        <img src="/images/outdoor-living.png" alt="Hill Country outdoor living at sunset" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Year-Round Living</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">Climate</p>
+        <h2 class="mb-6">Nine months <span class="text-gold-bright">of outdoor living.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Summer is when New Braunfels becomes the city the rest of Texas visits. The Comal runs a steady 70 degrees, Schlitterbahn fills up, and the Guadalupe picks up its own tubing crowd. Average summer highs sit around {facts.climate.annualHigh} for the year and trend mid-90s in July and August, with {facts.climate.precipitation} of annual rainfall spread across about {facts.climate.precipDays} days. Locals shift to early mornings and late evenings -- rivers before 10 a.m., Gruene Hall outdoor sets and patio dinners after the heat breaks.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Fall through spring is the secret-best stretch. Wurstfest takes over for ten days each November, the Hill Country wineries run tasting events through the holidays, and average lows sit around {facts.climate.annualLow} with most January days topping out in the 60s. Spring brings wildflowers across the Hill Country, comfortable 70s and 80s, and the start of river season before the summer crowds arrive. Canyon Lake hiking, the wineries, and Gruene Hall all peak in usability during these shoulder months -- nine months of genuine outdoor living.</p>
+        <p class="text-dim text-xs">Source: <a href={facts.climate.sources[0].url} target="_blank" rel="noopener" class="text-gold">U.S. Climate Data</a></p>
+        <a href="/contact" class="btn-outline mt-6">Talk to Glen</a>
+      </div>
+    </div>
+  </section>
+
+  <FAQSection
+    eyebrow="Lifestyle FAQ"
+    title="Living the New Braunfels Lifestyle"
+    faqs={faqs}
+  />
+
+  <section class="py-20 bg-elevated border-t border-subtle">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="mb-6">Visit Before You Move?</h2>
+      <p class="text-muted mb-8">Glen can put together an area tour for relocators. Restaurants, neighborhoods, schools, and the spots locals actually go.</p>
+      <a href="/contact" class="btn-gold">Plan Your Visit</a>
+    </div>
+  </section>
+</Layout>

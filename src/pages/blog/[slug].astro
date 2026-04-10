@@ -1,0 +1,173 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTABand from '../../components/CTABand.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import { blogPosts } from '../../data/blog-posts.js';
+
+export function getStaticPaths() {
+  return blogPosts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+
+// Pick 3 other posts as related reads, prefer same category
+const relatedPosts = blogPosts
+  .filter(p => p.slug !== post.slug)
+  .sort((a, b) => {
+    const aMatch = a.category === post.category ? 0 : 1;
+    const bMatch = b.category === post.category ? 0 : 1;
+    return aMatch - bMatch;
+  })
+  .slice(0, 3);
+
+const relatedLinks = [
+  ...relatedPosts.map(p => ({
+    href: `/blog/${p.slug}`,
+    eyebrow: p.category,
+    label: p.title,
+    description: p.excerpt,
+  })),
+  { href: '/contact', eyebrow: 'Ready?', label: 'Talk to Glen', description: 'Same-day reply. Honest answers and real local expertise.' },
+];
+
+const formattedDate = new Date(post.pubDate + 'T00:00:00').toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const siteUrl = 'https://glenrobisonhomes.com';
+const postUrl = `${siteUrl}/blog/${post.slug}`;
+
+const blogPostingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.description,
+  datePublished: post.pubDate,
+  author: {
+    '@type': 'Person',
+    name: post.author,
+    url: siteUrl,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Glen Robison Homes',
+    url: siteUrl,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': postUrl,
+  },
+  articleSection: post.category,
+  keywords: post.tags?.join(', '),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
+    { '@type': 'ListItem', position: 3, name: post.title, item: postUrl },
+  ],
+};
+---
+
+<Layout title={`${post.title} | Glen Robison Homes`} description={post.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <!-- Hero -->
+  <section class="relative py-24 md:py-32 border-b border-hair overflow-hidden bg-deep">
+    <div class="absolute inset-0 opacity-[0.04]" style="background: radial-gradient(ellipse at top left, var(--color-gold) 0%, transparent 60%);"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-8">
+      <a href="/blog" class="text-gold text-xs uppercase tracking-wider hover:text-gold-bright font-semibold">← The Glen Robison Report</a>
+      <span class="gold-rule mt-8"></span>
+      <p class="eyebrow mb-5">{post.category}</p>
+      <h1 class="mb-8">{post.title}</h1>
+      <p class="text-muted text-lg leading-[1.65] mb-8">{post.excerpt}</p>
+      <p class="text-dim text-sm uppercase tracking-wider">
+        {formattedDate} · By {post.author}
+      </p>
+    </div>
+  </section>
+
+  <!-- Lead Answer -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-8">
+      <h2 class="mb-6">{post.title}</h2>
+      <p class="text-muted leading-[1.75] text-lg">{post.quickAnswer}</p>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <article class="pb-20">
+    <div class="max-w-3xl mx-auto px-8 space-y-14">
+      {post.content.map(section => (
+        <div>
+          <h2 class="mb-6">{section.h}</h2>
+          {section.p.split('\n\n').map(para => (
+            <p class="text-muted leading-[1.75] mb-5">{para}</p>
+          ))}
+        </div>
+      ))}
+    </div>
+  </article>
+
+  <!-- FAQs -->
+  {post.faqs && post.faqs.length > 0 && (
+    <FAQSection
+      faqs={post.faqs}
+      eyebrow="Reader Questions"
+      title="Frequently asked questions."
+    />
+  )}
+
+  <!-- Sources -->
+  {post.sources && post.sources.length > 0 && (
+    <section class="py-16 border-t border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <p class="eyebrow mb-5 text-dim">Sources</p>
+        <ul class="space-y-2 text-sm">
+          {post.sources.map(s => (
+            <li>
+              <a href={s.url} target="_blank" rel="noopener" class="text-gold hover:text-gold-bright">{s.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- Tags -->
+  {post.tags && post.tags.length > 0 && (
+    <section class="pb-20">
+      <div class="max-w-3xl mx-auto px-8">
+        <p class="eyebrow mb-5 text-dim">Tags</p>
+        <div class="flex flex-wrap gap-2">
+          {post.tags.map(tag => (
+            <span class="text-xs uppercase tracking-wider px-3 py-1 border border-hair text-muted rounded-full">{tag}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <RelatedLinks
+    eyebrow="More from the Blog"
+    title="Keep Reading."
+    links={relatedLinks}
+  />
+
+  <CTABand
+    eyebrow="Glen Robison · REALTOR"
+    title="Ready to find your Hill Country home?"
+    subtitle="Ten years in New Braunfels, Canyon Lake, and Garden Ridge. Honest answers, luxury Hill Country expertise, and the kind of local detail you cannot get from a portal."
+    primaryLabel="Contact Glen"
+    primaryHref="/contact"
+    secondaryLabel="Read More on the Blog"
+    secondaryHref="/blog"
+  />
+</Layout>

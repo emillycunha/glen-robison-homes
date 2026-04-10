@@ -1,0 +1,33 @@
+---
+interface LinkItem {
+  href: string;
+  label: string;
+  description?: string;
+  eyebrow?: string;
+}
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  links: LinkItem[];
+}
+const { eyebrow = 'Related', title = 'Keep Exploring.', links } = Astro.props;
+---
+
+<section class="py-20 border-t border-hair bg-elevated">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="mb-10">
+      <p class="eyebrow mb-4">{eyebrow}</p>
+      <h2>{title}</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {links.map(l => (
+        <a href={l.href} class="arch-card p-8 group block">
+          {l.eyebrow && <p class="eyebrow mb-4 text-dim">{l.eyebrow}</p>}
+          <h3 class="mb-3 group-hover:text-gold-bright transition-colors">{l.label}</h3>
+          {l.description && <p class="text-muted text-sm leading-[1.65]">{l.description}</p>}
+          <div class="mt-5 eyebrow text-[10px] text-gold group-hover:text-gold-bright">Read →</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

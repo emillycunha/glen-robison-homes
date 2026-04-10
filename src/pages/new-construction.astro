@@ -1,0 +1,254 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQSection from '../components/FAQSection.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import { neighborhoods } from '../data/neighborhoods.js';
+
+const newBuildHoods = neighborhoods.filter(n => n.construction && n.construction.toLowerCase().includes('new construction'));
+
+const newConstRelated = [
+  { href: '/neighborhoods/vintage-oaks', eyebrow: 'Master-Planned', label: 'Vintage Oaks', description: '3,900-acre community with multiple custom builders on 1+ acre homesites.' },
+  { href: '/neighborhoods/mayfair', eyebrow: 'New Community', label: 'Mayfair', description: 'Perry Homes, Coventry, Toll Brothers, Scott Felder. $361K – $700K+.' },
+  { href: '/neighborhoods/veramendi', eyebrow: 'Master-Planned', label: 'Veramendi', description: '2,400-acre NBISD-zoned community with 10+ active builders.' },
+  { href: '/buyers', eyebrow: 'Why It Matters', label: "Why Use a Buyer's Agent for New Build", description: 'The on-site agent works for the builder. Glen works for you, at no extra cost.' },
+];
+
+const newConstructionFaqs = [
+  {
+    q: "Do I need a buyer's agent if I'm buying new construction?",
+    a: "Yes. The on-site sales agent at the model home works for the builder, not for you. The builder pays your buyer's agent commission either way, so bringing your own representation costs you nothing and gives you someone in your corner on contract review, upgrade pricing, inspections, and warranty enforcement. Just make sure your agent walks in with you on your very first visit, most builders require it."
+  },
+  {
+    q: "How are builder contracts different from a standard TREC contract?",
+    a: "Builder contracts are drafted by the builder's attorneys, not TREC. They typically have no option period, larger and sometimes non-refundable earnest money, limited inspection rights, weaker financing protections, and delay clauses that don't penalize the builder if your move-in slips by months. Glen reads every page before you sign and flags the terms worth pushing back on."
+  },
+  {
+    q: "Can I actually negotiate with a builder?",
+    a: "Yes, just not always on the sticker price. Builders protect base prices to keep their comps strong, but they'll often negotiate on upgrades, design center allowances, closing cost contributions, and rate buy-downs. Spec homes that have been sitting, end-of-quarter timing, and slower months give you the most leverage."
+  },
+  {
+    q: "Do I still need an independent inspection on a brand-new home?",
+    a: "Absolutely. Phase inspections (pre-drywall and final walkthrough) plus a foundation check from your own inspector, not the builder's, catch issues that the builder's QC will miss. Because builder contracts limit your ability to renegotiate after the fact, the inspection report is your best tool for getting fixes documented before you close."
+  },
+  {
+    q: "What kind of warranty comes with a new build in Texas?",
+    a: "Most Texas builders offer a 1-2-10 warranty: one year on workmanship and materials, two years on systems (plumbing, electrical, HVAC), and ten years on major structural defects. Texas law requires a minimum of six years of structural coverage. Read the warranty document carefully, what counts as a 'covered defect' is narrower than most buyers expect."
+  },
+  {
+    q: "What are the biggest new construction communities in New Braunfels right now?",
+    a: "The 78130 and 78132 zip codes are leading growth, with around 66 active communities, 1,400+ new homes in inventory, and 29 builders working the market. Sunflower Ridge starts near $349,990, Veramendi from around $406,990, and the broader median lands close to $390,000. The full price band runs from roughly $192,000 to $800,000 depending on community, lot, and finish level."
+  },
+  {
+    q: "How long does it take to build a new home?",
+    a: "Production builds typically run 6-9 months from contract to move-in, with another 1-3 months possible if you hit weather delays, supply issues, or significant upgrades. Spec homes that are already framed or finished can close in weeks. Custom builds are a different timeline conversation, usually 12-18 months once plans are finalized."
+  },
+  {
+    q: "Should I use the builder's preferred lender?",
+    a: "Sometimes yes, sometimes no. Builder incentives like closing cost credits or upgrade allowances often only apply if you finance through their preferred lender, but those incentives can mask higher rates or fees that cost tens of thousands over the life of the loan. RESPA forbids builders from requiring you to use their lender. Shop your own lender first, then take the best independent quote back to the builder and ask them to match the incentive."
+  }
+];
+---
+
+<Layout
+  title="New Construction Homes in New Braunfels TX | Glen Robison"
+  description="New construction homes and custom builds in New Braunfels, TX. Vintage Oaks, Copper Ridge, Havenwood, and other communities with active builders."
+>
+  <PageHero
+    eyebrow="New Construction"
+    title="Building New in New Braunfels." image="/images/hero-new-construction.png"
+    intro="Builder representation from contract review through warranty follow-through, so the on-site agent's contract doesn't become your problem."
+  >
+    <div class="quick-answer mt-10">
+      <p>New construction in New Braunfels is concentrated in master-planned communities like Vintage Oaks, Havenwood at Hunters Crossing, Mayfair, Veramendi, and Copper Ridge. The on-site sales agent at the model home works for the builder, Glen works for you, at no additional cost, because the builder pays the commission either way. Ten years and 160+ closed sales in the Hill Country, with a contract-negotiation background that shows up on every builder addendum.</p>
+    </div>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/contact" class="btn-gold">Talk to Glen</a>
+      <a href="#new-build-neighborhoods" class="btn-outline">Browse New Builds</a>
+    </div>
+  </PageHero>
+
+  <!-- 3-STEP PROCESS CARDS -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-5">The Process</p>
+        <h2>Three Steps. <span class="text-gold-bright">No Surprises.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">01</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Builder Selection</h3>
+          <p class="text-muted leading-[1.7] text-base">Glen vets builders, compares communities, and walks you through which ones negotiate, which ones don't, and which floor plans and lot positions actually hold value. First visits happen with Glen in the room, most builders require it.</p>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">02</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Contract Review</h3>
+          <p class="text-muted leading-[1.7] text-base">Builder contracts are not TREC contracts. Glen reads every page, flags the terms with room to move, and negotiates upgrades, design center allowances, rate buy-downs, and closing cost concessions before you sign.</p>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">03</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Walkthrough & Closing</h3>
+          <p class="text-muted leading-[1.7] text-base">Independent phase inspections (pre-drywall and final), a real punch list, warranty documentation, and closing day coordination. Glen stays in the loop through the 1-2-10 warranty period after you move in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inline resources -->
+  <section class="py-20 border-t border-hair">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="mb-10 text-center">
+        <p class="eyebrow mb-4">Free Resources</p>
+        <h2>Tools to <span class="text-gold-bright">get started.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="/buyers-guide" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Unlock Free</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Buyer's Guide</h3>
+          <p class="text-muted leading-[1.65] mb-6">Financing, inspections, contracts, closing. Unlock the full guide with one email.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Unlock →</span>
+        </a>
+        <a href="/tools/mortgage-calculator" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Calculator</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Mortgage Payment</h3>
+          <p class="text-muted leading-[1.65] mb-6">Estimate your monthly payment with principal, interest, taxes, and insurance.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Run Numbers →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW BUILD NEIGHBORHOOD GRID -->
+  <section id="new-build-neighborhoods" class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-5">Where It's Happening</p>
+        <h2>Active new <span class="text-gold-bright">construction communities.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mt-6">Several New Braunfels communities have active new construction or ongoing custom builds. Each one has a different mix of builders, lot sizes, and price points.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {newBuildHoods.map(n => (
+          <a href={`/neighborhoods/${n.slug}`} class="bg-card border border-hair hover:border-[var(--color-gold-dim)] p-8 transition-all group">
+            <p class="text-gold text-[10px] font-semibold uppercase tracking-[0.2em] mb-3">{n.priceRange}</p>
+            <h3 class="mb-3 group-hover:text-gold-bright transition-colors">{n.name}</h3>
+            <p class="text-muted text-sm leading-relaxed line-clamp-3">{n.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 1: image left -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/havenwood.png" alt="Havenwood at Hunters Crossing new construction" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Buyer's Side Only</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Why Use a Buyer's Agent</p>
+        <h2 class="mb-6">The on-site agent <span class="text-gold-bright">works for the builder.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">The person sitting in the model home is a builder employee. Their job is to protect the base price, sell the upgrades that move the needle for the builder, and steer you toward the contract terms the builder prefers. They are not representing you, and in Texas, they are not required to.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Bringing Glen in costs you nothing additional. The builder pays the buyer's agent commission either way, so you pick up an advocate on contract review, upgrade negotiation, inspection rights, financing terms, and warranty follow-through. Important detail, most builders require your agent to walk in with you on the very first visit, so loop Glen in before you ever step into a model home.</p>
+        <a href="/about" class="btn-outline">About Glen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 2: image right -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="md:order-2 relative">
+        <img src="/images/mayfair.png" alt="Mayfair master-planned community builder contracts" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Contract Pitfalls</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">What to Watch For</p>
+        <h2 class="mb-6">What most buyers <span class="text-gold-bright">miss at signing.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Builder contracts are drafted by the builder's attorneys to protect the builder. Preferred-lender clauses quietly tie closing-cost credits to a rate that may not be competitive. Change-order pricing can balloon well past the design center estimate, and most contracts cap how many changes you can make once construction starts. Completion deadlines almost always favor the builder, with no penalty if your move-in slips by months.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Earnest money behaves differently too. In a resale, the Texas option period gives you a clean out. In a builder contract there often is no option period, and earnest money can shift from refundable to non-refundable the moment construction begins. Glen reads every page, pushes back on the terms with room to move, and makes sure you understand exactly what you're agreeing to before you sign.</p>
+        <a href="/contact" class="btn-outline">Talk to Glen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 3: image left -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/vintage-oaks.png" alt="Vintage Oaks custom home on acreage" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Production · Custom</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Build Types</p>
+        <h2 class="mb-6">Production, semi-custom, <span class="text-gold-bright">or fully custom.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Production builders like Perry Homes, Coventry, and Pulte sell fixed floor plans on builder-owned lots inside master-planned communities. You pick a plan, pick a lot, pick from a pre-set design center menu, and the build runs on a tight 6-9 month timeline. Pricing is the most predictable and cost-per-foot is the lowest, but flexibility is limited.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Semi-custom builders like Scott Felder give you room to move walls, swap rooflines, and pick finishes outside the standard menu. Fully custom builders work from your plans on a lot you own, the right call for acreage homesites in Vintage Oaks, River Chase, or Copper Ridge, but expect a 12-18 month timeline once plans are finalized and budget for the construction loan and draw schedule.</p>
+        <a href="/neighborhoods" class="btn-outline">Browse Neighborhoods</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF / STATS BAND -->
+  <section class="py-24 bg-deep">
+    <div class="max-w-5xl mx-auto px-8 text-center">
+      <p class="eyebrow mb-6">The Track Record</p>
+      <h2 class="mb-12">A decade of <span class="text-gold-bright">happy clients.</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">10</div>
+          <p class="eyebrow text-dim mt-3">Years</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">160+</div>
+          <p class="eyebrow text-dim mt-3">Sales</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]"><span class="text-4xl md:text-5xl align-middle mr-2">★</span>5.0</div>
+          <p class="eyebrow text-dim mt-3">Zillow</p>
+        </div>
+      </div>
+      <a href="/testimonials" class="btn-outline mt-12">Read Reviews</a>
+    </div>
+  </section>
+
+  <FAQSection
+    eyebrow="New Construction FAQ"
+    title="What New Build Buyers Ask Most."
+    subtitle="The questions Glen hears most often from buyers shopping new builds in the Hill Country."
+    faqs={newConstructionFaqs}
+  />
+
+  <RelatedLinks
+    eyebrow="Active New Builds"
+    title="Where to look first."
+    links={newConstRelated}
+  />
+
+  <CTABand
+    eyebrow="Building New in New Braunfels?"
+    title="Talk to Glen Before You Sign."
+    subtitle="Loop Glen in before your first model-home visit. Builder representation costs you nothing and saves you from signing a contract you didn't fully understand."
+    primaryLabel="Talk to Glen"
+    primaryHref="/contact"
+    secondaryLabel="Browse Neighborhoods"
+    secondaryHref="/neighborhoods"
+  />
+</Layout>

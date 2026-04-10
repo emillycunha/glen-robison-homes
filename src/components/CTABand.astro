@@ -1,0 +1,34 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+const {
+  eyebrow,
+  title,
+  subtitle,
+  primaryLabel = 'Contact Glen',
+  primaryHref = '/contact',
+  secondaryLabel,
+  secondaryHref,
+} = Astro.props;
+---
+
+<section class="relative py-24 bg-deep border-y border-hair overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.04]" style="background: radial-gradient(ellipse at center, var(--color-gold) 0%, transparent 55%);"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-8 text-center">
+    {eyebrow && <p class="eyebrow mb-6">{eyebrow}</p>}
+    <h2 class="mb-6">{title}</h2>
+    {subtitle && <p class="text-muted text-base md:text-lg mb-10 max-w-2xl mx-auto leading-[1.65]">{subtitle}</p>}
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href={primaryHref} class="btn-gold">{primaryLabel}</a>
+      {secondaryLabel && secondaryHref && <a href={secondaryHref} class="btn-outline">{secondaryLabel}</a>}
+    </div>
+  </div>
+</section>

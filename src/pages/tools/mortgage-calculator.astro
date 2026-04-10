@@ -1,0 +1,328 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQSection from '../../components/FAQSection.astro';
+
+const faqs = [
+  {
+    q: "How is the monthly payment calculated?",
+    a: "The calculator uses the standard amortization formula to compute principal and interest. It then adds estimated monthly property tax (based on 2.2% of home value for Comal County) and homeowner's insurance to give you a full PITI payment estimate.",
+  },
+  {
+    q: "What is the average property tax rate in New Braunfels?",
+    a: "Property tax rates in New Braunfels and Comal County typically range from 1.8% to 2.5% of assessed value, depending on the school district and any special districts. This calculator uses 2.2% as a default estimate. Your actual rate may vary based on location and exemptions.",
+  },
+  {
+    q: "How much down payment do I need?",
+    a: "Conventional loans typically require 5-20% down. FHA loans can go as low as 3.5%. VA and USDA loans may require no down payment at all. A larger down payment lowers your monthly payment and may help you avoid private mortgage insurance (PMI). Glen can connect you with lenders who offer programs tailored to your situation.",
+  },
+  {
+    q: "Should I choose a 15-year or 30-year mortgage?",
+    a: "A 15-year mortgage has higher monthly payments but significantly lower total interest. A 30-year mortgage keeps payments manageable and gives you more cash flow flexibility. Use the term buttons above to compare both options side by side. Many New Braunfels buyers choose the 30-year for flexibility, especially with today's rates.",
+  },
+  {
+    q: "Does this calculator include HOA fees?",
+    a: "No. This calculator estimates principal, interest, taxes, and insurance only. Many New Braunfels communities (especially gated neighborhoods and master-planned developments) have HOA fees that can range from $50 to $500+ per month. Glen can provide HOA details for specific communities you're considering.",
+  },
+  {
+    q: "How accurate is this estimate?",
+    a: "This gives you a solid ballpark. Your actual payment depends on your credit score, loan type, lender fees, exact tax assessment, insurance quotes, and any PMI. For a precise number, get pre-approved with a lender. Glen works with several trusted local lenders and is happy to make an introduction.",
+  },
+];
+---
+
+<Layout title="Mortgage Calculator | New Braunfels TX | Glen Robison" description="Estimate your monthly mortgage payment for a New Braunfels home. Includes principal, interest, taxes, and insurance.">
+  <PageHero
+    eyebrow="For Buyers"
+    title="Mortgage Calculator."
+    image="/images/nb-family-neighborhood.png"
+    intro="Estimate your monthly payment on a New Braunfels home — principal, interest, taxes, and insurance."
+  />
+
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+        <!-- LEFT: Loan Details -->
+        <div class="lg:col-span-3 bg-card border border-subtle p-8 md:p-10">
+          <h2 class="text-xl mb-8 flex items-center gap-3">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 0h.008v.008h-.008V7.5z"/></svg>
+            Loan Details
+          </h2>
+
+          <!-- Home Price -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955a1.126 1.126 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                Home Price
+              </label>
+              <span class="font-display text-lg text-text font-bold" id="price-display">$500,000</span>
+            </div>
+            <input type="range" id="price" min="100000" max="5000000" step="10000" value="500000" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>$100K</span><span>$5M</span>
+            </div>
+          </div>
+
+          <!-- Down Payment -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+                Down Payment (<span id="down-pct">20</span>%)
+              </label>
+              <span class="font-display text-lg text-text font-bold" id="down-display">$100,000</span>
+            </div>
+            <input type="range" id="down" min="0" max="50" step="1" value="20" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>0%</span><span>50%</span>
+            </div>
+          </div>
+
+          <!-- Interest Rate -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 14.25 6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0z"/></svg>
+                Interest Rate
+              </label>
+              <span class="font-display text-lg text-text font-bold" id="rate-display">6.5%</span>
+            </div>
+            <input type="range" id="rate" min="1" max="12" step="0.1" value="6.5" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>1%</span><span>12%</span>
+            </div>
+          </div>
+
+          <!-- Loan Term -->
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+                Loan Term
+              </label>
+              <span class="font-display text-lg text-text font-bold" id="term-display">30 Years</span>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <button class="term-btn py-3 text-sm font-semibold tracking-wider uppercase border border-subtle text-muted hover:border-gold hover:text-gold transition-all" data-years="15">15 Yrs</button>
+              <button class="term-btn py-3 text-sm font-semibold tracking-wider uppercase border border-subtle text-muted hover:border-gold hover:text-gold transition-all" data-years="20">20 Yrs</button>
+              <button class="term-btn py-3 text-sm font-semibold tracking-wider uppercase border border-gold bg-gold text-[#0a0a0a] font-bold transition-all" data-years="30">30 Yrs</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Results -->
+        <div class="lg:col-span-2 flex flex-col gap-6">
+
+          <!-- Monthly Payment -->
+          <div class="bg-card border border-gold/30 p-8">
+            <p class="text-dim text-xs uppercase tracking-[0.2em] mb-3">Estimated Monthly Payment</p>
+            <p class="font-display text-5xl md:text-[3.5rem] text-gold-bright font-bold leading-none" id="result">$0</p>
+            <div class="mt-6 space-y-3">
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Principal & Interest</span>
+                <span class="text-text font-semibold" id="pi">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Property Tax (Est.)</span>
+                <span class="text-text font-semibold" id="t">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-muted text-sm">Home Insurance (Est.)</span>
+                <span class="text-text font-semibold" id="i">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loan Summary -->
+          <div class="bg-card border border-subtle p-8">
+            <h3 class="text-base mb-5 flex items-center gap-2">
+              <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125z"/></svg>
+              Loan Summary
+            </h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Loan Amount</span>
+                <span class="text-text font-semibold" id="loan">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Total Interest</span>
+                <span class="text-text font-semibold" id="total-interest">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-muted text-sm">Total Cost</span>
+                <span class="text-text font-bold text-gold-bright" id="total-cost">$0</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <p class="text-dim text-xs mt-8 text-center max-w-2xl mx-auto">Estimates only. Actual payment depends on credit, lender, HOA, and other factors. Property tax estimated at 2.2% (Comal County average). Insurance estimated at $1,500/yr.</p>
+    </div>
+  </section>
+
+  <!-- Get Your Free Report -->
+  <section class="py-24 border-t border-hair">
+    <div class="max-w-2xl mx-auto px-8 text-center">
+      <p class="eyebrow mb-5">Free Report</p>
+      <h2 class="mb-4">Get a Personalized Estimate</h2>
+      <p class="text-muted text-base leading-[1.65] mb-10">Enter your details to receive a personalized mortgage report and expert advice from Glen, including lender recommendations tailored to New Braunfels buyers.</p>
+
+      <form id="report-form" class="max-w-lg mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <input type="text" name="first_name" placeholder="First Name" required class="w-full bg-elevated border border-subtle px-4 py-3 text-text text-sm placeholder:text-dim focus:border-[var(--color-gold)] outline-none" />
+          <input type="text" name="last_name" placeholder="Last Name" required class="w-full bg-elevated border border-subtle px-4 py-3 text-text text-sm placeholder:text-dim focus:border-[var(--color-gold)] outline-none" />
+        </div>
+        <input type="email" name="email" placeholder="Email Address" required class="w-full bg-elevated border border-subtle px-4 py-3 text-text text-sm placeholder:text-dim focus:border-[var(--color-gold)] outline-none mb-4" />
+        <input type="tel" name="phone" placeholder="Phone (optional)" class="w-full bg-elevated border border-subtle px-4 py-3 text-text text-sm placeholder:text-dim focus:border-[var(--color-gold)] outline-none mb-6" />
+        <button type="submit" class="btn-gold w-full justify-center">Get My Free Report</button>
+      </form>
+
+      <p class="text-dim text-xs mt-6">Glen will respond within 24 hours. No spam, no pressure.</p>
+    </div>
+  </section>
+
+  <FAQSection
+    faqs={faqs}
+    eyebrow="Mortgage FAQ"
+    title="Frequently Asked Questions"
+    subtitle="Common questions about financing a home in New Braunfels and the Texas Hill Country."
+  />
+
+  <style>
+    .slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: var(--color-border);
+      outline: none;
+      border-radius: 0;
+      cursor: pointer;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--color-gold);
+      border: 2px solid var(--color-bg-card);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(193, 154, 87, 0.3);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 14px rgba(193, 154, 87, 0.5);
+    }
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: var(--color-gold);
+      border: 2px solid var(--color-bg-card);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(193, 154, 87, 0.3);
+    }
+    .slider {
+      background: linear-gradient(
+        to right,
+        var(--color-gold) 0%,
+        var(--color-gold) var(--fill, 50%),
+        var(--color-border) var(--fill, 50%),
+        var(--color-border) 100%
+      );
+    }
+  </style>
+
+  <script>
+    const fmt = (n: number) => '$' + Math.round(n).toLocaleString();
+    const fmtDec = (n: number) => '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const priceEl = document.getElementById('price') as HTMLInputElement;
+    const downEl = document.getElementById('down') as HTMLInputElement;
+    const rateEl = document.getElementById('rate') as HTMLInputElement;
+
+    let termYears = 30;
+
+    function updateSliderFill(el: HTMLInputElement) {
+      const min = parseFloat(el.min);
+      const max = parseFloat(el.max);
+      const val = parseFloat(el.value);
+      const pct = ((val - min) / (max - min)) * 100;
+      el.style.setProperty('--fill', pct + '%');
+    }
+
+    function calc() {
+      const price = +priceEl.value || 0;
+      const downPct = +downEl.value || 0;
+      const downAmt = price * (downPct / 100);
+      const rate = (+rateEl.value || 0) / 100 / 12;
+      const term = termYears * 12;
+
+      const taxRate = 0.022;
+      const insYearly = 1500;
+
+      const loan = price - downAmt;
+      const pi = rate > 0 ? loan * (rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1) : (term > 0 ? loan / term : 0);
+      const tax = (price * taxRate) / 12;
+      const insMonth = insYearly / 12;
+      const total = pi + tax + insMonth;
+
+      const totalInterest = (pi * term) - loan;
+      const totalCost = pi * term + (tax + insMonth) * term;
+
+      (document.getElementById('price-display') as HTMLElement).textContent = fmt(price);
+      (document.getElementById('down-display') as HTMLElement).textContent = fmt(downAmt);
+      (document.getElementById('down-pct') as HTMLElement).textContent = String(downPct);
+      (document.getElementById('rate-display') as HTMLElement).textContent = (+rateEl.value).toFixed(1) + '%';
+
+      (document.getElementById('result') as HTMLElement).textContent = fmtDec(total);
+      (document.getElementById('pi') as HTMLElement).textContent = fmtDec(pi);
+      (document.getElementById('t') as HTMLElement).textContent = fmtDec(tax);
+      (document.getElementById('i') as HTMLElement).textContent = fmtDec(insMonth);
+      (document.getElementById('loan') as HTMLElement).textContent = fmt(loan);
+      (document.getElementById('total-interest') as HTMLElement).textContent = fmtDec(totalInterest > 0 ? totalInterest : 0);
+      (document.getElementById('total-cost') as HTMLElement).textContent = fmtDec(totalCost > 0 ? totalCost : 0);
+
+      updateSliderFill(priceEl);
+      updateSliderFill(downEl);
+      updateSliderFill(rateEl);
+    }
+
+    [priceEl, downEl, rateEl].forEach(el => el.addEventListener('input', calc));
+
+    document.querySelectorAll('.term-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        termYears = parseInt((btn as HTMLElement).dataset.years || '30');
+        (document.getElementById('term-display') as HTMLElement).textContent = termYears + ' Years';
+        document.querySelectorAll('.term-btn').forEach(b => {
+          b.className = 'term-btn py-3 text-sm font-semibold tracking-wider uppercase border border-subtle text-muted hover:border-gold hover:text-gold transition-all';
+        });
+        btn.className = 'term-btn py-3 text-sm font-semibold tracking-wider uppercase border border-gold bg-gold text-[#0a0a0a] font-bold transition-all';
+        calc();
+      });
+    });
+
+    // Report form
+    const reportForm = document.getElementById('report-form') as HTMLFormElement;
+    reportForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(reportForm);
+      const name = data.get('first_name');
+      const email = data.get('email');
+      const phone = data.get('phone') || '';
+      const subject = encodeURIComponent('Mortgage Calculator Report Request');
+      const body = encodeURIComponent(
+        `Name: ${data.get('first_name')} ${data.get('last_name')}\nEmail: ${email}\nPhone: ${phone}\n\nRequesting a personalized mortgage estimate from the calculator page.`
+      );
+      window.location.href = `mailto:glenrobison@gmail.com?subject=${subject}&body=${body}`;
+      reportForm.reset();
+    });
+
+    calc();
+  </script>
+</Layout>

@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<Layout title="Free Relocation Guide | New Braunfels TX | Glen Robison" description="Unlock Glen's complete relocation guide for moving to New Braunfels and the Texas Hill Country.">
+  <PageHero eyebrow="Free Guide" title="The New Braunfels Relocation Guide." image="/images/hero-why-move.png" intro="The complete relocation guide for buyers moving from out of state, Austin, or San Antonio. Enter your email to unlock the full guide." />
+
+  <section class="py-20">
+    <div class="max-w-2xl mx-auto px-8">
+      <div class="bg-card border border-hair p-10">
+        <p class="eyebrow mb-4">Unlock the Guide</p>
+        <h2 class="mb-4">One email. Instant access.</h2>
+        <p class="text-muted leading-[1.65] mb-8">No downloads, no PDFs. Enter your email and the full guide unlocks on this page, ready to read.</p>
+        <form class="space-y-4">
+          <input type="text" placeholder="Name" class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
+          <input type="email" placeholder="Email" class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
+          <button type="submit" class="btn-gold w-full">Unlock the Guide</button>
+          <p class="text-dim text-xs text-center">TODO: Wire to GHL, set cookie, reveal full guide content below on submit.</p>
+        </form>
+      </div>
+
+      <div class="mt-10 text-center text-dim text-sm">
+        Once unlocked, you'll see the full Relocation Guide inline, cost of living, taxes, schools, neighborhoods, and a week-by-week timeline for moving to the Hill Country.
+      </div>
+    </div>
+  </section>
+</Layout>

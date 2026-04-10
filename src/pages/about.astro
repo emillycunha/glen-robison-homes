@@ -1,0 +1,251 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQSection from '../components/FAQSection.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+
+const aboutRelated = [
+  { href: '/buyers', eyebrow: 'For Buyers', label: 'Buyer Representation', description: 'How Glen helps buyers find the right home in the New Braunfels market.' },
+  { href: '/luxury', eyebrow: 'Luxury', label: 'Luxury Homes', description: 'Gated communities, ridgetop estates, and Hill Country acreage.' },
+  { href: '/testimonials', eyebrow: 'Reviews', label: 'Client Reviews', description: 'Verified 5-star reviews from buyers and sellers Glen has represented.' },
+  { href: '/contact', eyebrow: 'Talk', label: 'Contact Glen', description: 'Same-day reply. Direct line, no phone tree.' },
+];
+
+const aboutFaqs = [
+  {
+    q: "How long has Glen been a REALTOR?",
+    a: "Ten years. Glen left a career as an oil and gas land agent and moved into residential real estate in 2016. He's been licensed and active in the New Braunfels market every year since.",
+  },
+  {
+    q: "What brokerage is Glen with?",
+    a: "Glen is a REALTOR with Popby Realty in New Braunfels, Texas. His Texas real estate license number is #0676313.",
+  },
+  {
+    q: "Does Glen represent buyers and sellers?",
+    a: "Yes. Glen works with both. Buyers get a REALTOR who walks every property, pulls real comps, and negotiates hard. Sellers get someone who prices the home right, markets it well, and brings real buyers to the door. Whichever side you're on, you get his full attention.",
+  },
+  {
+    q: "What makes Glen different from other New Braunfels REALTORs?",
+    a: "Three things: a contract-negotiation background from his pre-real-estate career, ten years of closed sales (160+ and counting) in this specific market, and the kind of straight-talk most agents skip. He picks up the phone, walks every property, and tells you the truth.",
+  },
+  {
+    q: "Where does Glen serve?",
+    a: "New Braunfels, Canyon Lake, Garden Ridge, Gruene, and the broader Texas Hill Country. He works the corridor between Austin and San Antonio and knows the neighborhood-level differences across Comal County and parts of Guadalupe County.",
+  },
+  {
+    q: "Is Glen a luxury specialist?",
+    a: "Yes. While he handles transactions across price points, the luxury market, Vintage Oaks, Copper Ridge, Riverforest, River Chase, and Hill Country acreage, is where most of his work is. The custom builds, the bigger stakes, and the more complex deals are the part he loves.",
+  },
+];
+---
+
+<Layout
+  title="About Glen Robison | New Braunfels REALTOR"
+  description="Glen Robison is a REALTOR with Popby Realty in New Braunfels, TX. Ten years of experience, 160+ closed sales, and a 5.0 rating on Zillow."
+>
+  <PageHero
+    eyebrow="About"
+    title="Glen Robison." image="/images/hero-about.png"
+    intro="REALTOR with Popby Realty in New Braunfels. Luxury Hill Country specialist. Ten years helping people buy and sell homes the right way."
+  >
+    <div class="quick-answer mt-10">
+      <p>Glen is a REALTOR with Popby Realty in New Braunfels. Before real estate, he worked oil and gas as a landman, running title research and contract negotiations across Texas. In 2016 he moved into residential real estate and hasn't looked back. Today he focuses on luxury homes in the Hill Country, with 160+ closed sales and a verified 5.0 rating on Zillow.</p>
+    </div>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/contact" class="btn-gold">Talk to Glen</a>
+      <a href="/testimonials" class="btn-outline">Read Reviews</a>
+    </div>
+  </PageHero>
+
+  <!-- HEADSHOT + 3 PRINCIPLES -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[400px_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img
+          src="/images/glen-headshot.png"
+          alt="Glen Robison, REALTOR with Popby Realty in New Braunfels, TX"
+          class="w-full aspect-[4/5] object-cover border border-hair"
+        />
+        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[var(--color-bg)] border border-hair py-3 px-5 whitespace-nowrap">
+          <p class="eyebrow text-gold-bright">Glen Robison · REALTOR</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="space-y-10">
+          <div>
+            <div class="flex items-baseline gap-4 mb-3">
+              <span class="font-display font-extrabold text-3xl text-gold">01</span>
+              <div class="h-px flex-1 bg-gold-deep"></div>
+            </div>
+            <h3 class="mb-3">Honest Answers</h3>
+            <p class="text-muted leading-[1.7] text-base">Glen tells you the truth even when it costs the deal. If a home is overpriced, he says so. If you should wait six months, he tells you that. The goal isn't to close, it's to help you make a good decision.</p>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-4 mb-3">
+              <span class="font-display font-extrabold text-3xl text-gold">02</span>
+              <div class="h-px flex-1 bg-gold-deep"></div>
+            </div>
+            <h3 class="mb-3">Local Knowledge</h3>
+            <p class="text-muted leading-[1.7] text-base">Ten years walking the streets of New Braunfels. Glen knows the builders, the inspectors, the lenders, and which neighborhoods hold their value. He's been here long enough to remember when these homes were lots.</p>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-4 mb-3">
+              <span class="font-display font-extrabold text-3xl text-gold">03</span>
+              <div class="h-px flex-1 bg-gold-deep"></div>
+            </div>
+            <h3 class="mb-3">A REALTOR Who Answers</h3>
+            <p class="text-muted leading-[1.7] text-base">Glen picks up the phone. Same-day reply on every inquiry. No assistant chain, no email auto-responder, no waiting until Monday. Direct access, the way it should work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inline resources -->
+  <section class="py-20 border-t border-hair">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="mb-10 text-center">
+        <p class="eyebrow mb-4">Free Resources</p>
+        <h2>Tools to <span class="text-gold-bright">get started.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="/buyers-guide" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Unlock Free</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Buyer's Guide</h3>
+          <p class="text-muted leading-[1.65] mb-6">Financing, inspections, contracts, closing. Unlock the full guide with one email.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Unlock →</span>
+        </a>
+        <a href="/tools/mortgage-calculator" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Calculator</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Mortgage Payment</h3>
+          <p class="text-muted leading-[1.65] mb-6">Estimate your monthly payment with principal, interest, taxes, and insurance.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Run Numbers →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 1: image left, Background -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/hero-home.png" alt="Texas Hill Country at golden hour" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Since 2016</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Background</p>
+        <h2 class="mb-6">From the oil patch <span class="text-gold-bright">to the Hill Country.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Glen didn't start in real estate. For years he worked oil and gas as a landman, running title research and contract negotiations for energy companies across Texas. It was technical work, and he was good at it. He learned how to read a contract, how to negotiate when the other side didn't want to budge, and how to keep his head when a deal got messy.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">But the work was lonely. He missed talking to real people. He missed helping someone make a decision that actually changed their life. In 2016 he made the move into residential real estate, and he hasn't looked back.</p>
+        <a href="/contact" class="btn-outline">Talk to Glen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 2: image right, How Glen Works -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="md:order-2 relative">
+        <img src="/images/copper-ridge.png" alt="Copper Ridge luxury estate" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Straight Talk</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">How Glen Works</p>
+        <h2 class="mb-6">The job is to keep you <span class="text-gold-bright">from a million-dollar mistake.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">For buyers, that looks like walking the property twice, asking the questions other agents skip, and pulling the comps that actually matter. It means saying "this home is overpriced" when it is, and "put in your strongest offer" when the right one comes along.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">For sellers, it means pricing the home where the market actually is, not where you wish it was. Real photography, real marketing, and real buyers walking through the door, not tire kickers. Either way, you get a REALTOR who picks up the phone.</p>
+        <a href="/buyers" class="btn-outline">Buyer Representation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 3: image left, Why Luxury -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/vintage-oaks.png" alt="Vintage Oaks Hill Country home" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Luxury Specialist</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Why Luxury</p>
+        <h2 class="mb-6">The harder deals <span class="text-gold-bright">are the fun ones.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Glen specializes in luxury homes in the Hill Country because the work is harder and the stakes are higher. Custom builds. Acreage. Gated communities. Riverfront. Country club streets. Every home is different, and every deal has its own quirks.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">He knows the neighborhoods most agents only drive through. Vintage Oaks. Copper Ridge. River Chase. Riverforest. Havenwood at Hunters Crossing. He's walked the lots, met the builders, and watched the prices move over a decade in this market.</p>
+        <a href="/luxury" class="btn-outline">Luxury Homes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 4: image right, Outside Real Estate / Family -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="md:order-2 relative">
+        <img src="/images/canyon-lake.png" alt="Canyon Lake Hill Country" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Family Man</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">Outside of Real Estate</p>
+        <h2 class="mb-6">Husband. <span class="text-gold-bright">Father.</span> Hill Country local.</h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Glen lives in New Braunfels with his wife and three daughters. The family is active in their church and their community, and Glen volunteers his time when he can.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">When he's not showing homes, you'll usually find him with his family, on the river, or somewhere out in the Hill Country he can't stop talking about. The reason he sells so much luxury here is simple, he genuinely loves the place.</p>
+        <a href="/living/why-move-to-new-braunfels" class="btn-outline">Why Move to New Braunfels</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF / STATS BAND -->
+  <section class="py-24 bg-deep">
+    <div class="max-w-5xl mx-auto px-8 text-center">
+      <p class="eyebrow mb-6">The Track Record</p>
+      <h2 class="mb-12">A decade of <span class="text-gold-bright">happy clients.</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">10</div>
+          <p class="eyebrow text-dim mt-3">Years</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">160+</div>
+          <p class="eyebrow text-dim mt-3">Sales</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]"><span class="text-4xl md:text-5xl align-middle mr-2">★</span>5.0</div>
+          <p class="eyebrow text-dim mt-3">Zillow</p>
+        </div>
+      </div>
+      <a href="/testimonials" class="btn-outline mt-12">Read Reviews</a>
+    </div>
+  </section>
+
+  <FAQSection
+    eyebrow="About Glen FAQ"
+    title="What People Ask About Working with Glen."
+    subtitle="Quick answers to the questions that come up most before someone picks up the phone."
+    faqs={aboutFaqs}
+  />
+
+  <RelatedLinks
+    eyebrow="Next Steps"
+    title="Keep Exploring."
+    links={aboutRelated}
+  />
+
+  <CTABand
+    eyebrow="Ready?"
+    title="Let's Talk."
+    subtitle="Same-day reply on every inquiry. Call, text, or send a note and Glen will get back to you the same day."
+    primaryLabel="Contact Glen"
+    primaryHref="/contact"
+    secondaryLabel="Read Reviews"
+    secondaryHref="/testimonials"
+  />
+</Layout>

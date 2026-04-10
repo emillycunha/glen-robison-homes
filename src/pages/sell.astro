@@ -1,0 +1,231 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQSection from '../components/FAQSection.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+
+const sellerRelated = [
+  { href: '/tools/seller-net-sheet', eyebrow: 'Tool', label: 'Seller Net Sheet', description: "Estimate your net proceeds after commissions, closing costs, and payoffs." },
+  { href: '/sellers-guide', eyebrow: 'Guide', label: "Seller's Guide", description: 'Unlock the full seller playbook, pricing, prep, marketing, negotiation.' },
+  { href: '/neighborhoods', eyebrow: 'Market', label: 'New Braunfels Neighborhoods', description: 'See how your neighborhood compares to others Glen has sold in.' },
+  { href: '/testimonials', eyebrow: 'Reviews', label: 'What Clients Say', description: 'Verified 5-star reviews from buyers and sellers Glen has represented.' },
+];
+
+const sellerFaqs = [
+  {
+    q: "What does it cost to sell a home in Texas?",
+    a: "Plan on roughly 6-10% of the sale price all-in. About 1-3% covers title fees, prorated property taxes, and recording charges, and the rest is real estate commissions. On a $400,000 New Braunfels home that usually pencils out to $24,000-$40,000, depending on what you negotiate and how prorations land on closing day.",
+  },
+  {
+    q: "Do I have to fill out a Seller's Disclosure Notice?",
+    a: "Yes, for any previously occupied single-family home in Texas. You're required to disclose known issues like water damage, foundation work, termite history, electrical problems, past insurance claims, HOA fees, and any active HOA litigation. The notice goes to the buyer with or before the contract.",
+  },
+  {
+    q: "What are real estate commissions running after the NAR settlement?",
+    a: "Total commissions in Texas are still landing around 5-6%, typically split close to even between the listing side and the buyer's side. Sellers don't have to pay buyer-agent compensation, but most still offer it as a concession because it widens the buyer pool. Glen will walk you through the math before you list.",
+  },
+  {
+    q: "How long are New Braunfels homes taking to sell right now?",
+    a: "The average days-on-market in New Braunfels is sitting near 125 days, up from about 80 the prior year. Median list-to-pending is around 113 days, but well-priced and well-prepped homes are still going pending in roughly 50 days. Pricing and presentation are doing the heavy lifting in this market.",
+  },
+  {
+    q: "Do I have to disclose foundation issues?",
+    a: "Yes. Known foundation cracks, prior repairs, drainage problems, sticking doors, and any related history have to be disclosed on the Seller's Disclosure Notice. Texas treats nondisclosure as misrepresentation, and it's one of the easiest ways to end up in a lawsuit after closing. When in doubt, disclose.",
+  },
+  {
+    q: "Will I owe capital gains tax when I sell?",
+    a: "If the home has been your primary residence for at least two of the last five years, the federal Section 121 exclusion lets you exclude up to $250,000 of gain (single) or $500,000 (married filing jointly). Investment properties and second homes don't qualify. Talk to your CPA before listing if you're close to the limits.",
+  },
+  {
+    q: "Do I need a new survey to sell?",
+    a: "Not legally, but most lenders and title companies want one. You can usually furnish your existing survey along with a T-47 affidavit if nothing has changed on the property. A new survey runs $400-$700 and is sometimes the fastest way to keep a deal on track.",
+  },
+  {
+    q: "When is the best time to list in New Braunfels?",
+    a: "Spring, mid-April through May, pulls the most buyer traffic, driven by tax refunds and family moves before the school year. Summer is strong for river-adjacent and Canyon Lake properties. Late fall and winter are the slowest stretches.",
+  },
+];
+---
+
+<Layout
+  title="Selling a Home in New Braunfels | Glen Robison"
+  description="Sell your New Braunfels home with a realtor who understands the Hill Country market. Strategic pricing, marketing, and negotiation."
+>
+  <PageHero
+    eyebrow="Seller Representation"
+    title="Selling Your New Braunfels Home." image="/images/hero-sell.png"
+    intro="Strategic pricing, full-spectrum marketing, and a listing agent who knows the Hill Country buyer pool by name."
+  >
+    <div class="quick-answer mt-10">
+      <p>Glen prices your home to the data, preps it so buyers stop scrolling, and negotiates the strongest net you can walk away with. He runs a fresh CMA against active, pending, and sold comps in your subdivision, and walks you through a seller net sheet before you sign anything. Ten years and 160+ sales in the Hill Country market.</p>
+    </div>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/contact" class="btn-gold">Free Market Analysis</a>
+      <a href="/tools/seller-net-sheet" class="btn-outline">Seller Net Sheet</a>
+    </div>
+  </PageHero>
+
+  <!-- 3-STEP PROCESS CARDS -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-5">The Process</p>
+        <h2>Three Steps. <span class="text-gold-bright">No Surprises.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">01</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Pricing</h3>
+          <p class="text-muted leading-[1.7] text-base">A current CMA against active, pending, and sold comps inside your subdivision. Lot size, finish level, view, builder, and school zone, not just price per square foot. You see the math before you list.</p>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">02</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Marketing</h3>
+          <p class="text-muted leading-[1.7] text-base">HDR photography, drone aerials, MLS syndication to every major portal, targeted social campaigns into the relocation channels, and a launch sequence built to peak on the first weekend of showings.</p>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">03</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Closing</h3>
+          <p class="text-muted leading-[1.7] text-base">Glen quarterbacks the option period, repair negotiations, appraisal, title work, and walkthrough. Texas closings typically run 30-45 days. The only thing you need to do is sign at the table.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inline resources -->
+  <section class="py-20 border-t border-hair">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="mb-10 text-center">
+        <p class="eyebrow mb-4">Free Resources</p>
+        <h2>Tools to <span class="text-gold-bright">get started.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="/sellers-guide" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Unlock Free</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Seller's Guide</h3>
+          <p class="text-muted leading-[1.65] mb-6">Pricing, prep, marketing, and negotiation. Unlock the full guide with one email.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Unlock →</span>
+        </a>
+        <a href="/tools/seller-net-sheet" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Calculator</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Seller Net Sheet</h3>
+          <p class="text-muted leading-[1.65] mb-6">Estimate your net proceeds after commissions, closing costs, and payoffs.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Run Numbers →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 1: image left -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/havenwood.png" alt="Havenwood at Hunters Crossing home" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Priced to Sell</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Pricing Strategy</p>
+        <h2 class="mb-6">The price <span class="text-gold-bright">decides everything.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Pricing in this market is not about what your neighbor listed at last spring. Glen builds a current CMA using active competition, pending sales, and homes that have actually closed in the last 90-120 days inside your submarket.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">With New Braunfels DOM averaging around 125 days, the difference between pricing strategically and pricing optimistically is going pending in 50 days versus dropping the price three times before anyone writes an offer.</p>
+        <a href="/tools/seller-net-sheet" class="btn-outline">Run Your Net Sheet</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 2: image right -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="md:order-2 relative">
+        <img src="/images/luxury-interior.png" alt="Luxury Hill Country home interior" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Full-Spectrum</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">Marketing</p>
+        <h2 class="mb-6">Built around <span class="text-gold-bright">your buyer.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Every Glen Robison listing leads with HDR photography, drone aerials when the lot or view warrants it, and MLS syndication to Zillow, Realtor.com, Redfin, Trulia, and Homes.com. Targeted social campaigns reach Austin and San Antonio commuters, California and Colorado relocators, and the Canyon Lake second-home pool.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">On homes above $750K he'll often recommend a pre-listing inspection, light staging, and a private agent preview before the home goes live, so the first weekend of showings hits with momentum.</p>
+        <a href="/sellers-guide" class="btn-outline">Unlock the Seller's Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 3: image left -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/mayfair.png" alt="Mayfair master-planned community" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Smooth Closing</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">From Listed to Closed</p>
+        <h2 class="mb-6">Weekly updates. <span class="text-gold-bright">Real numbers.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Glen handles all showing requests, follows up with every agent who walks through, and gives you weekly written updates on traffic, feedback, and how the listing is performing against comps.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">When offers come in, he runs a side-by-side comparison so you can see net proceeds, contingencies, financing strength, and timelines, not just the headline number. From there it's option period, inspections, repair negotiations, appraisal, and final walkthrough.</p>
+        <a href="/testimonials" class="btn-outline">Read Reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF / STATS BAND -->
+  <section class="py-24 bg-deep">
+    <div class="max-w-5xl mx-auto px-8 text-center">
+      <p class="eyebrow mb-6">The Track Record</p>
+      <h2 class="mb-12">A decade of <span class="text-gold-bright">happy sellers.</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">10</div>
+          <p class="eyebrow text-dim mt-3">Years</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">160+</div>
+          <p class="eyebrow text-dim mt-3">Sales</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]"><span class="text-4xl md:text-5xl align-middle mr-2">★</span>5.0</div>
+          <p class="eyebrow text-dim mt-3">Zillow</p>
+        </div>
+      </div>
+      <a href="/testimonials" class="btn-outline mt-12">Read Reviews</a>
+    </div>
+  </section>
+
+  <FAQSection
+    eyebrow="Seller FAQ"
+    title="What New Braunfels Sellers Ask Most."
+    subtitle="The questions Glen hears most often from sellers in the Hill Country market."
+    faqs={sellerFaqs}
+  />
+
+  <RelatedLinks
+    eyebrow="Next Steps"
+    title="Keep Exploring."
+    links={sellerRelated}
+  />
+
+  <CTABand
+    eyebrow="Thinking About Selling?"
+    title="Get a Free Market Analysis."
+    subtitle="Glen will run a custom CMA on your property and walk you through what it's worth right now, what to expect, and how to maximize your net proceeds."
+    primaryLabel="Request CMA"
+    primaryHref="/contact"
+    secondaryLabel="Seller's Guide"
+    secondaryHref="/sellers-guide"
+  />
+</Layout>

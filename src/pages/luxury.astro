@@ -1,0 +1,258 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQSection from '../components/FAQSection.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import { neighborhoods } from '../data/neighborhoods.js';
+
+const luxuryHoods = neighborhoods.filter(n => n.segment.toLowerCase().includes('luxury'));
+
+const luxuryRelated = [
+  { href: '/neighborhoods/copper-ridge', eyebrow: 'Luxury Anchor', label: 'Copper Ridge', description: '$1.2M – $2.1M+ · The only guarded and gated community in New Braunfels.' },
+  { href: '/neighborhoods/riverforest', eyebrow: 'Luxury', label: 'Riverforest', description: '$1M – $3M+ · Gated estates with private Guadalupe River access.' },
+  { href: '/new-construction', eyebrow: 'New Builds', label: 'New Construction', description: 'Active custom builders in Vintage Oaks, Havenwood, and other master-planned communities.' },
+  { href: '/buyers', eyebrow: 'Representation', label: 'Buyer Services', description: 'How Glen helps luxury buyers find the right home with discretion and care.' },
+];
+
+const faqs = [
+  {
+    q: "What price point qualifies as luxury in New Braunfels?",
+    a: "In the New Braunfels and Comal County market, the luxury threshold begins at $1M. The premium tier, typically acreage estates, river-access lots, or homes in the most established gated communities, starts in the $2M to $3M+ range. For context, the broader market median sits around $350K to $380K, so luxury inventory is a distinct segment with its own buyer pool, marketing rhythm, and negotiation dynamics.",
+    sources: [
+      { label: "Comal County luxury data", url: "https://www.perplexity.ai/search/i-need-8-frequently-asked-ques-SYim_iHaTTKskX5puDyoeQ" }
+    ]
+  },
+  {
+    q: "How much $1M+ inventory is actually available in Comal County?",
+    a: "At any given time Comal County typically has 50+ homes priced at $1M and above on the active market, ranging from roughly $1.7M up past $6M. That is a small enough pool that buyers and sellers in this segment often cross paths repeatedly, which is why discretion and relationships matter more than mass-market exposure."
+  },
+  {
+    q: "Which neighborhoods anchor the luxury market here?",
+    a: "The core luxury neighborhoods are Vintage Oaks, River Chase, and Copper Ridge, large-acreage, gated, Hill Country settings with resort-style amenities. Havenwood at Hunters Crossing and the John Newcombe Estate round out the upper segment, the latter built around the historic tennis ranch and country club. Riverforest brings Guadalupe River frontage into the mix for buyers who want water access without leaving a gated community."
+  },
+  {
+    q: "How long do luxury homes take to sell?",
+    a: "Luxury days-on-market in Comal County typically run 95 to 100+ days, compared with 84 days city-wide and 92 to 103 days county-wide overall. The luxury segment runs roughly 20-30% longer than the broader market because the buyer pool is smaller, financing is more complex, and the right buyer often has to be brought to the property rather than found waiting on Zillow."
+  },
+  {
+    q: "Do cash buyers really get a discount on luxury homes?",
+    a: "There is no formal cash discount, but in a cooling market cash offers regularly secure 5-10% price reductions because they remove appraisal risk, financing contingencies, and timing uncertainty. Some sellers also reward speed with preferred terms, earlier possession, fewer contingencies, even if the headline price stays firm."
+  },
+  {
+    q: "Should luxury sellers do a pre-listing inspection?",
+    a: "Yes, and it is increasingly common in this segment. A pre-listing inspection builds buyer trust, surfaces issues early so they can be addressed on the seller's timeline rather than under offer pressure, and helps justify premium pricing. It also shortens the back-and-forth during the option period, which matters when your buyer pool is small and every serious offer counts."
+  },
+  {
+    q: "Acreage estate vs. in-town luxury, what's the tradeoff?",
+    a: "Acreage luxury, Vintage Oaks, River Chase, Copper Ridge, gives you 1 to 20+ acres, long Hill Country views, resort amenities, and real privacy. In-town luxury delivers walkability to Gruene and downtown New Braunfels, river access on foot, and historic charm. The decision usually comes down to whether you want seclusion or convenience, and Glen helps clients pressure-test which one they actually want before they commit."
+  },
+  {
+    q: "Why does luxury representation matter at this price point?",
+    a: "Above $1M, the work shifts. Off-market and pocket listings, relationships with high-end seller agents, targeted private marketing, pre-market intel, and nuanced negotiation become the job, not list-and-wait. Mass-market agents are optimized for transaction volume and speed; luxury buyers and sellers need someone who guards exclusivity and protects pricing power. That is the work Glen has built his luxury practice around."
+  }
+];
+---
+
+<Layout
+  title="New Braunfels Luxury Homes & Hill Country Estates | Glen Robison"
+  description="Luxury homes and Hill Country estates in New Braunfels, TX. Gated communities, ridgetop acreage, riverfront properties, and country-club neighborhoods."
+>
+  <PageHero
+    eyebrow="Luxury Specialist"
+    title="Luxury Homes in New Braunfels." image="/images/hero-luxury.png"
+    intro="From guarded gates to ridgetop estates, from riverfront acreage to country-club enclaves. Glen Robison specializes in the high end of the New Braunfels and Hill Country market."
+  >
+    <div class="quick-answer mt-10">
+      <p>The New Braunfels luxury market begins at $1M and climbs past $6M for premier acreage and river-access estates. Glen represents buyers and sellers in this segment with the discretion, off-market access, and disciplined negotiation a $1M+ transaction requires, backed by ten years in the local market, 160+ closed sales, and a contract-negotiation background that came before real estate.</p>
+    </div>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/contact" class="btn-gold">Private Consultation</a>
+      <a href="/neighborhoods" class="btn-outline">Browse Luxury Neighborhoods</a>
+    </div>
+  </PageHero>
+
+  <!-- 3-STEP PROCESS CARDS -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-5">The Approach</p>
+        <h2>Three Steps. <span class="text-gold-bright">Quietly Done.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">01</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Discovery</h3>
+          <p class="text-muted leading-[1.7] text-base">A private conversation about the home you actually want, acreage, views, river access, builder quality, privacy. Glen maps your criteria against what is on the market, what is quietly available, and what is likely to surface in the next 90 days.</p>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">02</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Off-Market Access</h3>
+          <p class="text-muted leading-[1.7] text-base">Pocket listings, pre-market intel, and direct relationships with luxury listing agents and custom builders across Vintage Oaks, Copper Ridge, Riverforest, and River Chase. A meaningful share of luxury inventory in this market never sees the MLS.</p>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">03</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Closing</h3>
+          <p class="text-muted leading-[1.7] text-base">Disciplined negotiation, private showings, surveyor and inspector coordination, and a closing choreographed to protect your privacy. Luxury closings in Texas typically run 30-45 days for financed deals and two weeks for cash.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inline resources -->
+  <section class="py-20 border-t border-hair">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="mb-10 text-center">
+        <p class="eyebrow mb-4">Free Resources</p>
+        <h2>Tools to <span class="text-gold-bright">get started.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="/buyers-guide" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Unlock Free</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Buyer's Guide</h3>
+          <p class="text-muted leading-[1.65] mb-6">Financing, inspections, contracts, closing. Unlock the full guide with one email.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Unlock →</span>
+        </a>
+        <a href="/tools/mortgage-calculator" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Calculator</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Mortgage Payment</h3>
+          <p class="text-muted leading-[1.65] mb-6">Estimate your monthly payment with principal, interest, taxes, and insurance.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Run Numbers →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LUXURY NEIGHBORHOOD GRID -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-5">The Neighborhoods</p>
+        <h2>Where New Braunfels <span class="text-gold-bright">luxury lives.</span></h2>
+        <p class="text-muted leading-[1.75] mt-6">Vintage Oaks, River Chase, and Copper Ridge anchor the acreage and gated tier. Havenwood at Hunters Crossing and the John Newcombe Estate round out the upper segment, and Riverforest brings private Guadalupe River frontage into a gated enclave.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {luxuryHoods.map(n => (
+          <a href={`/neighborhoods/${n.slug}`} class="bg-card border border-hair hover:border-[var(--color-gold-dim)] p-8 transition-all group">
+            <p class="text-gold text-[10px] font-semibold uppercase tracking-[0.2em] mb-3">{n.priceRange}</p>
+            <h3 class="mb-3 group-hover:text-gold-bright transition-colors">{n.name}</h3>
+            <p class="text-muted text-sm leading-relaxed">{n.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 1: image left -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/riverforest.png" alt="Riverforest gated estate" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Discretion</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Off-Market Access</p>
+        <h2 class="mb-6">Some homes <span class="text-gold-bright">never list.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">A meaningful share of the best luxury inventory in Comal County changes hands before it ever hits the MLS. Pocket listings, pre-market previews, and quiet conversations between listing agents are how these deals actually move.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Ten years in the New Braunfels market have built Glen the relationships that matter, luxury listing agents, custom builders in Vintage Oaks and Copper Ridge, and the estate owners who prefer to sell without a sign in the yard. If the home you want is not on Zillow, there is a good chance Glen can still find it.</p>
+        <a href="/contact" class="btn-outline">Talk to Glen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 2: image right -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="md:order-2 relative">
+        <img src="/images/copper-ridge.png" alt="Copper Ridge guarded gated community" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Custom Search</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">Tailored Search</p>
+        <h2 class="mb-6">Built around <span class="text-gold-bright">one buyer.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Every luxury search Glen runs starts with a tight brief, acreage minimums, elevation and views, water access, school district, builder quality, privacy, and how much finish work you are willing to do. From there he builds a custom short-list that cuts through the 50+ active $1M+ listings in Comal County to the handful that actually fit.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">He vets the builder history, runs neighborhood-specific comps that will not show up on Zillow, and screens every property for drainage, foundation, septic, well, and the acreage-specific issues that a city-focused agent will miss. By the time you walk a home, the homework is already done.</p>
+        <a href="/neighborhoods" class="btn-outline">Browse Neighborhoods</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 3: image left -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/vintage-oaks.png" alt="Vintage Oaks luxury acreage estate" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Hill Country Local</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Local Knowledge</p>
+        <h2 class="mb-6">The high end is <span class="text-gold-bright">its own market.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Glen has worked the New Braunfels market for a decade and closed 160+ sales across price points from $183K to $1.8M. Above $1M the rules change, smaller buyer pool, longer days on market, more nuanced financing, and a much smaller margin for a mispriced listing or a missed comp.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">He knows which builders hold value, which gated sections trade fastest, which riverfront lots actually flood, and which ridgetop homesites command a premium. For out-of-state relocators writing offers sight-unseen, that local fluency is the difference between a great home and an expensive lesson.</p>
+        <a href="/about" class="btn-outline">About Glen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF / STATS BAND -->
+  <section class="py-24 bg-deep">
+    <div class="max-w-5xl mx-auto px-8 text-center">
+      <p class="eyebrow mb-6">The Track Record</p>
+      <h2 class="mb-12">A decade in <span class="text-gold-bright">the high end.</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">10</div>
+          <p class="eyebrow text-dim mt-3">Years</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">160+</div>
+          <p class="eyebrow text-dim mt-3">Sales</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]"><span class="text-4xl md:text-5xl align-middle mr-2">★</span>5.0</div>
+          <p class="eyebrow text-dim mt-3">Zillow</p>
+        </div>
+      </div>
+      <a href="/testimonials" class="btn-outline mt-12">Read Reviews</a>
+    </div>
+  </section>
+
+  <FAQSection
+    eyebrow="Luxury FAQ"
+    title="What Luxury Buyers and Sellers Ask."
+    subtitle="The questions that matter most above the $1M line in New Braunfels and the Hill Country."
+    faqs={faqs}
+  />
+
+  <RelatedLinks
+    eyebrow="Next Steps"
+    title="Keep Exploring."
+    links={luxuryRelated}
+  />
+
+  <CTABand
+    eyebrow="Luxury Representation"
+    title="Discretion. Access. Expertise."
+    subtitle="Glen represents luxury clients with off-market access, custom search, and the discretion the high end of the market demands."
+    primaryLabel="Private Consultation"
+    primaryHref="/contact"
+    secondaryLabel="Browse Luxury Neighborhoods"
+    secondaryHref="/neighborhoods"
+  />
+</Layout>

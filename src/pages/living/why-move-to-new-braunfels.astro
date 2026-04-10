@@ -1,0 +1,179 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import { facts } from '../../data/facts.js';
+
+const relatedLinks = [
+  { href: '/living/cost-of-living-and-schools', eyebrow: 'Numbers', label: 'Cost of Living & Schools', description: 'Tax math, home prices, Comal ISD, and district ratings.' },
+  { href: '/living/things-to-do', eyebrow: 'Lifestyle', label: 'Things to Do', description: 'Schlitterbahn, Gruene Hall, two rivers, and Hill Country wineries.' },
+  { href: '/neighborhoods', eyebrow: 'Where to Live', label: 'Neighborhoods & Communities', description: 'Glen knows the 9 best neighborhoods and 2 Hill Country alternatives.' },
+  { href: '/relocation-guide', eyebrow: 'Full Guide', label: 'Relocation Guide', description: 'Unlock the complete week-by-week relocation playbook.' },
+];
+
+const faqs = [
+  {
+    q: 'Is New Braunfels really one of the fastest-growing cities in the country?',
+    a: `Yes. The U.S. Census shows New Braunfels grew from 91,683 in 2020 to ${facts.population.current} by ${facts.population.year}, a ${facts.population.growthSince2020} jump in roughly four years. That growth rate is several times the national average and consistently lands New Braunfels in the top handful of fastest-growing U.S. cities. The broader San Antonio–New Braunfels metro now sits at ${facts.population.metro}.`,
+    sources: [facts.population.sources[0], facts.population.sources[1]],
+  },
+  {
+    q: 'How much would I save on state income tax moving from California?',
+    a: `Texas has ${facts.taxes.stateIncomeTax} state income tax. California's top marginal rate is over 13%. A household earning $200,000 in taxable income could keep roughly $15,000 to $20,000 more per year by relocating, depending on bracket and deductions. That savings often offsets the higher Texas property tax bill, and after the homestead exemption it usually still nets out positive for relocating buyers.`,
+    sources: [facts.taxes.sources[0]],
+  },
+  {
+    q: 'Is New Braunfels a better option than Austin suburbs?',
+    a: `For buyers comparing Buda, Kyle, Dripping Springs, or San Marcos, New Braunfels usually delivers more square footage and more land per dollar, plus access to two rivers, Canyon Lake, and the Hill Country. Austin-Bergstrom is ${facts.distance.austinAirport} away, and you also gain a second major metro (San Antonio) within easy reach. Many California and Illinois relocators end up here specifically because Austin suburbs felt overpriced and overbuilt.`,
+    sources: [facts.distance.sources[0]],
+  },
+  {
+    q: 'What kinds of jobs are in New Braunfels?',
+    a: `The economy is anchored by healthcare (CHRISTUS Santa Rosa, Resolute Health), public sector (City, County, and both ISDs), utilities, and a strong manufacturing base including Hunter Industries and HD Supply. Hospitality is also a major employer thanks to Schlitterbahn and the river tourism economy. Many remote workers from California, Illinois and the Pacific Northwest are simply keeping their jobs and moving here for the lifestyle.`,
+    sources: [facts.employerSources[0]],
+  },
+  {
+    q: 'How does the cost of living compare to where I am now?',
+    a: `New Braunfels has a cost-of-living index around ${facts.costOfLiving.index} (national average = 100), so about ${facts.costOfLiving.vsNational}. Median household income locally is ${facts.costOfLiving.medianIncome}. Compared to coastal California, the Northeast, or Chicago, both housing costs and overall expenses are dramatically lower while wages remain competitive.`,
+    sources: [facts.costOfLiving.sources[0]],
+  },
+  {
+    q: 'When is the best time of year to buy here?',
+    a: `${facts.bestBuyingSeason.months} typically offers the widest inventory and the most active relocation traffic. ${facts.bestBuyingSeason.note}. Buyers who want negotiation leverage often look at late fall and early winter, when seller motivation tends to climb and builder incentives appear on standing inventory.`,
+    sources: facts.bestBuyingSeason.sources,
+  },
+];
+---
+
+<Layout title="Why Move to New Braunfels TX | Relocation Guide | Glen Robison" description="The case for relocating to New Braunfels, Texas. Population growth, no state income tax, lower cost of living, and Hill Country lifestyle.">
+  <PageHero
+    eyebrow="Relocation"
+    title="Why Move to New Braunfels?" image="/images/hero-why-move.png"
+    intro="New Braunfels grew 40.56% from 2020 to 2026, making it one of the fastest-growing cities in the country. Here's why."
+  >
+    <div class="quick-answer mt-10">
+      <p>New Braunfels grew from 91,683 in 2020 to {facts.population.current} today, a {facts.population.growthSince2020} increase. The combination of Texas's 0% state income tax, a cost of living near {facts.costOfLiving.vsNational}, A-rated Comal ISD schools, and proximity to both Austin ({facts.distance.austinAirport}) and San Antonio makes it one of the most relocator-friendly markets in Texas. Two rivers, Hill Country culture, and a deep employer base do the rest.</p>
+    </div>
+  </PageHero>
+
+  <!-- Detail 1: Growth (image left, bg-elevated) -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/downtown-nb.png" alt="Downtown New Braunfels" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">40% Growth</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Growth</p>
+        <h2 class="mb-6">How fast is New Braunfels <span class="text-gold-bright">growing?</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">New Braunfels grew from 91,683 residents in 2020 to {facts.population.current} by {facts.population.year}, a {facts.population.growthSince2020} expansion in roughly four years. That puts it consistently inside the U.S. Census Bureau's top-five list of fastest-growing American cities, and it's one of only a handful of mid-sized cities in the country posting double-digit percentage growth two census cycles in a row. The broader San Antonio–New Braunfels metro reached {facts.population.metro} in 2025, anchoring Comal County as one of the fastest-growing counties in Texas.</p>
+        <p class="text-muted leading-[1.75] text-base mb-5">The growth is driven almost entirely by in-migration, not births. Roughly two-thirds of new arrivals come from outside Texas, with California, Illinois, the Pacific Northwest, and the Northeast supplying the largest contingents. Inside Texas, Austin's overflow accounts for most of the rest. What makes New Braunfels different from a typical boomtown is that the growth has been balanced, new master-planned communities, infill in the historic core, and luxury custom builds in Vintage Oaks and Copper Ridge are all happening at once, so price points span $300K starter homes through $2M-plus Hill Country estates.</p>
+        <p class="text-dim text-xs mb-8">Sources: <a href={facts.population.sources[0].url} target="_blank" rel="noopener" class="text-gold">U.S. Census</a>, <a href={facts.population.sources[1].url} target="_blank" rel="noopener" class="text-gold">World Population Review</a></p>
+        <a href="/neighborhoods" class="btn-outline">Browse Neighborhoods</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 2: Tax Savings (image right, plain) -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="md:order-2 relative">
+        <img src="/images/nb-family-neighborhood.png" alt="New Braunfels family neighborhood" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">0% Income Tax</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">Tax Savings</p>
+        <h2 class="mb-6">Zero state income tax. <span class="text-gold-bright">Real savings.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Texas charges {facts.taxes.stateIncomeTax} state income tax. For a household relocating from California, where the top marginal rate exceeds 13%, the annual savings can run $15,000 to $25,000 or more depending on income. Illinois, New York, and New Jersey buyers see similar benefits in the $8,000 to $20,000 range. Even relocators from "lower tax" states like Colorado or Arizona typically come out ahead. Sales tax in New Braunfels caps at 8.25% (6.25% state plus a {facts.taxes.cityRate} city add-on and local options), which is in line with most U.S. metros.</p>
+        <p class="text-muted leading-[1.75] text-base mb-5">Texas does have higher property taxes than many states because it has no income tax, so the comparison isn't apples-to-apples. The good news for relocators: Texas's $140,000 school district homestead exemption, plus local-option exemptions and senior freezes, take a meaningful bite out of the bill on a primary residence. Most California and Illinois relocators we work with still net thousands of dollars per year ahead after running the full tax math, and the difference compounds substantially over a 10-year hold.</p>
+        <p class="text-dim text-xs mb-8">Source: <a href={facts.taxes.sources[0].url} target="_blank" rel="noopener" class="text-gold">AARP Texas Tax Guide</a></p>
+        <a href="/living/cost-of-living-and-schools" class="btn-outline">See the Full Tax Math</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 3: Location (image left, bg-elevated) -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/i35-new-braunfels.png" alt="Interstate 35 through New Braunfels Hill Country" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Between Two Metros</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Location</p>
+        <h2 class="mb-6">Between Austin <span class="text-gold-bright">and San Antonio.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">New Braunfels sits directly on I-35 between Austin and San Antonio, with Austin-Bergstrom International Airport about {facts.distance.austinAirport} from the city core. That positioning is the single biggest practical advantage New Braunfels has over comparable Hill Country towns. Buyers looking at Buda, Kyle, San Marcos, or Dripping Springs as Austin overflow regularly find that for the same dollar, New Braunfels offers more square footage, more land, newer construction, and a more established downtown core with real history.</p>
+        <p class="text-muted leading-[1.75] text-base mb-5">For families with one spouse working in Austin and another in San Antonio, New Braunfels is one of the only locations where neither commute is brutal. Hybrid and remote workers, now the majority of relocators we see, get the best of both metros without choosing one. And because the city is roughly halfway, weekend access to Austin culture, San Antonio's medical center and missions, and Hill Country wineries is essentially equal in every direction.</p>
+        <p class="text-dim text-xs mb-8">Source: <a href={facts.distance.sources[0].url} target="_blank" rel="noopener" class="text-gold">Rome2Rio</a></p>
+        <a href="/living/things-to-do" class="btn-outline">Things to Do</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 4: Lifestyle (image right, plain) -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="md:order-2 relative">
+        <img src="/images/gruene-hall.png" alt="Gruene Hall dance hall" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Since 1878</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">Lifestyle</p>
+        <h2 class="mb-6">Hill Country living. <span class="text-gold-bright">Not just a tagline.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Two rivers run through New Braunfels: the spring-fed Comal (the shortest navigable river in the country, and reliably 70°F year-round) and the longer Guadalupe, which runs out of Canyon Lake and is the heart of Hill Country tubing culture. Schlitterbahn, the largest waterpark in Texas, sits on the Comal. Gruene Hall, built in 1878, is the oldest continually operating dance hall in Texas and still hosts top country, Americana, and Texas singer-songwriter acts most nights.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Beyond the postcard items, what relocators usually mention after a year is the day-to-day texture: an actual downtown with restaurants and music, Wurstfest each fall (one of the largest German heritage festivals in the country), Canyon Lake fifteen minutes north for boating and lakeside dining, and dozens of Hill Country wineries within a 30-mile drive. The pace is small-city Texas, friendlier than Austin, less corporate than San Antonio, more authentic than the typical master-planned suburb.</p>
+        <a href="/living/things-to-do" class="btn-outline">Explore Things to Do</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 5: Employment (image left, bg-elevated) -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/hill-country-winery.png" alt="Hill Country winery vineyard" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Strong Economy</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Employment</p>
+        <h2 class="mb-6">A real economy. <span class="text-gold-bright">Not just tourism.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Top employers include {facts.employers.slice(0, 6).join(', ')}, along with HD Supply, Hunter Industries, IBEX Global, and Resolute Health Hospital. Healthcare and the public sector form the backbone, with manufacturing, utilities, and hospitality filling out the rest. Hospitality alone accounts for roughly 31% of city employment thanks to Schlitterbahn, river outfitters, and the Gruene tourism corridor, that creates a tight summer labor market and a steady year-round economy.</p>
+        <p class="text-muted leading-[1.75] text-base mb-5">The biggest shift in the last five years has been remote work. A large share of new arrivals are software, finance, marketing, and creative professionals keeping their existing jobs and simply trading a Bay Area, Chicago, or Denver address for a New Braunfels one. The city has invested in fiber and coworking infrastructure to support that. For buyers whose income doesn't depend on the local labor market, the question shifts from "are there jobs here?" to "what will my quality of life look like?", and that question almost always answers itself after one visit.</p>
+        <p class="text-dim text-xs mb-8">Source: <a href={facts.employerSources[0].url} target="_blank" rel="noopener" class="text-gold">NB Chamber</a></p>
+        <a href="/contact" class="btn-outline">Talk to Glen</a>
+      </div>
+    </div>
+  </section>
+
+  <FAQSection
+    eyebrow="Relocation FAQ"
+    title="Common Relocation Questions"
+    subtitle="The questions Glen hears most often from relocators considering a move to New Braunfels."
+    faqs={faqs}
+  />
+
+  <RelatedLinks
+    eyebrow="Keep Learning"
+    title="More on Living Here."
+    links={relatedLinks}
+  />
+
+  <section class="py-20 bg-elevated border-t border-subtle">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="mb-6">Thinking About Relocating?</h2>
+      <p class="text-muted mb-8">Glen helps relocators from out of state navigate the New Braunfels market remotely and in person.</p>
+      <a href="/contact" class="btn-gold">Talk to Glen</a>
+    </div>
+  </section>
+</Layout>

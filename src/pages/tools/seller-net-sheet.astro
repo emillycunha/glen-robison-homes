@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+
+<Layout title="Seller Net Sheet | New Braunfels TX | Glen Robison" description="Estimate your net proceeds from selling a home in New Braunfels. Free seller net sheet calculator.">
+  <PageHero
+    eyebrow="For Sellers"
+    title="Seller Net Sheet."
+    image="/images/luxury-interior.png"
+    intro="Estimate what you'll walk away with after commissions, closing costs, and payoffs."
+  />
+
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="bg-card border border-subtle p-8">
+        <form id="ns-form" class="space-y-5">
+          <div>
+            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Estimated Sale Price</label>
+            <input type="number" id="sale" value="500000" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
+          </div>
+          <div>
+            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Mortgage Payoff Balance</label>
+            <input type="number" id="payoff" value="200000" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
+          </div>
+          <div>
+            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Total Commission (%)</label>
+            <input type="number" id="commission" step="0.1" value="6" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
+          </div>
+          <div>
+            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Title & Closing Costs (%)</label>
+            <input type="number" id="title" step="0.1" value="1.5" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
+          </div>
+          <div>
+            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Repairs / Concessions ($)</label>
+            <input type="number" id="repairs" value="0" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
+          </div>
+          <div>
+            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Other Costs ($)</label>
+            <input type="number" id="other" value="0" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
+          </div>
+        </form>
+
+        <div class="mt-8 pt-8 border-t border-subtle">
+          <p class="text-dim text-xs uppercase tracking-wider mb-2">Estimated Net Proceeds</p>
+          <p class="font-display text-5xl text-gold-bright" id="net">$0</p>
+          <div class="mt-6 space-y-2 text-sm">
+            <div class="flex justify-between"><span class="text-dim">Sale Price</span><span class="text-text" id="d-sale">$0</span></div>
+            <div class="flex justify-between"><span class="text-dim">Commission</span><span class="text-text" id="d-comm">−$0</span></div>
+            <div class="flex justify-between"><span class="text-dim">Title & Closing</span><span class="text-text" id="d-title">−$0</span></div>
+            <div class="flex justify-between"><span class="text-dim">Repairs / Concessions</span><span class="text-text" id="d-rep">−$0</span></div>
+            <div class="flex justify-between"><span class="text-dim">Other</span><span class="text-text" id="d-oth">−$0</span></div>
+            <div class="flex justify-between"><span class="text-dim">Mortgage Payoff</span><span class="text-text" id="d-pay">−$0</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="text-dim text-xs mt-4">Estimates only. Actual proceeds depend on contract terms, prorations, and final closing statement. For an accurate net sheet on your specific property, request a free CMA from Glen.</p>
+    </div>
+  </section>
+
+  <script>
+    const fmt = (n) => '$' + Math.round(n).toLocaleString();
+    function calc() {
+      const sale = +(document.getElementById('sale') as HTMLInputElement).value || 0;
+      const payoff = +(document.getElementById('payoff') as HTMLInputElement).value || 0;
+      const commPct = +(document.getElementById('commission') as HTMLInputElement).value || 0;
+      const titlePct = +(document.getElementById('title') as HTMLInputElement).value || 0;
+      const repairs = +(document.getElementById('repairs') as HTMLInputElement).value || 0;
+      const other = +(document.getElementById('other') as HTMLInputElement).value || 0;
+
+      const comm = sale * (commPct / 100);
+      const title = sale * (titlePct / 100);
+      const net = sale - comm - title - repairs - other - payoff;
+
+      document.getElementById('net')!.textContent = fmt(net);
+      document.getElementById('d-sale')!.textContent = fmt(sale);
+      document.getElementById('d-comm')!.textContent = '−' + fmt(comm);
+      document.getElementById('d-title')!.textContent = '−' + fmt(title);
+      document.getElementById('d-rep')!.textContent = '−' + fmt(repairs);
+      document.getElementById('d-oth')!.textContent = '−' + fmt(other);
+      document.getElementById('d-pay')!.textContent = '−' + fmt(payoff);
+    }
+    document.querySelectorAll('input').forEach(i => i.addEventListener('input', calc));
+    calc();
+  </script>
+</Layout>

@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQSection from '../components/FAQSection.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+
+const buyerRelated = [
+  { href: '/luxury', eyebrow: 'Next', label: 'Luxury Homes', description: 'Gated communities, acreage estates, and riverfront properties in New Braunfels.' },
+  { href: '/neighborhoods', eyebrow: 'Explore', label: 'All Neighborhoods', description: 'The 9 neighborhoods and 2 nearby communities Glen knows inside out.' },
+  { href: '/tools/mortgage-calculator', eyebrow: 'Tool', label: 'Mortgage Calculator', description: 'Estimate your monthly payment with taxes and insurance.' },
+  { href: '/living/why-move-to-new-braunfels', eyebrow: 'Relocation', label: 'Why Move to New Braunfels', description: 'Growth, taxes, lifestyle, and why families are moving here.' },
+];
+
+const faqs = [
+  {
+    q: "How much home can I afford on a $150K household income in New Braunfels?",
+    a: "Most lenders will qualify a $150K household for roughly $400K to $500K, assuming 20-30% down, a debt-to-income ratio under 43%, and current rates in the 6-7% range. Comal County's median sale price sits near $445K, so that range lines up with the heart of the market. Plan on a monthly payment of $2,800 to $3,500 once Texas property taxes and homeowner's insurance are folded in.",
+  },
+  {
+    q: "What closing costs should a buyer budget for in Texas?",
+    a: "Buyer closing costs in Texas typically run 2-5% of the purchase price. On a $400,000 home that works out to roughly $8,000 to $20,000, covering lender fees, title insurance, the appraisal, the survey if required, and prepaid taxes and insurance set aside in your escrow account. Glen reviews the lender's loan estimate with every client so there are no surprises at the table.",
+  },
+  {
+    q: "Are Texas property taxes really that much higher?",
+    a: "Yes. Texas has no state income tax, so property taxes do more of the work. The state's effective rate sits around 1.245% versus a national average of 0.888%. Comal County effective rates land between 1.06% and 1.46% depending on the taxing entities for your specific address. Always run the numbers using the actual tax rate for the property, not a county average.",
+  },
+  {
+    q: "What is the IABS form my agent keeps mentioning?",
+    a: "IABS stands for Information About Brokerage Services. Texas requires every agent to deliver this disclosure at the first substantive communication. It explains the difference between representing a buyer, a seller, and acting as an intermediary. It is not a contract and it does not commit you to anything.",
+  },
+  {
+    q: "How are buyer agent fees handled after the NAR settlement?",
+    a: "Buyer compensation is now negotiated up front in a written buyer representation agreement before you tour homes. In practice, sellers in this market still frequently offer a 2-3% concession toward the buyer's agent. Glen writes the buyer rep agreement so you know exactly what you would owe in any scenario.",
+  },
+  {
+    q: "What does a home inspection cost in New Braunfels?",
+    a: "A standard single-family inspection in New Braunfels runs $259 to $314 on average, with a wider range of $174 to $392 depending on square footage and age. Specialty inspections like wood-destroying insect, foundation, septic, or pool typically add $50 to $200 each. Plan on a $400+ inspection budget for most homes.",
+  },
+  {
+    q: "How long does closing take from contract to keys?",
+    a: "Conventional financing usually closes in 30 to 45 days. FHA and VA tend to run 71 to 77 days. Cash purchases can close in 10 to 14 days. The Texas option period, typically 7 to 10 days at the start of the contract, is your protected window for inspections.",
+  },
+  {
+    q: "Should I ever waive the inspection to win a house?",
+    a: "No. Even in competitive situations there are better tools, informational-only inspections, pre-offer inspections, or shortened option periods, that let you stay aggressive without giving up your protection. Glen will not advise a client to walk away from the option period.",
+  },
+];
+---
+
+<Layout
+  title="New Braunfels Buyer's Agent | Glen Robison Homes"
+  description="Glen Robison helps buyers find homes in New Braunfels and the Texas Hill Country. Honest answers, local expertise, and a REALTOR who picks up the phone."
+>
+  <PageHero
+    eyebrow="Buyer Representation"
+    title="Buying a Home in New Braunfels." image="/images/hero-buyers.png"
+    intro="Glen Robison is a REALTOR with Popby Realty in New Braunfels, helping buyers find homes across Canyon Lake, Garden Ridge, and the Texas Hill Country."
+  >
+    <div class="quick-answer mt-10">
+      <p>Ten years in New Braunfels. 160+ closed sales. 65 five-star Zillow reviews. Whether you're buying your first home in the $300s or a Hill Country estate north of $1M, you get a REALTOR who tells you the truth, picks up the phone, and knows the streets you're shopping on.</p>
+    </div>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/contact" class="btn-gold">Talk to Glen</a>
+      <a href="/search" class="btn-outline">Search Homes</a>
+    </div>
+  </PageHero>
+
+  <!-- 3-STEP PROCESS CARDS -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-5">The Process</p>
+        <h2>Three Steps. <span class="text-gold-bright">No Surprises.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">01</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Discovery</h3>
+          <p class="text-muted leading-[1.7] text-base">A real call about what you want, where, and what you can comfortably afford. Glen connects you with two or three lenders so you can compare rates and get pre-approved on real numbers.</p>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">02</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">The Search</h3>
+          <p class="text-muted leading-[1.7] text-base">Tailored MLS search, in-person and virtual tours, full CMA on every home you like, and an offer engineered around your priorities, price, terms, repair credits, contingencies that actually protect you.</p>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="font-display font-extrabold text-4xl text-gold">03</span>
+            <div class="h-px flex-1 bg-gold-deep"></div>
+          </div>
+          <h3 class="mb-4">Closing</h3>
+          <p class="text-muted leading-[1.7] text-base">Glen quarterbacks the option period, inspections, repair amendments, appraisal, survey, and walkthrough. Conventional loans close in 30-45 days. Cash deals can close in two weeks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inline resources -->
+  <section class="py-20 border-t border-hair">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="mb-10 text-center">
+        <p class="eyebrow mb-4">Free Resources</p>
+        <h2>Tools to <span class="text-gold-bright">get started.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="/buyers-guide" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Unlock Free</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Buyer's Guide</h3>
+          <p class="text-muted leading-[1.65] mb-6">Financing, inspections, contracts, closing. Unlock the full guide with one email.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Unlock →</span>
+        </a>
+        <a href="/tools/mortgage-calculator" class="arch-card p-10 group">
+          <p class="eyebrow mb-5">Calculator</p>
+          <h3 class="mb-4 group-hover:text-gold-bright">Mortgage Payment</h3>
+          <p class="text-muted leading-[1.65] mb-6">Estimate your monthly payment with principal, interest, taxes, and insurance.</p>
+          <span class="eyebrow text-[10px] text-gold group-hover:text-gold-bright">Run Numbers →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 1: image left -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/glen-action.png" alt="Glen Robison walking up to a luxury home" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">10 Years Local</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">What You Get</p>
+        <h2 class="mb-6">Someone in your corner. <span class="text-gold-bright">The whole way.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Buying a home in New Braunfels is a big decision. There are inspectors who actually find things, lenders who close on time, neighborhoods where the prices hold, and homes that look great in photos but fall apart in person. Glen has been doing this for ten years. He knows which is which.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">He'll walk every property with you, pull the comps that matter, and tell you when to push, when to wait, and when to walk. The goal is simple: help you find the right home and pay a fair price for it.</p>
+        <a href="/about" class="btn-outline">More About Glen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 2: image right -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="md:order-2 relative">
+        <img src="/images/hill-country-aerial.png" alt="Texas Hill Country aerial view" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Local Knowledge</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">The Market</p>
+        <h2 class="mb-6">Twelve markets. <span class="text-gold-bright">Not one.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">New Braunfels is not one market. Comal ISD versus NBISD changes property values block to block. Vintage Oaks plays by different rules than Mayfair, and Riverforest is a different animal than Garden Ridge.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Glen has lived and worked this market for ten years and closed 160+ sales. He has the neighborhood-level pricing data, builder relationships, inspector network, and lender bench to keep you out of the wrong house and into the right one at the right price.</p>
+        <a href="/neighborhoods" class="btn-outline">Browse Neighborhoods</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL 3: image left, relocators -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/river-chase.png" alt="River Chase Hill Country" class="w-full aspect-[4/3] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Relocators Welcome</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Out of State</p>
+        <h2 class="mb-6">Moving to <span class="text-gold-bright">New Braunfels?</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">A significant share of Glen's clients are relocating from California, Colorado, the Pacific Northwest, and the Northeast. He runs full virtual tours over FaceTime or Zoom, builds custom area-orientation drives when you visit, and walks you through how Texas does things differently.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Homestead exemptions, the option period, MUD and PID districts, the IABS form, the 1-2-10 builder warranty. The goal is simple: you arrive on closing day already feeling at home.</p>
+        <a href="/relocation-guide" class="btn-outline">Unlock Relocation Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF / STATS BAND -->
+  <section class="py-24 bg-deep">
+    <div class="max-w-5xl mx-auto px-8 text-center">
+      <h2 class="mb-12">A decade of <span class="text-gold-bright">happy buyers.</span></h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">10</div>
+          <p class="eyebrow text-dim mt-3">Years</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]">160+</div>
+          <p class="eyebrow text-dim mt-3">Sales</p>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-gold-bright text-6xl md:text-7xl leading-none tracking-[-0.04em]"><span class="text-4xl md:text-5xl align-middle mr-2">★</span>5.0</div>
+          <p class="eyebrow text-dim mt-3">Zillow</p>
+        </div>
+      </div>
+      <a href="/testimonials" class="btn-outline mt-12">Read Reviews</a>
+    </div>
+  </section>
+
+  <FAQSection
+    eyebrow="Buyer FAQ"
+    title="What New Braunfels Buyers Ask Most."
+    subtitle="Straight answers to the questions Glen hears every week, from financing to closing day."
+    faqs={faqs}
+  />
+
+  <RelatedLinks
+    eyebrow="Next Steps"
+    title="Keep Exploring."
+    links={buyerRelated}
+  />
+
+  <CTABand
+    eyebrow="Ready?"
+    title="Let's Find Your New Braunfels Home."
+    subtitle="Call, text, or send a note and Glen will get back to you the same day."
+    primaryLabel="Contact Glen"
+    primaryHref="/contact"
+    secondaryLabel="Browse Neighborhoods"
+    secondaryHref="/neighborhoods"
+  />
+</Layout>

@@ -1,0 +1,119 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CTABand from '../../../components/CTABand.astro';
+import { blogPosts } from '../../../data/blog-posts.js';
+
+const POSTS_PER_PAGE = 7;
+
+const sorted = [...blogPosts].sort((a, b) => (a.pubDate < b.pubDate ? 1 : -1));
+const totalPages = Math.max(1, Math.ceil(sorted.length / POSTS_PER_PAGE));
+
+export async function getStaticPaths() {
+  const { blogPosts: posts } = await import('../../../data/blog-posts.js');
+  const PER_PAGE = 7;
+  const total = Math.max(1, Math.ceil(posts.length / PER_PAGE));
+  return Array.from({ length: total - 1 }, (_, i) => ({
+    params: { page: String(i + 2) },
+    props: { pageNum: i + 2 },
+  }));
+}
+
+const { pageNum } = Astro.props;
+const startIdx = (pageNum - 1) * POSTS_PER_PAGE;
+const pagePosts = sorted.slice(startIdx, startIdx + POSTS_PER_PAGE);
+
+const images = [
+  '/images/hero-home.png',
+  '/images/copper-ridge.png',
+  '/images/vintage-oaks.png',
+  '/images/riverforest.png',
+  '/images/river-chase.png',
+  '/images/havenwood.png',
+  '/images/mayfair.png',
+];
+const getImage = (i) => images[i % images.length];
+
+const formatDate = (iso) =>
+  new Date(iso + 'T00:00:00').toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+---
+
+<Layout
+  title={`Blog, Page ${pageNum} | Glen Robison Homes`}
+  description="Market reports, neighborhood guides, and buyer insights from Glen Robison."
+>
+  <section class="pt-24 pb-12 border-b border-hair">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <p class="eyebrow mb-6">Page {pageNum}</p>
+      <h1 class="mb-6">The Glen Robison Report</h1>
+      <p class="text-muted text-base max-w-xl mx-auto">The full archive. Newest at the top.</p>
+    </div>
+  </section>
+
+  {pagePosts.length === 0 ? (
+    <section class="py-32 text-center">
+      <p class="text-muted">No posts on this page.</p>
+    </section>
+  ) : (
+    <section class="py-20 border-b border-hair">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+          {pagePosts.map((post, i) => (
+            <a href={`/blog/${post.slug}`} class="group block">
+              <div class="relative overflow-hidden aspect-[4/3] mb-5">
+                <img
+                  src={post.image ?? getImage(i)}
+                  alt={post.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[800ms]"
+                />
+              </div>
+              <p class="eyebrow mb-3 text-[10px]">{post.category} · {formatDate(post.pubDate)}</p>
+              <h3 class="mb-3 group-hover:text-gold-bright transition-colors" style="font-size: 1.25rem; line-height: 1.25;">{post.title}</h3>
+              <p class="text-muted text-sm leading-[1.65]">{post.excerpt}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- PAGINATION -->
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex items-center justify-center gap-3">
+        {pageNum > 2 && (
+          <a href={`/blog/page/${pageNum - 1}`} class="inline-flex items-center justify-center px-4 h-10 border border-subtle text-muted text-sm font-semibold hover:border-gold hover:text-gold transition-colors">← Prev</a>
+        )}
+        {pageNum === 2 && (
+          <a href="/blog" class="inline-flex items-center justify-center px-4 h-10 border border-subtle text-muted text-sm font-semibold hover:border-gold hover:text-gold transition-colors">← Prev</a>
+        )}
+        {Array.from({ length: totalPages }, (_, i) => {
+          const pg = i + 1;
+          const href = pg === 1 ? '/blog' : `/blog/page/${pg}`;
+          const isCurrent = pg === pageNum;
+          return isCurrent ? (
+            <span class="inline-flex items-center justify-center w-10 h-10 border border-gold bg-gold text-[#0a0a0a] text-sm font-bold">{pg}</span>
+          ) : (
+            <a href={href} class="inline-flex items-center justify-center w-10 h-10 border border-subtle text-muted text-sm font-semibold hover:border-gold hover:text-gold transition-colors">{pg}</a>
+          );
+        })}
+        {pageNum < totalPages && (
+          <a href={`/blog/page/${pageNum + 1}`} class="inline-flex items-center justify-center px-4 h-10 border border-subtle text-muted text-sm font-semibold hover:border-gold hover:text-gold transition-colors">Next →</a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Glen Robison · REALTOR"
+    title="Ready to find your Hill Country home?"
+    subtitle="Ten years in New Braunfels, Canyon Lake, and Garden Ridge."
+    primaryLabel="Contact Glen"
+    primaryHref="/contact"
+    secondaryLabel="Editorial Home"
+    secondaryHref="/blog"
+  />
+</Layout>

@@ -1,0 +1,164 @@
+---
+// VIP access modal — 2 step (interest selection → name/email)
+// Triggers once per visitor, localStorage-gated.
+---
+
+<div id="vip-modal" class="hidden fixed inset-0 z-[200] flex items-center justify-center px-4">
+  <!-- Backdrop -->
+  <div id="vip-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+
+  <!-- Modal -->
+  <div class="relative bg-[var(--color-bg)] border border-hair w-full max-w-md mx-auto overflow-hidden">
+    <!-- top accent rule -->
+    <div class="h-[2px] w-full" style="background: linear-gradient(90deg, var(--color-gold-deep), var(--color-gold-bright), var(--color-gold-deep));"></div>
+
+    <!-- Close -->
+    <button id="vip-close" aria-label="Close" class="absolute top-4 right-4 text-dim hover:text-cream text-2xl leading-none w-8 h-8 flex items-center justify-center z-10">
+      ×
+    </button>
+
+    <!-- STEP 1 -->
+    <div id="vip-step-1" class="p-8 pt-10">
+      <div class="text-center mb-8">
+        <p class="eyebrow text-gold-bright mb-4">Exclusive Access</p>
+        <h3 class="mb-3" style="font-size: 1.6rem; line-height: 1.2;">
+          Get VIP Access to<br/>
+          <span class="text-gold-bright">Off-Market Listings</span>
+        </h3>
+        <p class="text-muted text-sm leading-[1.55]">
+          Join 500+ Hill Country buyers and sellers who get first look at luxury homes before they hit the market.
+        </p>
+      </div>
+
+      <p class="text-dim text-xs uppercase tracking-[0.18em] mb-4">What brings you here today?</p>
+
+      <div class="space-y-3">
+        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Buying a Home">
+          <span class="text-cream font-medium text-sm">Buying a Home</span>
+          <span class="text-gold group-hover:text-gold-bright">→</span>
+        </button>
+        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Selling My Home">
+          <span class="text-cream font-medium text-sm">Selling My Home</span>
+          <span class="text-gold group-hover:text-gold-bright">→</span>
+        </button>
+        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Free Home Valuation (CMA)">
+          <span class="text-cream font-medium text-sm">Free Home Valuation (CMA)</span>
+          <span class="text-gold group-hover:text-gold-bright">→</span>
+        </button>
+        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Relocating to the Hill Country">
+          <span class="text-cream font-medium text-sm">Relocating to the Hill Country</span>
+          <span class="text-gold group-hover:text-gold-bright">→</span>
+        </button>
+      </div>
+
+      <div class="text-center mt-6">
+        <button id="vip-dismiss" class="text-dim text-xs hover:text-muted">No thanks, I'll browse on my own</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="vip-step-2" class="hidden p-8 pt-10">
+      <div class="text-center mb-6">
+        <h3 class="mb-3" style="font-size: 1.5rem;">Almost There.</h3>
+        <p class="text-muted text-sm">
+          Enter your details to get personalized listings for<br/>
+          <span id="vip-interest-label" class="text-gold-bright"></span>
+        </p>
+      </div>
+
+      <form id="vip-form" class="space-y-3">
+        <input type="hidden" id="vip-interest-input" name="interest" />
+        <input type="text" name="name" placeholder="Your Full Name" required class="w-full bg-card border border-hair px-4 py-3 text-cream text-sm focus:border-[var(--color-gold)] outline-none" />
+        <input type="email" name="email" placeholder="Your Email Address" required class="w-full bg-card border border-hair px-4 py-3 text-cream text-sm focus:border-[var(--color-gold)] outline-none" />
+        <button type="submit" class="btn-gold w-full">Get Exclusive Access</button>
+      </form>
+
+      <div class="text-center mt-4">
+        <button id="vip-back" class="text-dim text-xs hover:text-muted">← Back to interests</button>
+      </div>
+
+      <div class="flex justify-center gap-5 text-dim text-[10px] uppercase tracking-wider mt-6 pt-5 border-t border-hair">
+        <span>🔒 Secure & Private</span>
+        <span>No Spam, Ever</span>
+        <span>Unsubscribe Anytime</span>
+      </div>
+    </div>
+
+    <!-- STEP 3 — thank you -->
+    <div id="vip-step-3" class="hidden p-10 text-center">
+      <p class="eyebrow text-gold-bright mb-4">You're In</p>
+      <h3 class="mb-4" style="font-size: 1.6rem;">Thanks. Glen will be in touch.</h3>
+      <p class="text-muted text-sm mb-6">Expect a same-day reply with your personalized listings and next steps.</p>
+      <button id="vip-finish" class="btn-outline">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const KEY = 'vip-modal-seen';
+    const modal = document.getElementById('vip-modal');
+    if (!modal) return;
+    if (localStorage.getItem(KEY)) return;
+
+    const step1 = document.getElementById('vip-step-1');
+    const step2 = document.getElementById('vip-step-2');
+    const step3 = document.getElementById('vip-step-3');
+    const interestLabel = document.getElementById('vip-interest-label');
+    const interestInput = document.getElementById('vip-interest-input') as HTMLInputElement;
+
+    function openModal() {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+      localStorage.setItem(KEY, '1');
+    }
+
+    function showStep(n: number) {
+      step1?.classList.toggle('hidden', n !== 1);
+      step2?.classList.toggle('hidden', n !== 2);
+      step3?.classList.toggle('hidden', n !== 3);
+    }
+
+    // Triggers
+    let opened = false;
+    function trigger() {
+      if (opened) return;
+      opened = true;
+      openModal();
+    }
+    setTimeout(trigger, 8000);
+    window.addEventListener('scroll', () => {
+      if ((window.scrollY + window.innerHeight) / document.body.scrollHeight > 0.4) trigger();
+    }, { passive: true });
+
+    // Close handlers
+    document.getElementById('vip-close')?.addEventListener('click', closeModal);
+    document.getElementById('vip-backdrop')?.addEventListener('click', closeModal);
+    document.getElementById('vip-dismiss')?.addEventListener('click', closeModal);
+    document.getElementById('vip-finish')?.addEventListener('click', closeModal);
+
+    // Interest selection → step 2
+    document.querySelectorAll('.vip-interest').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const interest = (btn as HTMLElement).dataset.interest || '';
+        if (interestLabel) interestLabel.textContent = interest;
+        if (interestInput) interestInput.value = interest;
+        showStep(2);
+      });
+    });
+
+    // Back to step 1
+    document.getElementById('vip-back')?.addEventListener('click', () => showStep(1));
+
+    // Submit → step 3 (TODO: wire to GHL)
+    document.getElementById('vip-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // TODO: POST to GHL form endpoint with name, email, interest
+      showStep(3);
+    });
+  })();
+</script>

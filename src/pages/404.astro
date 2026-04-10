@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Page Not Found | Glen Robison Homes"
+  description="The page you're looking for doesn't exist. Let's get you back to finding your Hill Country home."
+>
+  <section class="relative min-h-[80vh] flex items-center overflow-hidden bg-deep">
+    <img
+      src="/images/hero-home.png"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale"
+      aria-hidden="true"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-bg)]/70 via-[var(--color-bg)]/85 to-[var(--color-bg)]"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-8 py-32 text-center">
+      <p class="eyebrow mb-6">Error 404</p>
+
+      <div class="font-display font-extrabold text-gold-bright mb-8 leading-[0.85]" style="font-size: clamp(6rem, 16vw, 12rem); letter-spacing: -0.05em;">
+        404
+      </div>
+
+      <h1 class="mb-8">Lost in the Hill Country.</h1>
+
+      <p class="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-12 leading-[1.6]">
+        The page you're looking for doesn't exist or may have been moved. Let's get you back on the map.
+      </p>
+
+      <div class="flex flex-wrap gap-4 justify-center mb-16">
+        <a href="/" class="btn-gold">Back to Home</a>
+        <a href="/search" class="btn-outline">Search Homes</a>
+      </div>
+
+      <div class="pt-12 border-t border-hair">
+        <p class="eyebrow mb-6">Or try one of these</p>
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
+          <a href="/buyers" class="text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Buyers</a>
+          <a href="/luxury" class="text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Luxury</a>
+          <a href="/neighborhoods" class="text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Neighborhoods</a>
+          <a href="/living" class="text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Guides</a>
+          <a href="/testimonials" class="text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Reviews</a>
+          <a href="/contact" class="text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Contact Glen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

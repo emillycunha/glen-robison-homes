@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+@theme {
+  /* Modern masculine luxury, architectural, confident */
+  --color-bg: #0a0a0a;                /* true black, more architectural */
+  --color-bg-elevated: #121212;        /* subtle lift */
+  --color-bg-card: #161616;            /* card surface */
+  --color-bg-deep: #050505;            /* deepest */
+  --color-border: #262626;
+  --color-border-subtle: #1c1c1c;
+  --color-border-hair: rgba(193, 154, 87, 0.15);
+
+  --color-text: #f4f2ee;               /* warm off-white, confident */
+  --color-text-muted: #9e9a93;
+  --color-text-dim: #5a574f;
+
+  /* Gold, Aston Martin tan / Tom Ford brass, masculine */
+  --color-gold: #c19a57;
+  --color-gold-bright: #e0b974;
+  --color-gold-deep: #8a6d3a;
+  --color-gold-tint: rgba(193, 154, 87, 0.08);
+
+  /* Typography */
+  --font-display: "Syne", -apple-system, sans-serif;
+  --font-display-h1: "Bricolage Grotesque", -apple-system, sans-serif;
+  --font-body: "Manrope", -apple-system, sans-serif;
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  position: relative;
+  font-weight: 400;
+}
+
+/* Subtle noise, keep atmosphere without the editorial grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+main, header, footer { position: relative; z-index: 2; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-text);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Consistent display scale across the site */
+h1 {
+  font-family: var(--font-display-h1);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96;        /* large optical size for display */
+  letter-spacing: -0.035em;
+  line-height: 1.0;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);    /* 36 → 56px */
+}
+h2 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  font-size: clamp(1.625rem, 2.6vw, 2.25rem);  /* section: 26 → 36px */
+}
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-size: 1.25rem;  /* 20px */
+}
+h4 {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  font-size: 1rem;
+}
+
+p { color: var(--color-text); font-weight: 400; }
+
+a {
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+a:hover { color: var(--color-gold-bright); }
+
+/* Eyebrows, condensed uppercase Manrope */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--color-gold);
+  display: inline-block;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Utility tokens */
+.text-gold { color: var(--color-gold); }
+.text-gold-bright { color: var(--color-gold-bright); }
+.text-gold-deep { color: var(--color-gold-deep); }
+.text-muted { color: var(--color-text-muted); }
+.text-dim { color: var(--color-text-dim); }
+.text-cream { color: var(--color-text); }
+.bg-elevated { background: var(--color-bg-elevated); }
+.bg-card { background: var(--color-bg-card); }
+.bg-deep { background: var(--color-bg-deep); }
+.border-subtle { border-color: var(--color-border-subtle); }
+.border-default { border-color: var(--color-border); }
+.border-hair { border-color: var(--color-border-hair); }
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+
+/* Architectural rule, sharp, confident */
+.gold-rule {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--color-gold);
+  margin: 0 0 1.75rem 0;
+}
+
+.hair-rule {
+  height: 1px;
+  background: var(--color-border-hair);
+  border: 0;
+  margin: 0;
+}
+
+/* Large index number, 01, 02, 03 */
+.index-number {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--color-gold);
+}
+
+/* Buttons, sharp, architectural, no rounded corners */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2.25rem;
+  background: var(--color-gold);
+  color: #0a0a0a;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid var(--color-gold);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-gold:hover {
+  background: var(--color-gold-bright);
+  border-color: var(--color-gold-bright);
+  color: #0a0a0a;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -14px rgba(193, 154, 87, 0.5);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2.25rem;
+  background: transparent;
+  color: var(--color-gold);
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid var(--color-gold-deep);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-outline:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold-bright);
+  background: rgba(193, 154, 87, 0.05);
+}
+
+/* Cards */
+.arch-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.arch-card:hover {
+  border-color: var(--color-gold-deep);
+  transform: translateY(-3px);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6);
+}
+
+/* Legal / long-form prose, smaller heading scale for privacy, terms, disclosures */
+.legal-prose h1 {
+  font-size: 1.875rem;          /* 30px */
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+.legal-prose h2 {
+  font-size: 1.125rem;          /* 18px */
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.legal-prose h3 {
+  font-size: 0.875rem;          /* 14px */
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.legal-prose p {
+  font-size: 0.9375rem;         /* 15px */
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+/* Quick Answer, structured pull, not italic */
+.quick-answer {
+  border-left: 2px solid var(--color-gold);
+  padding: 1.5rem 0 1.5rem 2rem;
+  margin: 2rem 0;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  line-height: 1.65;
+  color: var(--color-text);
+  font-weight: 400;
+}
+.quick-answer p { margin: 0; color: var(--color-text); }
+.quick-answer p + p { margin-top: 0.75rem; }
+
+::selection {
+  background: var(--color-gold);
+  color: #0a0a0a;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Entrance animations */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise-1 { animation: rise 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s backwards; }
+.rise-2 { animation: rise 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.25s backwards; }
+.rise-3 { animation: rise 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.4s backwards; }
+.rise-4 { animation: rise 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.55s backwards; }
+.rise-5 { animation: rise 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.7s backwards; }

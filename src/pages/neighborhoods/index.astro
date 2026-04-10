@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { neighborhoods } from '../../data/neighborhoods.js';
+import { communities } from '../../data/communities.js';
+---
+
+<Layout
+  title="New Braunfels Neighborhoods & Nearby Communities | Glen Robison Homes"
+  description="Explore the top neighborhoods and gated communities in New Braunfels, TX, plus nearby Hill Country communities like Canyon Lake and Garden Ridge."
+>
+  <PageHero
+    eyebrow="Where to Live"
+    title="Neighborhoods & Communities."
+    image="/images/hill-country-aerial.png"
+    intro="From guarded gates to acreage estates, here are the New Braunfels neighborhoods Glen knows best, plus the nearby Hill Country communities many buyers also consider."
+  />
+
+  <!-- NEIGHBORHOODS -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12">
+        <span class="gold-rule"></span>
+        <p class="text-gold text-[11px] font-semibold uppercase tracking-[0.3em] mb-3">New Braunfels</p>
+        <h2 class="">Neighborhoods.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {neighborhoods.map(n => (
+          <a href={`/neighborhoods/${n.slug}`} class="bg-card border border-subtle hover:border-[var(--color-gold-dim)] transition-all group overflow-hidden">
+            <div class="aspect-[16/10] overflow-hidden">
+              <img
+                src={n.image ?? `https://placehold.co/800x500/131313/c9a661?font=playfair&text=${encodeURIComponent(n.name)}`}
+                alt={n.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-8">
+              <p class="text-gold text-[10px] font-semibold uppercase tracking-[0.2em] mb-3">{n.segment}</p>
+              <h3 class="mb-3 group-hover:text-gold-bright transition-colors">{n.name}</h3>
+              <p class="text-dim text-sm mb-4">{n.priceRange}</p>
+              <p class="text-muted text-sm leading-relaxed line-clamp-3">{n.description}</p>
+              {n.needsResearch && <p class="mt-4 text-[10px] text-yellow-600 uppercase tracking-wider">Profile in development</p>}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- NEARBY COMMUNITIES -->
+  <section class="py-20 bg-elevated border-t border-subtle">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12">
+        <span class="gold-rule"></span>
+        <p class="text-gold text-[11px] font-semibold uppercase tracking-[0.3em] mb-3">Hill Country</p>
+        <h2 class="">Nearby Communities.</h2>
+        <p class="text-muted text-lg mt-4 max-w-2xl">Buyers in the Hill Country often consider multiple towns. Here are the nearby communities Glen serves alongside New Braunfels.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {communities.map(c => (
+          <a href={`/communities/${c.slug}`} class="bg-card border border-subtle hover:border-[var(--color-gold-dim)] transition-all group overflow-hidden">
+            <div class="aspect-[16/10] overflow-hidden">
+              <img
+                src={c.image ?? `https://placehold.co/800x500/0a0a0a/c9a661?font=playfair&text=${encodeURIComponent(c.name)}`}
+                alt={c.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-8">
+              <p class="text-gold text-[10px] font-semibold uppercase tracking-[0.2em] mb-3">{c.distance} of New Braunfels</p>
+              <h3 class="mb-3 group-hover:text-gold-bright transition-colors">{c.name}</h3>
+              <p class="text-dim text-sm mb-4">Median home price: {c.medianPrice}</p>
+              <p class="text-muted text-sm leading-relaxed line-clamp-3">{c.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

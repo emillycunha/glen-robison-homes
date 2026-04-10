@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTABand from '../components/CTABand.astro';
+---
+
+<Layout
+  title="Search Homes for Sale in New Braunfels TX & the Hill Country | Glen Robison"
+  description="Search active MLS listings in New Braunfels, Canyon Lake, Garden Ridge, and the Texas Hill Country. Powered by The Hill Country Home Guide."
+>
+  <PageHero
+    eyebrow="Home Search"
+    title="Find your Hill Country home." image="/images/hero-search.png"
+    intro="Search active MLS listings across New Braunfels, Canyon Lake, Garden Ridge, and the broader Texas Hill Country. Filter by price, beds, baths, and more."
+  />
+
+  <!-- Quick links bar -->
+  <section class="border-b border-hair bg-deep">
+    <div class="max-w-7xl mx-auto px-8 py-6">
+      <div class="flex flex-wrap items-center gap-x-8 gap-y-3">
+        <span class="eyebrow text-dim">Quick Searches:</span>
+        <a href="/luxury" class="text-sm text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Luxury Homes</a>
+        <a href="/neighborhoods" class="text-sm text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">By Neighborhood</a>
+        <a href="/new-construction" class="text-sm text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">New Construction</a>
+        <a href="/neighborhoods/copper-ridge" class="text-sm text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Copper Ridge</a>
+        <a href="/neighborhoods/vintage-oaks" class="text-sm text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Vintage Oaks</a>
+        <a href="/communities/canyon-lake" class="text-sm text-muted hover:text-gold-bright uppercase tracking-wider font-semibold">Canyon Lake</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search iframe, external header clipped via overflow + negative offset -->
+  <section class="bg-deep">
+    <div class="max-w-[1600px] mx-auto px-4 md:px-8 py-10">
+      <div class="border border-hair bg-card relative" style="height: 85vh; min-height: 720px; overflow: hidden;">
+        <iframe
+          src="https://www.thehillcountryhomeguide.com/search"
+          title="Hill Country home search"
+          class="block"
+          style="width: 100%; height: calc(85vh + 100px); min-height: 820px; border: 0; margin-top: -100px;"
+          loading="lazy"
+          allow="geolocation"
+        ></iframe>
+      </div>
+      <p class="text-dim text-xs uppercase tracking-wider mt-4 text-center">
+        Listings provided by The Hill Country Home Guide · Updated in real time
+      </p>
+    </div>
+  </section>
+
+  <!-- Not finding it section -->
+  <section class="py-24 border-t border-hair">
+    <div class="max-w-6xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="eyebrow mb-5">Don't see it here?</p>
+        <h2 class="mb-6">
+          The best listings are <span class="text-gold-bright">off-market.</span>
+        </h2>
+        <p class="text-base md:text-lg text-muted leading-[1.7] mb-4">
+          Some of the best luxury homes in New Braunfels never hit the MLS. Glen works with sellers and builders directly and gets early access to pocket listings, pre-market homes, and new construction before they go live.
+        </p>
+        <p class="text-base md:text-lg text-muted leading-[1.7] mb-8">
+          If you're looking for something specific, tell Glen what you want. He'll put together a custom search and flag anything he hears about through his network.
+        </p>
+        <a href="/contact" class="btn-gold">Request a Custom Search</a>
+      </div>
+      <div class="arch-card p-10">
+        <p class="eyebrow mb-6">What to share</p>
+        <ul class="space-y-4 text-muted">
+          <li class="flex items-start gap-3"><span class="text-gold mt-1">◆</span><span>Price range and timeline</span></li>
+          <li class="flex items-start gap-3"><span class="text-gold mt-1">◆</span><span>Beds, baths, square footage</span></li>
+          <li class="flex items-start gap-3"><span class="text-gold mt-1">◆</span><span>Must-have features (gated, acreage, lake, golf)</span></li>
+          <li class="flex items-start gap-3"><span class="text-gold mt-1">◆</span><span>Preferred neighborhoods or areas</span></li>
+          <li class="flex items-start gap-3"><span class="text-gold mt-1">◆</span><span>Whether you're open to new construction</span></li>
+          <li class="flex items-start gap-3"><span class="text-gold mt-1">◆</span><span>Relocation timing, if moving from out of state</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Ready to Look?"
+    title="Glen does the legwork."
+    subtitle="You don't have to scroll through hundreds of listings. Share what you want and Glen will send you the handful worth seeing."
+    primaryLabel="Contact Glen"
+    primaryHref="/contact"
+    secondaryLabel="Read Reviews"
+    secondaryHref="/testimonials"
+  />
+</Layout>

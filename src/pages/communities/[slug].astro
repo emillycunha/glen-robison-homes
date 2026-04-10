@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTABand from '../../components/CTABand.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import { communities } from '../../data/communities.js';
+import { neighborhoods } from '../../data/neighborhoods.js';
+
+export function getStaticPaths() {
+  return communities.map(c => ({ params: { slug: c.slug }, props: { c } }));
+}
+
+const { c } = Astro.props;
+
+// Show the other community, 2 relevant neighborhoods, and the relocation guide
+const otherCommunity = communities.find(x => x.slug !== c.slug);
+const luxuryHoods = neighborhoods.filter(n => n.segment.toLowerCase().includes('luxury')).slice(0, 2);
+
+const relatedLinks = [
+  ...luxuryHoods.map(n => ({
+    href: `/neighborhoods/${n.slug}`,
+    eyebrow: n.segment.replace(' (anchor)', ''),
+    label: n.name,
+    description: n.priceRange,
+  })),
+  ...(otherCommunity ? [{
+    href: `/communities/${otherCommunity.slug}`,
+    eyebrow: 'Nearby Community',
+    label: otherCommunity.name,
+    description: otherCommunity.whyChoose,
+  }] : []),
+  {
+    href: '/relocation-guide',
+    eyebrow: 'For Relocators',
+    label: 'Relocation Guide',
+    description: 'Everything you need to know about moving to New Braunfels and the Hill Country.',
+  },
+];
+---
+
+<Layout
+  title={`${c.name}, TX Real Estate | Glen Robison Homes`}
+  description={`${c.name} real estate near New Braunfels. ${c.distance}, median home price ${c.medianPrice}. ${c.description.slice(0, 100)}`}
+>
+  <section class="relative py-24 border-b border-hair overflow-hidden bg-deep">
+    <img
+      src={c.image ?? `https://placehold.co/1920x800/0a0a0a/c19a57?font=playfair&text=${encodeURIComponent(c.name)}`}
+      alt={c.name}
+      class="absolute inset-0 w-full h-full object-cover opacity-40"
+    />
+    <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-bg)]/90 via-[var(--color-bg)]/75 to-[var(--color-bg)]"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-8">
+      <a href="/neighborhoods" class="text-gold text-xs uppercase tracking-wider hover:text-gold-bright font-semibold">← Neighborhoods & Communities</a>
+      <span class="gold-rule mt-8"></span>
+      <p class="eyebrow mb-4">Hill Country Community</p>
+      <h1 class="mb-6">{c.name}</h1>
+      <p class="text-muted text-sm mb-8">{c.distance} of New Braunfels · Population {c.population}</p>
+
+      <div class="quick-answer">
+        <p>{c.description}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What it feels like -->
+  {c.dailyLife && (
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">What does {c.name} feel like?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{c.dailyLife}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Market snapshot -->
+  <section class="py-20 bg-elevated border-y border-hair">
+    <div class="max-w-3xl mx-auto px-8">
+      <h2 class="mb-8">What's the {c.name} market look like?</h2>
+      <dl class="grid grid-cols-2 gap-8 mb-8">
+        <div>
+          <dt class="eyebrow text-dim mb-2">Median Home Price</dt>
+          <dd class="font-display font-extrabold text-gold-bright text-3xl">{c.medianPrice}</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-dim mb-2">Population</dt>
+          <dd class="font-display font-extrabold text-cream text-3xl">{c.population}</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-dim mb-2">Median Income</dt>
+          <dd class="font-display font-extrabold text-cream text-3xl">{c.medianIncome}</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-dim mb-2">Median Age</dt>
+          <dd class="font-display font-extrabold text-cream text-3xl">{c.medianAge}</dd>
+        </div>
+      </dl>
+      {c.marketDetail && <p class="text-muted leading-[1.75] text-lg mt-8">{c.marketDetail}</p>}
+    </div>
+  </section>
+
+  <!-- Schools -->
+  {c.schools && (
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">Schools in {c.name}</h2>
+        <p class="text-muted leading-[1.75] text-lg">{c.schools}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Commute / distance -->
+  {c.commute && (
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">How far is {c.name} from New Braunfels?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{c.commute}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Amenities -->
+  {c.amenitiesDetail && (
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">Amenities and lifestyle</h2>
+        <p class="text-muted leading-[1.75] text-lg">{c.amenitiesDetail}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Taxes -->
+  {c.taxes && (
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">Property taxes in {c.name}</h2>
+        <p class="text-muted leading-[1.75] text-lg">{c.taxes}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Why choose -->
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-8">
+      <h2 class="mb-6">Why choose {c.name} over New Braunfels?</h2>
+      <p class="text-muted leading-[1.75] text-lg">{c.whyChoose}</p>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  {c.faqs && c.faqs.length > 0 && (
+    <FAQSection
+      faqs={c.faqs}
+      eyebrow={`${c.name} FAQ`}
+      title={`Frequently asked about ${c.name}.`}
+    />
+  )}
+
+  <!-- Sources -->
+  {c.sources && c.sources.length > 0 && (
+    <section class="py-12 border-t border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <p class="eyebrow mb-4 text-dim">Sources</p>
+        <ul class="space-y-1 text-sm">
+          {c.sources.map(s => (
+            <li><a href={s.url} target="_blank" rel="noopener" class="text-gold hover:text-gold-bright">{s.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <RelatedLinks
+    eyebrow="Also Worth Knowing"
+    title="More Hill Country options."
+    links={relatedLinks}
+  />
+
+  <CTABand
+    eyebrow={`Looking at ${c.name}?`}
+    title="Get a local perspective."
+    subtitle={`Glen serves ${c.name} alongside New Braunfels. He can walk you through the trade-offs, the neighborhoods, and the day-in-the-life differences.`}
+    primaryLabel="Talk to Glen"
+    primaryHref="/contact"
+    secondaryLabel="Relocation Guide"
+    secondaryHref="/relocation-guide"
+  />
+</Layout>

@@ -1,0 +1,188 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTABand from '../../components/CTABand.astro';
+
+const freeGuides = [
+  {
+    href: '/buyers-guide',
+    badge: 'Unlock Free',
+    title: "Buyer's Guide",
+    desc: 'The complete guide to buying a home in New Braunfels and the Hill Country. Financing, inspections, contracts, closing, everything a buyer needs.',
+    image: '/images/hero-buyers.png',
+  },
+  {
+    href: '/sellers-guide',
+    badge: 'Unlock Free',
+    title: "Seller's Guide",
+    desc: 'Strategic pricing, marketing, staging, and negotiation. How to sell well in New Braunfels without leaving money on the table.',
+    image: '/images/hero-sell.png',
+  },
+  {
+    href: '/relocation-guide',
+    badge: 'Unlock Free',
+    title: 'Relocation Guide',
+    desc: 'Moving to New Braunfels from out of state, Austin, or San Antonio? Schools, taxes, neighborhoods, cost of living, all in one place.',
+    image: '/images/hero-why-move.png',
+  },
+];
+
+const calculators = [
+  {
+    href: '/tools/mortgage-calculator',
+    badge: 'For Buyers',
+    title: 'Mortgage Calculator',
+    desc: 'Estimate your monthly payment including principal, interest, taxes, and insurance.',
+    image: '/images/blog-affordability.png',
+  },
+  {
+    href: '/tools/seller-net-sheet',
+    badge: 'For Sellers',
+    title: 'Seller Net Sheet',
+    desc: "Estimate what you'll walk away with after commissions, closing costs, and mortgage payoff.",
+    image: '/images/luxury-interior.png',
+  },
+];
+
+const lifestyle = [
+  {
+    href: '/living/why-move-to-new-braunfels',
+    badge: 'Relocation',
+    title: 'Why Move to New Braunfels',
+    desc: 'The case for New Braunfels and the Texas Hill Country. Growth, taxes, lifestyle, and why people are moving here.',
+    image: '/images/hill-country-aerial.png',
+  },
+  {
+    href: '/living/cost-of-living-and-schools',
+    badge: 'Relocation',
+    title: 'Cost of Living & Schools',
+    desc: 'Texas no-state-income-tax math, Comal ISD, and what relocating families need to know.',
+    image: '/images/hero-cost-schools.png',
+  },
+  {
+    href: '/living/things-to-do',
+    badge: 'Lifestyle',
+    title: 'Things to Do',
+    desc: 'Schlitterbahn, the Comal and Guadalupe rivers, Gruene Hall, Hill Country wineries, and lake life.',
+    image: '/images/gruene-hall.png',
+  },
+];
+---
+
+<Layout
+  title="New Braunfels Buyer & Seller Guides, Calculators, & Relocation | Glen Robison"
+  description="Free guides, calculators, and relocation content for New Braunfels, Texas. Everything you need to know about buying, selling, and moving to the Hill Country."
+>
+  <PageHero
+    eyebrow="Resources"
+    title="Guides & Tools."
+    image="/images/hero-living.png"
+    intro="Unlockable guides, working calculators, and in-depth relocation content for New Braunfels and the Texas Hill Country. Enter your email once and the full guides open up on this site."
+  />
+
+  <!-- FREE GUIDES -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12">
+        <span class="gold-rule"></span>
+        <p class="text-gold text-[11px] font-semibold uppercase tracking-[0.3em] mb-3">Free Guides</p>
+        <h2 class="">Unlockable Guides.</h2>
+        <p class="text-muted text-lg mt-4 max-w-2xl">Short, practical, and specific to the New Braunfels market. No fluff.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {freeGuides.map(g => (
+          <a href={g.href} class="bg-card border border-subtle hover:border-[var(--color-gold-dim)] transition-all group overflow-hidden flex flex-col">
+            <div class="aspect-[3/2] overflow-hidden">
+              <img
+                src={g.image}
+                alt={g.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+              <p class="text-gold text-[10px] font-semibold uppercase tracking-[0.2em] mb-3">{g.badge}</p>
+              <h3 class="mb-3 group-hover:text-gold-bright transition-colors">{g.title}</h3>
+              <p class="text-muted text-sm leading-relaxed mb-6 flex-1">{g.desc}</p>
+              <span class="text-gold text-[11px] font-semibold uppercase tracking-[0.15em] group-hover:text-gold-bright">Unlock →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATORS -->
+  <section class="py-24 bg-elevated border-y border-subtle">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12">
+        <span class="gold-rule"></span>
+        <p class="text-gold text-[11px] font-semibold uppercase tracking-[0.3em] mb-3">Calculators</p>
+        <h2 class="">Run the Numbers.</h2>
+        <p class="text-muted text-lg mt-4 max-w-2xl">Free, no sign-up, instant results. Use them as a starting point and Glen can dial in the real numbers for your specific situation.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {calculators.map(c => (
+          <a href={c.href} class="bg-card border border-subtle hover:border-[var(--color-gold-dim)] transition-all group overflow-hidden flex flex-col">
+            <div class="aspect-[16/9] overflow-hidden">
+              <img
+                src={c.image}
+                alt={c.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-10 flex flex-col flex-1">
+              <p class="text-gold text-[10px] font-semibold uppercase tracking-[0.2em] mb-3">{c.badge}</p>
+              <h3 class="mb-4 group-hover:text-gold-bright transition-colors">{c.title}</h3>
+              <p class="text-muted text-base leading-relaxed mb-6 flex-1">{c.desc}</p>
+              <span class="text-gold text-[11px] font-semibold uppercase tracking-[0.15em] group-hover:text-gold-bright">Open Calculator →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVING IN NEW BRAUNFELS -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12">
+        <span class="gold-rule"></span>
+        <p class="text-gold text-[11px] font-semibold uppercase tracking-[0.3em] mb-3">Living in New Braunfels</p>
+        <h2 class="">Life in the Hill Country.</h2>
+        <p class="text-muted text-lg mt-4 max-w-2xl">Deep-dive content for buyers who want to know the city before they move. All facts verified against real sources.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {lifestyle.map(l => (
+          <a href={l.href} class="bg-card border border-subtle hover:border-[var(--color-gold-dim)] transition-all group overflow-hidden flex flex-col">
+            <div class="aspect-[3/2] overflow-hidden">
+              <img
+                src={l.image}
+                alt={l.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+              <p class="text-gold text-[10px] font-semibold uppercase tracking-[0.2em] mb-3">{l.badge}</p>
+              <h3 class="mb-3 group-hover:text-gold-bright transition-colors">{l.title}</h3>
+              <p class="text-muted text-sm leading-relaxed flex-1">{l.desc}</p>
+              <span class="text-gold text-[11px] font-semibold uppercase tracking-[0.15em] mt-6 group-hover:text-gold-bright">Read →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Prefer a Real Conversation?"
+    title="Skip the guides. Call Glen."
+    subtitle="The fastest way to get real answers is a 15-minute call. Glen will tell you what he knows and what he'd do in your shoes."
+    primaryLabel="Contact Glen"
+    primaryHref="/contact"
+    secondaryLabel="View Neighborhoods"
+    secondaryHref="/neighborhoods"
+  />
+</Layout>

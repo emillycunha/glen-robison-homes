@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTABand from '../components/CTABand.astro';
+import { testimonials } from '../data/testimonials.js';
+---
+
+<Layout
+  title="Client Reviews & Testimonials | Glen Robison REALTOR"
+  description="Real reviews from buyers and sellers who worked with Glen Robison in New Braunfels, Canyon Lake, and the Texas Hill Country."
+>
+  <PageHero
+    eyebrow="Testimonials"
+    title="In their own words."
+    image="/images/hero-about.png"
+    intro="Real reviews from buyers and sellers Glen has worked with across New Braunfels, Canyon Lake, and the Texas Hill Country. Every review below is verified on Zillow."
+  >
+    <div class="mt-10 flex flex-wrap items-center gap-4">
+      <a href="https://www.zillow.com/profile/Glen%20Robison#reviews" target="_blank" rel="noopener" class="btn-outline">
+        View Verified Reviews on Zillow →
+      </a>
+      <div class="text-gold text-lg tracking-wider">★★★★★ <span class="text-muted text-sm ml-2">5.0 on Zillow</span></div>
+    </div>
+  </PageHero>
+
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+      {testimonials.map(t => (
+        <div class="arch-card p-10 flex flex-col">
+          <div class="font-display text-gold text-6xl leading-none mb-4 opacity-70">"</div>
+          <p class="text-cream text-lg leading-[1.65] mb-8 flex-1">{t.quote}</p>
+          <div class="h-px w-12 bg-gold-deep mb-5"></div>
+          <div class="flex items-baseline justify-between gap-4">
+            <div>
+              <p class="text-cream font-semibold text-sm">{t.author}</p>
+              <p class="eyebrow text-[10px] text-dim mt-1">{t.context}</p>
+            </div>
+            <div class="text-gold text-sm tracking-wider">★★★★★</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Ready?"
+    title="Work with Glen."
+    subtitle="Call, text, or send a note. Glen will get back to you the same day."
+    primaryLabel="Schedule a Call"
+    primaryHref="/contact"
+    secondaryLabel="View Neighborhoods"
+    secondaryHref="/neighborhoods"
+  />
+</Layout>

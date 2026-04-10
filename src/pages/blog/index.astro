@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTABand from '../../components/CTABand.astro';
+import { blogPosts } from '../../data/blog-posts.js';
+
+const POSTS_PER_PAGE = 7;
+
+const sorted = [...blogPosts].sort((a, b) => (a.pubDate < b.pubDate ? 1 : -1));
+const pagePosts = sorted.slice(0, POSTS_PER_PAGE);
+const totalPages = Math.max(1, Math.ceil(sorted.length / POSTS_PER_PAGE));
+
+const images = [
+  '/images/hero-home.png',
+  '/images/copper-ridge.png',
+  '/images/vintage-oaks.png',
+  '/images/riverforest.png',
+  '/images/river-chase.png',
+  '/images/havenwood.png',
+  '/images/mayfair.png',
+];
+const getImage = (i) => images[i % images.length];
+
+const formatDate = (iso) =>
+  new Date(iso + 'T00:00:00').toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+const lead = pagePosts[0];
+const grid = pagePosts.slice(1);
+---
+
+<Layout
+  title="The Glen Robison Report | Hill Country Real Estate Insights"
+  description="Market reports, neighborhood guides, and buyer insights for New Braunfels, Canyon Lake, Garden Ridge, and the Texas Hill Country from REALTOR Glen Robison."
+>
+
+  <!-- MASTHEAD -->
+  <section class="pt-24 pb-12 border-b border-hair">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <p class="eyebrow mb-6">Vol. 1 · The Hill Country Edition</p>
+      <h1 class="mb-6" style="font-size: clamp(3rem, 6vw, 5rem); line-height: 0.95;">The Glen Robison Report</h1>
+      <p class="text-muted text-lg max-w-2xl mx-auto leading-[1.6]">Market updates, neighborhood guides, and buyer-side insights for New Braunfels, Canyon Lake, Garden Ridge, and the rest of the Texas Hill Country.</p>
+    </div>
+  </section>
+
+  {sorted.length === 0 ? (
+    <section class="py-32 text-center">
+      <p class="text-muted mb-8">No posts yet. Check back soon.</p>
+      <a href="/contact" class="btn-outline">Get on the List</a>
+    </section>
+  ) : (
+    <>
+      <!-- LEAD STORY -->
+      {lead && (
+        <section class="py-20 border-b border-hair">
+          <div class="max-w-7xl mx-auto px-8">
+            <a href={`/blog/${lead.slug}`} class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-12 items-center group">
+              <div class="relative overflow-hidden aspect-[4/3] order-2 lg:order-1">
+                <img
+                  src={lead.image ?? getImage(0)}
+                  alt={lead.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[800ms]"
+                />
+                <div class="absolute top-5 left-5 bg-[var(--color-bg)]/85 backdrop-blur-sm border border-hair py-2 px-4">
+                  <p class="eyebrow text-gold-bright">Lead Story</p>
+                </div>
+              </div>
+              <div class="order-1 lg:order-2">
+                <p class="eyebrow mb-5">{lead.category} · {formatDate(lead.pubDate)}</p>
+                <h2 class="mb-6 group-hover:text-gold-bright transition-colors" style="font-size: clamp(2rem, 3.5vw, 3.25rem); line-height: 1.05;">{lead.title}</h2>
+                <p class="text-muted text-lg leading-[1.65] mb-6">{lead.excerpt}</p>
+                <p class="eyebrow text-dim mb-8">By {lead.author}</p>
+                <span class="eyebrow text-gold group-hover:text-gold-bright">Read the Story →</span>
+              </div>
+            </a>
+          </div>
+        </section>
+      )}
+
+      <!-- 3x2 GRID -->
+      {grid.length > 0 && (
+        <section class="py-20 border-b border-hair">
+          <div class="max-w-7xl mx-auto px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+              {grid.map((post, i) => (
+                <a href={`/blog/${post.slug}`} class="group block">
+                  <div class="relative overflow-hidden aspect-[4/3] mb-5">
+                    <img
+                      src={post.image ?? getImage(i + 1)}
+                      alt={post.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[800ms]"
+                    />
+                  </div>
+                  <p class="eyebrow mb-3 text-[10px]">{post.category} · {formatDate(post.pubDate)}</p>
+                  <h3 class="mb-3 group-hover:text-gold-bright transition-colors" style="font-size: 1.25rem; line-height: 1.25;">{post.title}</h3>
+                  <p class="text-muted text-sm leading-[1.65]">{post.excerpt}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- PAGINATION -->
+      <section class="py-12">
+        <div class="max-w-7xl mx-auto px-8">
+          <div class="flex items-center justify-center gap-3">
+            <span class="inline-flex items-center justify-center w-10 h-10 border border-gold bg-gold text-[#0a0a0a] text-sm font-bold">1</span>
+            {Array.from({ length: totalPages - 1 }, (_, i) => (
+              <a href={`/blog/page/${i + 2}`} class="inline-flex items-center justify-center w-10 h-10 border border-subtle text-muted text-sm font-semibold hover:border-gold hover:text-gold transition-colors">{i + 2}</a>
+            ))}
+            {totalPages > 1 && (
+              <a href="/blog/page/2" class="inline-flex items-center justify-center px-4 h-10 border border-subtle text-muted text-sm font-semibold hover:border-gold hover:text-gold transition-colors">Next →</a>
+            )}
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+
+  <CTABand
+    eyebrow="Glen Robison · REALTOR"
+    title="Ready to find your Hill Country home?"
+    subtitle="Ten years in New Braunfels, Canyon Lake, and Garden Ridge. Honest answers and luxury Hill Country expertise."
+    primaryLabel="Contact Glen"
+    primaryHref="/contact"
+    secondaryLabel="Browse Neighborhoods"
+    secondaryHref="/neighborhoods"
+  />
+</Layout>

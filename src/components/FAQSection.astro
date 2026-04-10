@@ -1,0 +1,61 @@
+---
+interface FaqItem {
+  q: string;
+  a: string;
+  sources?: { label: string; url: string }[];
+}
+interface Props {
+  faqs: FaqItem[];
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+}
+const {
+  faqs,
+  eyebrow = 'FAQ',
+  title = 'Frequently Asked Questions',
+  subtitle,
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<section class="py-24 border-t border-hair">
+  <div class="max-w-4xl mx-auto px-8">
+    <div class="mb-12">
+      <p class="eyebrow mb-5">{eyebrow}</p>
+      <h2 class="mb-4">{title}</h2>
+      {subtitle && <p class="text-muted text-base max-w-2xl leading-[1.65]">{subtitle}</p>}
+    </div>
+
+    <div class="space-y-8">
+      {faqs.map(f => (
+        <div class="border-b border-hair pb-8">
+          <h3 class="mb-4 text-gold-bright">{f.q}</h3>
+          <p class="text-muted leading-[1.75] mb-4">{f.a}</p>
+          {f.sources && f.sources.length > 0 && (
+            <p class="text-xs text-dim">
+              Sources:
+              {f.sources.map((s, i) => (
+                <>
+                  {i > 0 && ', '}
+                  <a href={s.url} target="_blank" rel="noopener" class="text-gold hover:text-gold-bright">{s.label}</a>
+                </>
+              ))}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

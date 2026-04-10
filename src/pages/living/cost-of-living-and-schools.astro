@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import { facts } from '../../data/facts.js';
+
+const faqs = [
+  {
+    q: 'Which elementary schools are considered the best in Comal ISD?',
+    a: `The most consistently top-rated Comal ISD elementaries are ${facts.schoolsDetail.comalTopElementary.join(', ')}. These campuses tend to land 9/10 or 10/10 on GreatSchools and earn A or A- grades on Niche. Because Comal ISD covers a large geographic footprint, attendance zones move every few years as new neighborhoods come online, always verify the current zone for a specific address before making an offer.`,
+    sources: facts.schoolsDetail.lookupSources,
+  },
+  {
+    q: 'What are the top NBISD elementary schools?',
+    a: `Inside the city of New Braunfels, NBISD's strongest elementary campuses by Niche grades are ${facts.schoolsDetail.nbisdTopElementary.join(', ')}. NBISD is zone-based with no broad open enrollment, so address dictates the campus. Voss Farms and Carl Schurz both consistently grade B+ or better and serve much of the desirable central and west-side neighborhoods.`,
+    sources: [facts.schools.newBraunfelsISD],
+  },
+  {
+    q: 'Which high school will my luxury neighborhood feed into?',
+    a: facts.schoolsDetail.luxuryHighSchools + ' Because zones do shift, especially around growth corridors, Glen verifies the current high school assignment for every address as part of the buying process.',
+    sources: facts.schoolsDetail.lookupSources,
+  },
+  {
+    q: 'What is the actual all-in property tax rate in New Braunfels?',
+    a: `For an in-city home, the typical effective rate is roughly ${facts.propertyTaxRates.typicalEffective}. That stacks city of New Braunfels (${facts.propertyTaxRates.cityNewBraunfels}), Comal County (${facts.propertyTaxRates.comalCounty}), the Comal County lateral road tax (${facts.propertyTaxRates.comalCountyLateralRoad}), and one of the two school districts, Comal ISD at ${facts.propertyTaxRates.comalISD} or NBISD at ${facts.propertyTaxRates.nbisd}. Homes inside MUDs add a district rate on top.`,
+    sources: facts.propertyTaxRates.sources.slice(0, 3),
+  },
+  {
+    q: 'How does the Texas homestead exemption work for relocators?',
+    a: `Texas now offers a ${facts.propertyTaxRates.homesteadExemption}. That means the first $140,000 of your home's appraised value is exempt from school district taxes on your primary residence. Local taxing units add additional optional exemptions (typically the greater of $5,000 or 20% of value). You file once with the Comal Appraisal District after closing, Glen walks every buyer through the form.`,
+    sources: [facts.propertyTaxRates.sources[3], facts.propertyTaxRates.sources[4]],
+  },
+  {
+    q: 'What if I am buying as a senior or qualifying disabled buyer?',
+    a: `Texas adds an additional school tax exemption for homeowners age 65+ (${facts.propertyTaxRates.seniorExemption}). Just as importantly, the school tax bill is "frozen" at the dollar amount it was the year you turned 65, so future rate or appraisal increases on the school portion can't push the bill higher. Disabled homeowners qualify for similar protections. Both apply only to the primary residence.`,
+    sources: [facts.propertyTaxRates.sources[4]],
+  },
+];
+---
+
+<Layout title="New Braunfels Cost of Living & Schools | Glen Robison" description="Cost of living, taxes, school zoning, and 2025-26 property tax rates for New Braunfels, Texas. Comal ISD, New Braunfels ISD, and what relocating buyers need to know.">
+  <PageHero
+    eyebrow="Cost & Schools"
+    title="Cost of Living & Schools."
+    image="/images/hero-cost-schools.png"
+    intro="The two questions every relocating family asks first: what does it cost to live here, and what are the schools like?"
+  >
+    <div class="quick-answer mt-10">
+      <p>New Braunfels has a cost-of-living index of {facts.costOfLiving.index} (about {facts.costOfLiving.vsNational}), with median household income around {facts.costOfLiving.medianIncome}. Texas charges 0% state income tax, and the typical in-city all-in property tax rate runs around {facts.propertyTaxRates.typicalEffective} after the new $140,000 school homestead exemption. Comal ISD is rated A by Niche, and NBISD serves the city core.</p>
+    </div>
+  </PageHero>
+
+  <!-- Detail 1: Cost of Living + Home Prices (image left) -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/nb-family-neighborhood.png" alt="New Braunfels family neighborhood" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Near National Avg</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Cost of Living</p>
+        <h2 class="mb-6">What does it cost <span class="text-gold-bright">to live here?</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">The cost-of-living index is {facts.costOfLiving.index} (national average = 100), so New Braunfels runs about {facts.costOfLiving.vsNational}. Median household income is {facts.costOfLiving.medianIncome}, which keeps the income-to-cost ratio favorable for most relocating households. Groceries, utilities, and healthcare price out near or below the national average; housing is the line item that pulls the index slightly above 100, and even that remains dramatically lower than coastal California, the Northeast, or Chicago.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Median home prices range depending on source: <strong class="text-text">{facts.housing.medianRealtor}</strong> (Realtor.com) or <strong class="text-text">{facts.housing.medianZillow}</strong> (Zillow). Average days on market is about {facts.housing.daysOnMarket}, which is longer than peak-2021 levels and gives serious buyers real negotiating room. Luxury inventory in Vintage Oaks, Copper Ridge, and River Chase moves on its own timeline and typically ranges $700K to $2M-plus depending on lot size and finish level.</p>
+        <p class="text-dim text-xs mb-8">Source: <a href={facts.costOfLiving.sources[0].url} target="_blank" rel="noopener" class="text-gold">HomeSnacks</a>, <a href={facts.housing.sources[0].url} target="_blank" rel="noopener" class="text-gold">Realtor.com</a>, <a href={facts.housing.sources[1].url} target="_blank" rel="noopener" class="text-gold">Zillow</a></p>
+        <a href="/tools/mortgage-calculator" class="btn-outline">Run the Numbers</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 2: Tax Structure + Property Tax Rates (image right) -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative md:order-2">
+        <img src="/images/downtown-nb.png" alt="Downtown New Braunfels" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">0% Income Tax</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">Taxes</p>
+        <h2 class="mb-6">The Texas tax math. <span class="text-gold-bright">Spelled out.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">Texas charges {facts.taxes.stateIncomeTax} state income tax. Sales tax is {facts.taxes.salesTax}, with New Braunfels city adding {facts.taxes.cityRate}. For relocating households, the income-tax savings alone typically offset much of the higher Texas property tax bill, and after the homestead exemption and senior provisions the net comparison stays favorable for most buyers from California, Illinois, New York, and the Pacific Northwest.</p>
+        <p class="text-muted leading-[1.75] text-base mb-5">For tax year {facts.propertyTaxRates.year}, the published rates per $100 of taxable value are: City of New Braunfels {facts.propertyTaxRates.cityNewBraunfels}, Comal County {facts.propertyTaxRates.comalCounty}, Comal County lateral road {facts.propertyTaxRates.comalCountyLateralRoad}, Comal ISD {facts.propertyTaxRates.comalISD}, and NBISD {facts.propertyTaxRates.nbisd}. Stacked together for an in-city home, the all-in effective rate lands near {facts.propertyTaxRates.typicalEffective}. Homes in unincorporated Comal County skip the city portion. Homes inside a Municipal Utility District add a separate MUD rate on top.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Texas's {facts.propertyTaxRates.homesteadExemption} dramatically reduces the school district portion of the bill on a primary residence. Local taxing units stack additional optional exemptions on top, typically the greater of $5,000 or 20% of value. Senior buyers get further protection: {facts.propertyTaxRates.seniorExemption}, and the school tax dollar amount is frozen at the level it was the year you turned 65. Disabled homeowners qualify for similar relief.</p>
+        <p class="text-dim text-xs mb-8">Sources: <a href={facts.taxes.sources[0].url} target="_blank" rel="noopener" class="text-gold">AARP Texas Tax Guide</a>, <a href={facts.taxes.sources[1].url} target="_blank" rel="noopener" class="text-gold">City of New Braunfels</a>, <a href={facts.propertyTaxRates.sources[0].url} target="_blank" rel="noopener" class="text-gold">Comal County 2025 Tax Rates</a>, <a href={facts.propertyTaxRates.sources[2].url} target="_blank" rel="noopener" class="text-gold">Comal ISD</a>, <a href={facts.propertyTaxRates.sources[3].url} target="_blank" rel="noopener" class="text-gold">Texas Comptroller</a>, <a href={facts.propertyTaxRates.sources[5].url} target="_blank" rel="noopener" class="text-gold">Tax Estimator</a></p>
+        <a href="/tools/seller-net-sheet" class="btn-outline">Estimate Net Proceeds</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 3: School Ratings (image left) -->
+  <section class="py-24 bg-elevated border-y border-hair">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative">
+        <img src="/images/hill-country-aerial.png" alt="New Braunfels aerial view" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">A-Rated District</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-5">Schools</p>
+        <h2 class="mb-6">Comal ISD & NBISD. <span class="text-gold-bright">What parents need to know.</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5"><strong class="text-text">Comal ISD</strong> is rated <strong class="text-gold-bright">{facts.schools.comalISD.grade}</strong> by Niche and serves about {facts.schools.comalISD.schools} schools. <strong class="text-text">New Braunfels ISD</strong> serves the city core. Both districts have grade-level breakdowns, school-by-school ratings, and demographic profiles available through GreatSchools and Niche.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">School zoning in New Braunfels splits along a clear pattern: the central city core falls inside <strong class="text-text">NBISD</strong>, while the outer growth corridors and most of the luxury neighborhoods to the west and north sit inside <strong class="text-text">Comal ISD</strong>. Vintage Oaks feeds Comal ISD high schools (Canyon or Smithson Valley depending on the section). Copper Ridge, River Chase, and Riverforest typically feed Canyon Lake HS or Davenport HS, also Comal ISD. Some edges of those communities border NBISD attendance, the Two Rivers HS area is one example. Always verify by exact address before making an offer.</p>
+        <p class="text-dim text-xs mb-8">Sources: <a href={facts.schools.comalISD.source} target="_blank" rel="noopener" class="text-gold">Niche - Comal ISD</a>, <a href={facts.schools.newBraunfelsISD.source} target="_blank" rel="noopener" class="text-gold">GreatSchools - NBISD</a></p>
+        <a href="/neighborhoods" class="btn-outline">Browse Neighborhoods</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail 4: School Zoning Details (image right) -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-16 items-center">
+      <div class="relative md:order-2">
+        <img src="/images/copper-ridge.png" alt="Copper Ridge neighborhood" class="w-full aspect-[4/5] object-cover border border-hair" />
+        <div class="absolute -bottom-4 -left-4 bg-[var(--color-bg)] border border-hair py-3 px-5">
+          <p class="eyebrow text-gold-bright">Verify by Address</p>
+        </div>
+      </div>
+      <div class="md:order-1">
+        <p class="eyebrow mb-5">School Zones</p>
+        <h2 class="mb-6">Which school <span class="text-gold-bright">for which address?</span></h2>
+        <p class="text-muted leading-[1.75] text-base mb-5">The strongest Comal ISD elementaries by GreatSchools and Niche aggregation are {facts.schoolsDetail.comalTopElementary.join(', ')}. Inside NBISD, the top campuses are {facts.schoolsDetail.nbisdTopElementary.join(', ')}. The Grove sits mostly in Comal ISD with some edge addresses in NBISD; Yalpen Loop area splits between districts. Because Comal County is one of the fastest-growing counties in Texas, attendance zones do shift every few years to balance enrollment as new schools open.</p>
+        <p class="text-muted leading-[1.75] text-base mb-5">{facts.schoolsDetail.openEnrollment} For families who prioritize private options, {facts.schoolsDetail.privateOptions} Glen recommends every relocating family pull the current zone from the Comal ISD or Comal County GIS lookup tool before committing to a neighborhood, it's a five-minute step that prevents an expensive surprise.</p>
+        <p class="text-muted leading-[1.75] text-base mb-8">Notice of Appraised Value mails out around April each year. The protest deadline is {facts.propertyTaxRates.protestDeadline}. The Comal Appraisal District takes protests online, by mail, or in person, with informal review followed by a formal Appraisal Review Board hearing between May and July. Appeal options beyond the ARB include SOAH, binding arbitration, and district court. The Comal County tax estimator is the fastest way to model a specific address.</p>
+        <p class="text-dim text-xs mb-8">Sources: <a href={facts.schoolsDetail.lookupSources[0].url} target="_blank" rel="noopener" class="text-gold">Comal ISD Attendance Zones</a>, <a href={facts.schoolsDetail.lookupSources[1].url} target="_blank" rel="noopener" class="text-gold">Comal County GIS</a></p>
+        <a href="/contact" class="btn-outline">Ask Glen About Schools</a>
+      </div>
+    </div>
+  </section>
+
+  <FAQSection
+    eyebrow="Schools & Taxes FAQ"
+    title="What Relocating Families Ask Most"
+    faqs={faqs}
+  />
+
+  <section class="py-20 bg-elevated border-t border-subtle">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="mb-6">Questions About Schools or Taxes?</h2>
+      <a href="/contact" class="btn-gold">Talk to Glen</a>
+    </div>
+  </section>
+</Layout>

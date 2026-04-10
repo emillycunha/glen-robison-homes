@@ -1,0 +1,210 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTABand from '../../components/CTABand.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import { neighborhoods } from '../../data/neighborhoods.js';
+
+export function getStaticPaths() {
+  return neighborhoods.map(n => ({ params: { slug: n.slug }, props: { n } }));
+}
+
+const { n } = Astro.props;
+
+// Pick 3 related neighborhoods (same segment preferred, exclude current)
+const related = neighborhoods
+  .filter(x => x.slug !== n.slug)
+  .sort((a, b) => {
+    const aMatch = a.segment === n.segment ? 0 : 1;
+    const bMatch = b.segment === n.segment ? 0 : 1;
+    return aMatch - bMatch;
+  })
+  .slice(0, 3);
+
+const relatedLinks = [
+  ...related.map(r => ({
+    href: `/neighborhoods/${r.slug}`,
+    eyebrow: r.segment.replace(' (anchor)', ''),
+    label: r.name,
+    description: r.priceRange,
+  })),
+  {
+    href: '/buyers',
+    eyebrow: 'For Buyers',
+    label: 'Buyer Representation',
+    description: 'Glen works for buyers only, no dual agency, no mixed interests.',
+  },
+];
+---
+
+<Layout
+  title={`${n.name} Homes for Sale | New Braunfels TX | Glen Robison`}
+  description={`${n.name} in New Braunfels, TX. ${n.segment}, ${n.priceRange}. ${n.description.slice(0, 120)}`}
+>
+  <section class="relative py-24 border-b border-hair overflow-hidden bg-deep">
+    <img
+      src={n.image ?? `https://placehold.co/1920x800/0a0a0a/c19a57?font=playfair&text=${encodeURIComponent(n.name)}`}
+      alt={n.name}
+      class="absolute inset-0 w-full h-full object-cover opacity-40"
+    />
+    <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-bg)]/90 via-[var(--color-bg)]/75 to-[var(--color-bg)]"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-8">
+      <a href="/neighborhoods" class="text-gold text-xs uppercase tracking-wider hover:text-gold-bright font-semibold">← All Neighborhoods</a>
+      <span class="gold-rule mt-8"></span>
+      <p class="eyebrow mb-4">{n.segment}</p>
+      <h1 class="mb-6">{n.name}</h1>
+      <p class="text-gold-bright text-xl mb-2">{n.priceRange}</p>
+      <p class="text-muted text-sm mb-8">{n.location}</p>
+
+      <div class="quick-answer">
+        <p>{n.description}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Day in the Life -->
+  {n.dailyLife && (
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">What does daily life in {n.name} feel like?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{n.dailyLife}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Features list -->
+  {n.features && n.features.length > 0 && (
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-8">What makes {n.name} different?</h2>
+        <ul class="space-y-4">
+          {n.features.map(f => (
+            <li class="flex items-start gap-4 text-muted text-lg leading-relaxed">
+              <span class="text-gold mt-2 text-xs">◆</span>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- Schools -->
+  {n.schools && (
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">Which schools serve {n.name}?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{n.schools}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Commute -->
+  {n.commute && (
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">How's the commute from {n.name}?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{n.commute}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Amenities / Nearby -->
+  {n.amenitiesDetail && (
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">What's nearby?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{n.amenitiesDetail}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- HOA -->
+  {n.hoa && (
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">Is there an HOA in {n.name}?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{n.hoa}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Market -->
+  {n.marketData && (
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">What's the {n.name} market doing?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{n.marketData}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Buyer profile -->
+  {n.buyerProfile && (
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-6">Who buys in {n.name}?</h2>
+        <p class="text-muted leading-[1.75] text-lg">{n.buyerProfile}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Construction note -->
+  {n.construction && (
+    <section class="py-16">
+      <div class="max-w-3xl mx-auto px-8">
+        <h2 class="mb-4">New construction in {n.name}</h2>
+        <p class="text-muted leading-[1.75]">{n.construction}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQs -->
+  {n.faqs && n.faqs.length > 0 && (
+    <FAQSection
+      faqs={n.faqs}
+      eyebrow={`${n.name} FAQ`}
+      title={`Frequently asked about ${n.name}.`}
+    />
+  )}
+
+  <!-- Sources -->
+  {n.sources && n.sources.length > 0 && (
+    <section class="py-12 border-t border-hair">
+      <div class="max-w-3xl mx-auto px-8">
+        <p class="eyebrow mb-4 text-dim">Sources</p>
+        <ul class="space-y-1 text-sm">
+          {n.sources.map(s => (
+            <li><a href={s.url} target="_blank" rel="noopener" class="text-gold hover:text-gold-bright">{s.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {n.needsResearch && (
+    <section class="py-8">
+      <div class="max-w-3xl mx-auto px-8">
+        <div class="bg-card border border-yellow-900/50 p-6 text-yellow-600 text-sm">
+          ⚠ This neighborhood profile is in development and awaiting final verification.
+        </div>
+      </div>
+    </section>
+  )}
+
+  <RelatedLinks
+    eyebrow="Also Worth Knowing"
+    title={`More like ${n.name}.`}
+    links={relatedLinks}
+  />
+
+  <CTABand
+    eyebrow={`Interested in ${n.name}?`}
+    title="Glen knows the inventory."
+    subtitle={`Including the off-market opportunities, the builders actively working in ${n.name}, and the comps that don't show up on Zillow yet.`}
+    primaryLabel="Talk to Glen"
+    primaryHref="/contact"
+    secondaryLabel="Buyer's Guide"
+    secondaryHref="/buyers-guide"
+  />
+</Layout>
