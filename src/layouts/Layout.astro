@@ -10,13 +10,13 @@ interface Props {
 }
 
 const {
-  title = 'Glen Robison Homes | New Braunfels Luxury Real Estate',
+  title = 'Glen Robison Real Estate | New Braunfels Luxury Real Estate',
   description = 'New Braunfels and Texas Hill Country real estate. Glen Robison is a buyer-focused REALTOR specializing in luxury homes, gated communities, and Hill Country acreage.',
   canonical,
   ogImage,
 } = Astro.props;
 
-const siteUrl = 'https://glenrobisonhomes.com';
+const siteUrl = 'https://glenrobisonrealestate.com';
 const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
 const socialImage = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/hero-home.png`;
 
@@ -61,7 +61,7 @@ const schema = {
       '@type': 'WebSite',
       '@id': `${siteUrl}/#website`,
       url: siteUrl,
-      name: 'Glen Robison Homes',
+      name: 'Glen Robison Real Estate',
       description: 'New Braunfels and Hill Country real estate, buyer representation, luxury homes, and relocation guidance.',
       publisher: { '@id': `${siteUrl}/#agent` },
     },
@@ -79,7 +79,7 @@ const schema = {
     <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Glen Robison Homes" />
+    <meta property="og:site_name" content="Glen Robison Real Estate" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
@@ -108,20 +108,16 @@ const schema = {
     <header class="sticky top-0 z-50 bg-[var(--color-bg)]/92 backdrop-blur-md border-b border-hair">
       <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between gap-10">
 
-        <a href="/" class="flex items-center leading-none shrink-0 group" aria-label="Glen Robison Homes">
-          <div
-            class="h-12 w-[156px] bg-[var(--color-gold-bright)] group-hover:bg-[var(--color-gold)] transition-colors"
-            style="mask: url('/images/grh-logo.png') no-repeat left center / contain; -webkit-mask: url('/images/grh-logo.png') no-repeat left center / contain;"
-            role="img"
-            aria-label="Glen Robison Homes"
-          ></div>
+        <a href="/" class="shrink-0 group" aria-label="Glen Robison Real Estate">
+          <span class="font-display font-bold text-cream uppercase tracking-[-0.02em] text-[22px] leading-none block group-hover:text-gold-bright transition-colors">Glen Robison</span>
+          <span class="font-display text-gold text-[14px] tracking-[0.15em] font-semibold uppercase block">Real Estate</span>
         </a>
 
         <nav class="hidden lg:flex items-center gap-9">
           {navLinks.map(l => (
             <a
               href={l.href}
-              class="font-body text-[12px] text-muted hover:text-gold-bright transition-colors tracking-[0.2em] uppercase font-semibold relative group"
+              class="font-body text-[13px] text-muted hover:text-gold-bright transition-colors tracking-[0.18em] uppercase font-semibold relative group"
             >
               {l.label}
               <span class="absolute -bottom-1.5 left-0 w-0 h-px bg-gold group-hover:w-full transition-all duration-400"></span>
@@ -269,7 +265,7 @@ const schema = {
 
           <!-- Centered copyright + credit block -->
           <div class="text-center space-y-1 text-[10px] text-muted tracking-[0.25em] uppercase font-semibold">
-            <p>© {new Date().getFullYear()} · Glen Robison Homes · All Rights Reserved · TX License #0676313</p>
+            <p>© {new Date().getFullYear()} · Glen Robison Real Estate · All Rights Reserved · TX License #0676313</p>
             <p>
               Website designed and developed by <a href="https://whiteboston.com" target="_blank" rel="noopener" class="text-muted hover:text-gold-bright">WhiteBoston</a>
             </p>

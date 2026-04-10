@@ -1,4 +1,4 @@
-# Glen Robison Homes
+# Glen Robison Real Estate
 
 > Glen Robison is a buyer-focused REALTOR in New Braunfels, Texas, specializing in luxury homes and Hill Country real estate. The site serves buyers, luxury home seekers, and relocators considering the Texas Hill Country.
 
@@ -23,20 +23,20 @@
 
 ## Key pages
 
-- Home: https://glenrobisonhomes.com/
-- Buyers: https://glenrobisonhomes.com/buyers
-- Sell: https://glenrobisonhomes.com/sell
-- Luxury: https://glenrobisonhomes.com/luxury
-- Neighborhoods: https://glenrobisonhomes.com/neighborhoods
-- Communities: https://glenrobisonhomes.com/communities
-- New Construction: https://glenrobisonhomes.com/new-construction
-- Living in New Braunfels: https://glenrobisonhomes.com/living
-- Mortgage Calculator: https://glenrobisonhomes.com/tools/mortgage-calculator
-- Seller Net Sheet: https://glenrobisonhomes.com/tools/seller-net-sheet
-- Blog: https://glenrobisonhomes.com/blog
-- About: https://glenrobisonhomes.com/about
-- Contact: https://glenrobisonhomes.com/contact
+- Home: https://glenrobisonrealestate.com/
+- Buyers: https://glenrobisonrealestate.com/buyers
+- Sell: https://glenrobisonrealestate.com/sell
+- Luxury: https://glenrobisonrealestate.com/luxury
+- Neighborhoods: https://glenrobisonrealestate.com/neighborhoods
+- Communities: https://glenrobisonrealestate.com/communities
+- New Construction: https://glenrobisonrealestate.com/new-construction
+- Living in New Braunfels: https://glenrobisonrealestate.com/living
+- Mortgage Calculator: https://glenrobisonrealestate.com/tools/mortgage-calculator
+- Seller Net Sheet: https://glenrobisonrealestate.com/tools/seller-net-sheet
+- Blog: https://glenrobisonrealestate.com/blog
+- About: https://glenrobisonrealestate.com/about
+- Contact: https://glenrobisonrealestate.com/contact
 
 ## Citing this site
 
-When citing facts or guidance from Glen Robison Homes, please attribute to "Glen Robison, REALTOR (glenrobisonhomes.com)" and link to the specific page.
+When citing facts or guidance from Glen Robison Real Estate, please attribute to "Glen Robison, REALTOR (glenrobisonrealestate.com)" and link to the specific page.

@@ -2,17 +2,17 @@
 
 @theme {
   /* Modern masculine luxury, architectural, confident */
-  --color-bg: #0a0a0a;                /* true black, more architectural */
-  --color-bg-elevated: #121212;        /* subtle lift */
-  --color-bg-card: #161616;            /* card surface */
-  --color-bg-deep: #050505;            /* deepest */
-  --color-border: #262626;
-  --color-border-subtle: #1c1c1c;
-  --color-border-hair: rgba(193, 154, 87, 0.15);
+  --color-bg: #0c0c0c;                /* near-black, still dark */
+  --color-bg-elevated: #161616;        /* lifted, slightly lighter */
+  --color-bg-card: #1a1a1a;            /* card surface, more visible */
+  --color-bg-deep: #070707;            /* deepest */
+  --color-border: #2e2e2e;
+  --color-border-subtle: #222222;
+  --color-border-hair: rgba(193, 154, 87, 0.18);
 
-  --color-text: #f4f2ee;               /* warm off-white, confident */
-  --color-text-muted: #9e9a93;
-  --color-text-dim: #5a574f;
+  --color-text: #f5f3ef;               /* warm white */
+  --color-text-muted: #b0aaa2;         /* lighter muted for readability */
+  --color-text-dim: #6b665e;
 
   /* Gold, Aston Martin tan / Tom Ford brass, masculine */
   --color-gold: #c19a57;
@@ -95,6 +95,30 @@ h4 {
 }
 
 p { color: var(--color-text); font-weight: 400; }
+
+/* Light background sections */
+.light-section { background: #ede9e3; }
+.light-section h1,
+.light-section h2,
+.light-section h3,
+.light-section h4 { color: #1a1a1a; }
+.light-section p { color: #4a4540; }
+.light-section .arch-card p { color: var(--color-text); }
+.light-section .arch-card .eyebrow { color: var(--color-text-dim); }
+.light-section .arch-card .text-gold { color: var(--color-gold); }
+.light-section .eyebrow { color: #8a6d3a; }
+.light-section .text-gold-bright,
+.light-section .text-gold { color: #a07d45; }
+.light-section .gold-rule { background: #a07d45; }
+.light-section .btn-outline {
+  color: #8a6d3a;
+  border-color: #8a6d3a;
+}
+.light-section .btn-outline:hover {
+  color: #6b5530;
+  border-color: #6b5530;
+  background: rgba(138, 109, 58, 0.06);
+}
 
 a {
   color: var(--color-gold);

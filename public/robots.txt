@@ -31,4 +31,4 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-Sitemap: https://glenrobisonhomes.com/sitemap-index.xml
+Sitemap: https://glenrobisonrealestate.com/sitemap-index.xml

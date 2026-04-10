@@ -6,7 +6,7 @@ export const neighborhoods = [
     slug: 'copper-ridge',
     name: 'Copper Ridge',
     image: '/images/copper-ridge.png',
-    segment: 'Luxury (anchor)',
+    segment: 'Luxury',
     priceRange: '$1.2M – $2.1M+',
     location: 'About 10 miles north/west of downtown along Highway 46, outside Loop 337',
     features: [

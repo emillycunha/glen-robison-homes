@@ -37,7 +37,7 @@ const formattedDate = new Date(post.pubDate + 'T00:00:00').toLocaleDateString('e
   day: 'numeric',
 });
 
-const siteUrl = 'https://glenrobisonhomes.com';
+const siteUrl = 'https://glenrobisonrealestate.com';
 const postUrl = `${siteUrl}/blog/${post.slug}`;
 
 const blogPostingSchema = {
@@ -53,7 +53,7 @@ const blogPostingSchema = {
   },
   publisher: {
     '@type': 'Organization',
-    name: 'Glen Robison Homes',
+    name: 'Glen Robison Real Estate',
     url: siteUrl,
   },
   mainEntityOfPage: {
@@ -75,7 +75,7 @@ const breadcrumbSchema = {
 };
 ---
 
-<Layout title={`${post.title} | Glen Robison Homes`} description={post.description}>
+<Layout title={`${post.title} | Glen Robison Real Estate`} description={post.description}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 

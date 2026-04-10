@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://glenrobisonhomes.com',
+  site: 'https://glenrobisonrealestate.com',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

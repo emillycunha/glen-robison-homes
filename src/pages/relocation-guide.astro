@@ -3,45 +3,41 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import CTABand from '../components/CTABand.astro';
 import { facts } from '../data/facts.js';
+
+const siteUrl = 'https://glenrobisonrealestate.com';
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The New Braunfels Relocation Guide',
+  description: 'Complete relocation guide for moving to New Braunfels and the Texas Hill Country.',
+  url: `${siteUrl}/relocation-guide`,
+  author: { '@type': 'Person', name: 'Glen Robison' },
+  publisher: { '@type': 'RealEstateAgent', name: 'Glen Robison', url: siteUrl },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/relocation-guide` },
+};
 ---
 
 <Layout title="Free Relocation Guide | New Braunfels TX | Glen Robison" description="The complete relocation guide for moving to New Braunfels and the Texas Hill Country. Cost of living, taxes, schools, neighborhoods, and lifestyle.">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <PageHero eyebrow="Free Guide" title="The New Braunfels Relocation Guide." image="/images/hero-why-move.png" intro="The complete relocation guide for buyers moving from out of state, Austin, or San Antonio." />
 
-  <!-- GATE -->
-  <section id="gate" class="py-20">
-    <div class="max-w-2xl mx-auto px-8">
-      <div class="bg-card border border-hair p-10">
-        <p class="eyebrow mb-4">Unlock the Guide</p>
-        <h2 class="mb-4">One email. <span class="text-gold-bright">Instant access.</span></h2>
-        <p class="text-muted leading-[1.65] mb-8">No downloads, no PDFs. Enter your email and the full guide unlocks right here.</p>
-        <form id="gate-form" class="space-y-4">
-          <input type="text" name="name" placeholder="Name" class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
-          <input type="email" name="email" placeholder="Email" required class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
-          <button type="submit" class="btn-gold w-full">Unlock the Guide</button>
-        </form>
+  <!-- SNEAK PEEK (always visible) -->
+  <!-- 1. Why New Braunfels -->
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <span class="gold-rule"></span>
+      <p class="eyebrow mb-3">The Case</p>
+      <h2 class="mb-6">Why New Braunfels.</h2>
+      <div class="space-y-4">
+        <p class="text-muted leading-[1.75]">New Braunfels grew from <strong class="text-gold-bright">91,683</strong> to <strong class="text-gold-bright">{facts.population.current}</strong> since 2020, a <strong class="text-gold-bright">{facts.population.growthSince2020}</strong> increase that placed it among the top-five fastest-growing cities in the United States. The broader metro sits at <strong class="text-gold-bright">{facts.population.metro}</strong>.</p>
+        <p class="text-muted leading-[1.75]">This growth is <strong class="text-text">in-migration driven</strong>, not births. Roughly two-thirds of new residents arrive from out of state. California, Illinois, the Pacific Northwest, and the Northeast lead the pack. They bring equity, remote incomes, and a clear preference for lower taxes and more space.</p>
+        <p class="text-muted leading-[1.75]">Unlike boom towns that skew toward a single price bracket, New Braunfels has seen <strong class="text-text">balanced growth across price points</strong> from $300K starter homes to $2M+ luxury estates. That diversity keeps the economy stable and the community layered.</p>
       </div>
     </div>
   </section>
 
-  <!-- GUIDE CONTENT -->
-  <div id="guide-content" class="hidden">
-
-    <!-- 1. Why New Braunfels -->
-    <section class="py-20">
-      <div class="max-w-4xl mx-auto px-6">
-        <span class="gold-rule"></span>
-        <p class="eyebrow mb-3">The Case</p>
-        <h2 class="mb-6">Why New Braunfels.</h2>
-        <div class="space-y-4">
-          <p class="text-muted leading-[1.75]">New Braunfels grew from <strong class="text-gold-bright">91,683</strong> to <strong class="text-gold-bright">{facts.population.current}</strong> since 2020 — a <strong class="text-gold-bright">{facts.population.growthSince2020}</strong> increase that placed it among the top-five fastest-growing cities in the United States. The broader metro sits at <strong class="text-gold-bright">{facts.population.metro}</strong>.</p>
-          <p class="text-muted leading-[1.75]">This growth is <strong class="text-text">in-migration driven</strong>, not births. Roughly two-thirds of new residents arrive from out of state — California, Illinois, the Pacific Northwest, and the Northeast lead the pack. They bring equity, remote incomes, and a clear preference for lower taxes and more space.</p>
-          <p class="text-muted leading-[1.75]">Unlike boom towns that skew toward a single price bracket, New Braunfels has seen <strong class="text-text">balanced growth across price points</strong> from $300K starter homes to $2M+ luxury estates. That diversity keeps the economy stable and the community layered.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Location Between Two Metros -->
+  <!-- 2. Location (preview, fades out) -->
+  <div class="relative">
     <section class="py-20 bg-elevated border-y border-hair">
       <div class="max-w-4xl mx-auto px-6">
         <span class="gold-rule"></span>
@@ -54,6 +50,27 @@ import { facts } from '../data/facts.js';
         </div>
       </div>
     </section>
+    <div id="fade-overlay" class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[var(--color-bg-elevated)] via-[var(--color-bg-elevated)]/90 to-transparent pointer-events-none"></div>
+  </div>
+
+  <!-- GATE -->
+  <section id="gate" class="py-20 bg-elevated">
+    <div class="max-w-2xl mx-auto px-8">
+      <div class="bg-card border border-hair p-10">
+        <p class="eyebrow mb-4">8 More Sections</p>
+        <h2 class="mb-4">Unlock the full guide.</h2>
+        <p class="text-muted leading-[1.65] mb-8">Cost of living, taxes, schools, neighborhoods, lifestyle, and a week-by-week relocation timeline. One email, instant access.</p>
+        <form id="gate-form" class="space-y-4">
+          <input type="text" name="name" placeholder="Name" class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
+          <input type="email" name="email" placeholder="Email" required class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
+          <button type="submit" class="btn-gold w-full">Unlock the Guide</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCKED CONTENT -->
+  <div id="guide-content" class="hidden">
 
     <!-- 3. Cost of Living -->
     <section class="py-20">
@@ -63,7 +80,7 @@ import { facts } from '../data/facts.js';
         <h2 class="mb-6">Cost of living.</h2>
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]">The composite cost-of-living index for New Braunfels is <strong class="text-gold-bright">{facts.costOfLiving.index}</strong> (national average = 100), about <strong class="text-gold-bright">{facts.costOfLiving.vsNational}</strong>. Median household income sits at <strong class="text-gold-bright">{facts.costOfLiving.medianIncome}</strong>.</p>
-          <p class="text-muted leading-[1.75]"><strong class="text-text">Groceries, utilities, and healthcare</strong> all come in at or below the national average. Housing is the single category that pulls the index slightly above 100 — but even so, it remains far below coastal California, the Northeast corridor, and metro Chicago.</p>
+          <p class="text-muted leading-[1.75]"><strong class="text-text">Groceries, utilities, and healthcare</strong> all come in at or below the national average. Housing is the single category that pulls the index slightly above 100, but even so, it remains far below coastal California, the Northeast corridor, and metro Chicago.</p>
           <p class="text-muted leading-[1.75]">For relocators selling a home in a high-cost market, the arbitrage is significant. A median-priced home in San Francisco or Brooklyn buys a luxury property here with equity left over.</p>
         </div>
       </div>
@@ -78,7 +95,7 @@ import { facts } from '../data/facts.js';
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]">Texas has <strong class="text-gold-bright">{facts.taxes.stateIncomeTax}</strong> state income tax. A California relocator earning $200K saves roughly <strong class="text-gold-bright">$15K-$25K per year</strong> in state income tax alone. Movers from Illinois, New York, and New Jersey typically save <strong class="text-gold-bright">$8K-$20K</strong>.</p>
           <p class="text-muted leading-[1.75]">Sales tax runs <strong class="text-gold-bright">{facts.taxes.salesTax}</strong> plus <strong class="text-gold-bright">{facts.taxes.cityRate}</strong>. The effective property tax rate in New Braunfels is approximately <strong class="text-gold-bright">{facts.propertyTaxRates.typicalEffective}</strong>. The state-mandated <strong class="text-text">homestead exemption</strong> is <strong class="text-gold-bright">{facts.propertyTaxRates.homesteadExemption}</strong>.</p>
-          <p class="text-muted leading-[1.75]">Seniors 65 and over qualify for an <strong class="text-text">additional exemption</strong>: <strong class="text-gold-bright">{facts.propertyTaxRates.seniorExemption}</strong>, plus a school tax freeze that locks the rate at the year they turn 65. When you run the full tax math — income tax elimination minus higher property tax — <strong class="text-text">most relocators net ahead</strong>, often by five figures annually.</p>
+          <p class="text-muted leading-[1.75]">Seniors 65 and over qualify for an <strong class="text-text">additional exemption</strong>: <strong class="text-gold-bright">{facts.propertyTaxRates.seniorExemption}</strong>, plus a school tax freeze that locks the rate at the year they turn 65. When you run the full tax math, income tax elimination minus higher property tax, <strong class="text-text">most relocators net ahead</strong>, often by five figures annually.</p>
         </div>
       </div>
     </section>
@@ -91,7 +108,7 @@ import { facts } from '../data/facts.js';
         <h2 class="mb-6">Home prices and market.</h2>
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]">The current median home price is <strong class="text-gold-bright">{facts.housing.medianRealtor}</strong> (Realtor.com) and <strong class="text-gold-bright">{facts.housing.medianZillow}</strong> (Zillow). Average days on market: <strong class="text-gold-bright">{facts.housing.daysOnMarket}</strong>.</p>
-          <p class="text-muted leading-[1.75]">The <strong class="text-text">luxury segment</strong> — $700K to $2M+ — concentrates in Vintage Oaks, Copper Ridge, River Chase, and Riverforest. These communities offer acreage, custom builds, gated access, and Hill Country views that do not exist in Austin suburbs at comparable prices.</p>
+          <p class="text-muted leading-[1.75]">The <strong class="text-text">luxury segment</strong>, $700K to $2M+, concentrates in Vintage Oaks, Copper Ridge, River Chase, and Riverforest. These communities offer acreage, custom builds, gated access, and Hill Country views that do not exist in Austin suburbs at comparable prices.</p>
           <p class="text-muted leading-[1.75]">Dollar for dollar, New Braunfels delivers <strong class="text-text">more square footage and more land</strong> than any Austin suburb. Relocators from the coasts regularly gain 1,000+ square feet and a half-acre or more while reducing their monthly payment.</p>
         </div>
       </div>
@@ -105,7 +122,7 @@ import { facts } from '../data/facts.js';
         <h2 class="mb-6">Schools.</h2>
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]"><strong class="text-text">Comal ISD</strong> holds an <strong class="text-gold-bright">{facts.schools.comalISD.grade}</strong> rating on Niche and operates <strong class="text-gold-bright">{facts.schools.comalISD.schools}</strong> schools across the district. <strong class="text-text">New Braunfels ISD</strong> (NBISD) serves the city core.</p>
-          <p class="text-muted leading-[1.75]">School zones are determined by address. <strong class="text-text">Central neighborhoods</strong> fall under NBISD; <strong class="text-text">outer and luxury communities</strong> — including Vintage Oaks — feed into Comal ISD high schools like Canyon and Smithson Valley.</p>
+          <p class="text-muted leading-[1.75]">School zones are determined by address. <strong class="text-text">Central neighborhoods</strong> fall under NBISD; <strong class="text-text">outer and luxury communities</strong>, including Vintage Oaks, feed into Comal ISD high schools like Canyon and Smithson Valley.</p>
           <p class="text-muted leading-[1.75]">Zone boundaries shift as the population grows. <strong class="text-text">Always verify the assigned schools by exact address before making an offer.</strong> Glen confirms zones directly with each district during the search process.</p>
         </div>
       </div>
@@ -118,10 +135,10 @@ import { facts } from '../data/facts.js';
         <p class="eyebrow mb-3">Where to Live</p>
         <h2 class="mb-6">Neighborhoods at a glance.</h2>
         <div class="space-y-4">
-          <p class="text-muted leading-[1.75]"><strong class="text-text">Luxury gated communities:</strong> <strong class="text-gold-bright">Vintage Oaks</strong> — Hill Country acreage, resort-style amenities, Comal ISD. <strong class="text-gold-bright">Copper Ridge</strong> — established gated community with mature landscaping and strong resale. <strong class="text-gold-bright">River Chase</strong> — riverfront and hill-view lots, custom homes. <strong class="text-gold-bright">Riverforest</strong> — private, wooded homesites along the Guadalupe.</p>
-          <p class="text-muted leading-[1.75]"><strong class="text-text">New construction:</strong> <strong class="text-gold-bright">Mayfair</strong> — master-planned with builder variety and walkable amenities. <strong class="text-gold-bright">Havenwood</strong> — newer community with competitive pricing and quick move-ins. <strong class="text-gold-bright">Veramendi</strong> — large mixed-use development with parks, trails, and multiple builders.</p>
-          <p class="text-muted leading-[1.75]"><strong class="text-text">Historic and established:</strong> <strong class="text-gold-bright">John Newcombe Estate</strong> — mature, tree-lined neighborhood near downtown. <strong class="text-gold-bright">Manor Creek</strong> — established homes on generous lots with easy access to I-35.</p>
-          <p class="text-muted leading-[1.75]"><strong class="text-text">Nearby communities:</strong> <strong class="text-gold-bright">Canyon Lake</strong> — 15 minutes north, lake life with boat access and lower density. <strong class="text-gold-bright">Garden Ridge</strong> — upscale suburb between New Braunfels and San Antonio, large lots, top-rated schools.</p>
+          <p class="text-muted leading-[1.75]"><strong class="text-text">Luxury gated communities:</strong> <strong class="text-gold-bright">Vintage Oaks</strong>, Hill Country acreage, resort-style amenities, Comal ISD. <strong class="text-gold-bright">Copper Ridge</strong>, established gated community with mature landscaping and strong resale. <strong class="text-gold-bright">River Chase</strong>, riverfront and hill-view lots, custom homes. <strong class="text-gold-bright">Riverforest</strong>, private, wooded homesites along the Guadalupe.</p>
+          <p class="text-muted leading-[1.75]"><strong class="text-text">New construction:</strong> <strong class="text-gold-bright">Mayfair</strong>, master-planned with builder variety and walkable amenities. <strong class="text-gold-bright">Havenwood</strong>, newer community with competitive pricing and quick move-ins. <strong class="text-gold-bright">Veramendi</strong>, large mixed-use development with parks, trails, and multiple builders.</p>
+          <p class="text-muted leading-[1.75]"><strong class="text-text">Historic and established:</strong> <strong class="text-gold-bright">John Newcombe Estate</strong>, mature, tree-lined neighborhood near downtown. <strong class="text-gold-bright">Manor Creek</strong>, established homes on generous lots with easy access to I-35.</p>
+          <p class="text-muted leading-[1.75]"><strong class="text-text">Nearby communities:</strong> <strong class="text-gold-bright">Canyon Lake</strong>, 15 minutes north, lake life with boat access and lower density. <strong class="text-gold-bright">Garden Ridge</strong>, upscale suburb between New Braunfels and San Antonio, large lots, top-rated schools.</p>
           <p class="text-muted leading-[1.75]">For a deeper breakdown of each area, see the <a href="/neighborhoods" class="text-gold-bright underline underline-offset-4 hover:text-cream">Neighborhoods page</a>.</p>
         </div>
       </div>
@@ -134,9 +151,9 @@ import { facts } from '../data/facts.js';
         <p class="eyebrow mb-3">Lifestyle</p>
         <h2 class="mb-6">The Hill Country lifestyle.</h2>
         <div class="space-y-4">
-          <p class="text-muted leading-[1.75]">The <strong class="text-text">Comal River</strong> holds a steady 70 degrees year-round and claims the title of shortest navigable river in the world. The <strong class="text-text">Guadalupe River</strong> runs parallel, offering tubing, kayaking, and fly fishing. <strong class="text-text">Schlitterbahn</strong> — 65 acres of waterpark built into the Comal — is a local institution, not just a tourist draw.</p>
+          <p class="text-muted leading-[1.75]">The <strong class="text-text">Comal River</strong> holds a steady 70 degrees year-round and claims the title of shortest navigable river in the world. The <strong class="text-text">Guadalupe River</strong> runs parallel, offering tubing, kayaking, and fly fishing. <strong class="text-text">Schlitterbahn</strong>, 65 acres of waterpark built into the Comal, is a local institution, not just a tourist draw.</p>
           <p class="text-muted leading-[1.75]"><strong class="text-text">Gruene Hall</strong>, operating since 1878, is the oldest continually running dance hall in Texas. <strong class="text-text">Canyon Lake</strong> sits 15 minutes north with boating, cliff diving, and lakeside dining. Dozens of Hill Country wineries are within a 30-minute drive. <strong class="text-text">Wurstfest</strong> in November draws hundreds of thousands for a 10-day German heritage festival.</p>
-          <p class="text-muted leading-[1.75]">Climate: average highs around <strong class="text-gold-bright">{facts.climate.annualHigh}</strong>, lows around <strong class="text-gold-bright">{facts.climate.annualLow}</strong>, with <strong class="text-gold-bright">{facts.climate.precipitation}</strong> of rain across <strong class="text-gold-bright">{facts.climate.precipDays} days</strong>. That translates to roughly <strong class="text-text">nine months of outdoor living</strong> — pools, patios, and porches get used here.</p>
+          <p class="text-muted leading-[1.75]">Climate: average highs around <strong class="text-gold-bright">{facts.climate.annualHigh}</strong>, lows around <strong class="text-gold-bright">{facts.climate.annualLow}</strong>, with <strong class="text-gold-bright">{facts.climate.precipitation}</strong> of rain across <strong class="text-gold-bright">{facts.climate.precipDays} days</strong>. That translates to roughly <strong class="text-text">nine months of outdoor living</strong>, pools, patios, and porches get used here.</p>
         </div>
       </div>
     </section>
@@ -149,7 +166,7 @@ import { facts } from '../data/facts.js';
         <h2 class="mb-6">Job market.</h2>
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]">Top employers include <strong class="text-text">{facts.employers.slice(0, 6).join(', ')}</strong>. The economic backbone is <strong class="text-text">healthcare, public sector, and manufacturing</strong>, providing stable year-round employment independent of tourism cycles.</p>
-          <p class="text-muted leading-[1.75]">Hospitality accounts for approximately <strong class="text-gold-bright">31%</strong> of local jobs — driven by Schlitterbahn, the rivers, and the Gruene Historic District. That sector is seasonal but growing.</p>
+          <p class="text-muted leading-[1.75]">Hospitality accounts for approximately <strong class="text-gold-bright">31%</strong> of local jobs, driven by Schlitterbahn, the rivers, and the Gruene Historic District. That sector is seasonal but growing.</p>
           <p class="text-muted leading-[1.75]">The biggest shift in the last five years: <strong class="text-text">remote work</strong>. Software engineers, finance professionals, and marketing executives are keeping their coastal salaries and relocating for the tax savings and quality of life. The city is investing in <strong class="text-text">fiber internet and coworking spaces</strong> to accelerate this trend.</p>
         </div>
       </div>
@@ -172,15 +189,15 @@ import { facts } from '../data/facts.js';
           </div>
           <div class="border-l-2 border-[var(--color-gold)] pl-6">
             <p class="text-gold-bright font-semibold mb-1">Week 5: Visit in person</p>
-            <p class="text-muted leading-[1.75]">Fly in for an area orientation drive with Glen — neighborhoods, schools, commute routes, grocery stores, the rivers. Tour your top picks in person. Most serious relocators confirm their favorite on this trip.</p>
+            <p class="text-muted leading-[1.75]">Fly in for an area orientation drive with Glen: neighborhoods, schools, commute routes, grocery stores, the rivers. Tour your top picks in person. Most serious relocators confirm their favorite on this trip.</p>
           </div>
           <div class="border-l-2 border-[var(--color-gold)] pl-6">
             <p class="text-gold-bright font-semibold mb-1">Week 6: Make an offer</p>
-            <p class="text-muted leading-[1.75]">Submit your offer, enter contract, and schedule inspections. Glen negotiates repairs and credits. Option period in Texas is typically 7-10 days — use it to confirm everything checks out.</p>
+            <p class="text-muted leading-[1.75]">Submit your offer, enter contract, and schedule inspections. Glen negotiates repairs and credits. Option period in Texas is typically 7-10 days, use it to confirm everything checks out.</p>
           </div>
           <div class="border-l-2 border-[var(--color-gold)] pl-6">
             <p class="text-gold-bright font-semibold mb-1">Weeks 7-8: Close and move</p>
-            <p class="text-muted leading-[1.75]">Appraisal, underwriting, and final walkthrough. Close at a Texas title company — you can sign remotely if needed. File your homestead exemption immediately to lock in your tax savings for the following year.</p>
+            <p class="text-muted leading-[1.75]">Appraisal, underwriting, and final walkthrough. Close at a Texas title company, you can sign remotely if needed. File your homestead exemption immediately to lock in your tax savings for the following year.</p>
           </div>
         </div>
       </div>
@@ -194,9 +211,14 @@ import { facts } from '../data/facts.js';
     const gate = document.getElementById('gate');
     const content = document.getElementById('guide-content');
     const form = document.getElementById('gate-form');
+    const fade = document.getElementById('fade-overlay');
+    function unlock() {
+      gate?.classList.add('hidden');
+      fade?.classList.add('hidden');
+      content?.classList.remove('hidden');
+    }
     if (localStorage.getItem('guide_relocation')) {
-      gate.classList.add('hidden');
-      content.classList.remove('hidden');
+      unlock();
     }
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -211,9 +233,8 @@ import { facts } from '../data/facts.js';
           body: JSON.stringify({ name: fd.get('name'), email: fd.get('email'), guide: 'relocation' }),
         });
         localStorage.setItem('guide_relocation', '1');
-        gate.classList.add('hidden');
-        content.classList.remove('hidden');
-        content.scrollIntoView({ behavior: 'smooth' });
+        unlock();
+        content?.scrollIntoView({ behavior: 'smooth' });
       } catch {
         btn.textContent = 'Unlock the Guide';
         btn.disabled = false;

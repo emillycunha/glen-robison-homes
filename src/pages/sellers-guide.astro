@@ -2,18 +2,63 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import CTABand from '../components/CTABand.astro';
+
+const siteUrl = 'https://glenrobisonrealestate.com';
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: "The New Braunfels Seller's Guide",
+  description: "Complete guide to selling a home in New Braunfels. Pricing, staging, commissions, closing costs, and capital gains.",
+  url: `${siteUrl}/sellers-guide`,
+  author: { '@type': 'Person', name: 'Glen Robison' },
+  publisher: { '@type': 'RealEstateAgent', name: 'Glen Robison', url: siteUrl },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/sellers-guide` },
+};
 ---
 
 <Layout title="Free Seller's Guide | New Braunfels TX | Glen Robison" description="The complete guide to selling a home in New Braunfels. Pricing, prep, staging, commissions, closing costs, and capital gains.">
-  <PageHero eyebrow="Free Guide" title="The New Braunfels Seller's Guide." image="/images/hero-sell.png" intro="Pricing, prep, marketing, and negotiation — everything you need to know to sell well in New Braunfels." />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <PageHero eyebrow="Free Guide" title="The New Braunfels Seller's Guide." image="/images/hero-sell.png" intro="Pricing, prep, marketing, and negotiation: everything you need to know to sell well in New Braunfels." />
+
+  <!-- SNEAK PEEK (always visible) -->
+  <!-- 1. Pricing Strategy -->
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <span class="gold-rule"></span>
+      <p class="eyebrow mb-3">Price It Right</p>
+      <h2 class="mb-6">Your price sets the pace.</h2>
+      <div class="space-y-4">
+        <p class="text-muted leading-[1.75]">Pricing is the single most important decision you will make as a seller. A <strong class="text-text">Comparative Market Analysis (CMA)</strong> anchors your list price to recent closed sales of similar homes in your neighborhood, not Zestimates, not what your neighbor says, not what you "need." Glen pulls comps from MLS data, adjusts for upgrades, lot size, and condition, and delivers a realistic price range before you ever go live.</p>
+        <p class="text-muted leading-[1.75]">The <strong class="text-gold-bright">first two to three weeks</strong> on market are critical. That is when buyer interest peaks and showing traffic is highest. Homes priced at or near their CMA value in New Braunfels sell in under three weeks. Price <strong class="text-gold-bright">5-10% above market</strong> and you can expect to sit for 60 to 90 days, by which point agents and buyers assume something is wrong with the property.</p>
+        <p class="text-muted leading-[1.75]">New Braunfels median days on market has shifted. In late 2024, median DOM was around <strong class="text-gold-bright">18 days</strong> at a median price of $425K. By 2025-26 that number stretched to <strong class="text-gold-bright">84-108 days</strong> as inventory rose and buyers grew more selective. Overpricing in a slower market is the fastest way to become a stale listing. A well-priced home still moves quickly, the key is starting right.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Prep and Staging (preview, fades out) -->
+  <div class="relative">
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Get Ready</p>
+        <h2 class="mb-6">Prep that pays you back.</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">Not every renovation is worth doing before you list. Focus your budget on the upgrades with the highest return on investment. <strong class="text-text">Fresh interior paint</strong> is the single cheapest way to make a home feel new. <strong class="text-text">Refinished hardwood floors</strong> recover up to <strong class="text-gold-bright">147%</strong> of their cost at resale. Curb appeal, clean landscaping, a painted front door, fresh mulch, sets the tone before a buyer ever walks inside.</p>
+          <p class="text-muted leading-[1.75]">Staging works. <strong class="text-gold-bright">29%</strong> of listing agents report that staging increased their home's value by 1-10%, and staged homes sell up to <strong class="text-gold-bright">3x faster</strong> than vacant or cluttered ones. The rooms that matter most: <strong class="text-text">living room</strong> (37% of agents rank it first), <strong class="text-text">primary bedroom</strong> (34%), and <strong class="text-text">kitchen</strong> (23%). You do not need to stage every room, focus where buyers linger.</p>
+          <p class="text-muted leading-[1.75]">In New Braunfels, you are competing with new construction in communities like Veramendi, Vintage Oaks, and Meyer Ranch. Builders deliver move-in-ready product with fresh finishes. Your resale home needs to match that standard. Declutter aggressively, deep clean everything, and fix deferred maintenance before the first showing, not after the inspection report.</p>
+        </div>
+      </div>
+    </section>
+    <div id="fade-overlay" class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[var(--color-bg-elevated)] via-[var(--color-bg-elevated)]/90 to-transparent pointer-events-none"></div>
+  </div>
 
   <!-- GATE -->
-  <section id="gate" class="py-20">
+  <section id="gate" class="py-20 bg-elevated">
     <div class="max-w-2xl mx-auto px-8">
       <div class="bg-card border border-hair p-10">
-        <p class="eyebrow mb-4">Unlock the Guide</p>
-        <h2 class="mb-4">One email. <span class="text-gold-bright">Instant access.</span></h2>
-        <p class="text-muted leading-[1.65] mb-8">No downloads, no PDFs. Enter your email and the full guide unlocks right here.</p>
+        <p class="eyebrow mb-4">8 More Sections</p>
+        <h2 class="mb-4">Unlock the full guide.</h2>
+        <p class="text-muted leading-[1.65] mb-8">Disclosures, closing costs, commissions, capital gains, and more. One email, instant access, no PDFs.</p>
         <form id="gate-form" class="space-y-4">
           <input type="text" name="name" placeholder="Name" class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
           <input type="email" name="email" placeholder="Email" required class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
@@ -23,48 +68,8 @@ import CTABand from '../components/CTABand.astro';
     </div>
   </section>
 
-  <!-- GUIDE CONTENT -->
+  <!-- LOCKED CONTENT -->
   <div id="guide-content" class="hidden">
-
-    <!-- 1. Pricing Strategy -->
-    <section class="py-20">
-      <div class="max-w-4xl mx-auto px-6">
-        <span class="gold-rule"></span>
-        <p class="eyebrow mb-3">Price It Right</p>
-        <h2 class="mb-6">Your price sets the pace.</h2>
-        <div class="space-y-4">
-          <p class="text-muted leading-[1.75]">
-            Pricing is the single most important decision you will make as a seller. A <strong class="text-text">Comparative Market Analysis (CMA)</strong> anchors your list price to recent closed sales of similar homes in your neighborhood — not Zestimates, not what your neighbor says, not what you "need." Glen pulls comps from MLS data, adjusts for upgrades, lot size, and condition, and delivers a realistic price range before you ever go live.
-          </p>
-          <p class="text-muted leading-[1.75]">
-            The <strong class="text-gold-bright">first two to three weeks</strong> on market are critical. That is when buyer interest peaks and showing traffic is highest. Homes priced at or near their CMA value in New Braunfels sell in under three weeks. Price <strong class="text-gold-bright">5-10% above market</strong> and you can expect to sit for 60 to 90 days — by which point agents and buyers assume something is wrong with the property.
-          </p>
-          <p class="text-muted leading-[1.75]">
-            New Braunfels median days on market has shifted. In late 2024, median DOM was around <strong class="text-gold-bright">18 days</strong> at a median price of $425K. By 2025-26 that number stretched to <strong class="text-gold-bright">84-108 days</strong> as inventory rose and buyers grew more selective. Overpricing in a slower market is the fastest way to become a stale listing. A well-priced home still moves quickly — the key is starting right.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Prep and Staging -->
-    <section class="py-20 bg-elevated border-y border-hair">
-      <div class="max-w-4xl mx-auto px-6">
-        <span class="gold-rule"></span>
-        <p class="eyebrow mb-3">Get Ready</p>
-        <h2 class="mb-6">Prep that pays you back.</h2>
-        <div class="space-y-4">
-          <p class="text-muted leading-[1.75]">
-            Not every renovation is worth doing before you list. Focus your budget on the upgrades with the highest return on investment. <strong class="text-text">Fresh interior paint</strong> is the single cheapest way to make a home feel new. <strong class="text-text">Refinished hardwood floors</strong> recover up to <strong class="text-gold-bright">147%</strong> of their cost at resale. Curb appeal — clean landscaping, a painted front door, fresh mulch — sets the tone before a buyer ever walks inside.
-          </p>
-          <p class="text-muted leading-[1.75]">
-            Staging works. <strong class="text-gold-bright">29%</strong> of listing agents report that staging increased their home's value by 1-10%, and staged homes sell up to <strong class="text-gold-bright">3x faster</strong> than vacant or cluttered ones. The rooms that matter most: <strong class="text-text">living room</strong> (37% of agents rank it first), <strong class="text-text">primary bedroom</strong> (34%), and <strong class="text-text">kitchen</strong> (23%). You do not need to stage every room — focus where buyers linger.
-          </p>
-          <p class="text-muted leading-[1.75]">
-            In New Braunfels, you are competing with new construction in communities like Veramendi, Vintage Oaks, and Meyer Ranch. Builders deliver move-in-ready product with fresh finishes. Your resale home needs to match that standard. Declutter aggressively, deep clean everything, and fix deferred maintenance before the first showing — not after the inspection report.
-          </p>
-        </div>
-      </div>
-    </section>
 
     <!-- 3. Marketing Your Home -->
     <section class="py-20">
@@ -77,10 +82,10 @@ import CTABand from '../components/CTABand.astro';
             <strong class="text-text">Professional photography</strong> is non-negotiable. Listings with pro photos receive substantially more views and sell faster. Glen's listing plan includes high-resolution photography, drone aerials for acreage and Hill Country views, and <strong class="text-text">3D virtual tours</strong> that let out-of-state buyers walk your home from their phone.
           </p>
           <p class="text-muted leading-[1.75]">
-            Your listing syndicates to <strong class="text-gold-bright">hundreds of sites</strong> through MLS — Zillow, Realtor.com, Redfin, Homes.com, and every brokerage feed in the San Antonio-New Braunfels market. On top of syndication, Glen runs <strong class="text-text">targeted digital advertising</strong> on social platforms to reach relocation buyers from Austin, San Antonio, Houston, and Dallas — the four metros feeding New Braunfels growth.
+            Your listing syndicates to <strong class="text-gold-bright">hundreds of sites</strong> through MLS. Zillow, Realtor.com, Redfin, Homes.com, and every brokerage feed in the San Antonio-New Braunfels market. On top of syndication, Glen runs <strong class="text-text">targeted digital advertising</strong> on social platforms to reach relocation buyers from Austin, San Antonio, Houston, and Dallas, the four metros feeding New Braunfels growth.
           </p>
           <p class="text-muted leading-[1.75]">
-            The Hill Country aesthetic sells itself when presented correctly. Stone exteriors, mature oaks, river proximity, Gruene Hall walkability — these are lifestyle features that deserve dedicated copy and dedicated visuals. Generic listing descriptions leave money on the table.
+            The Hill Country aesthetic sells itself when presented correctly. Stone exteriors, mature oaks, river proximity, Gruene Hall walkability, these are lifestyle features that deserve dedicated copy and dedicated visuals. Generic listing descriptions leave money on the table.
           </p>
         </div>
       </div>
@@ -94,13 +99,13 @@ import CTABand from '../components/CTABand.astro';
         <h2 class="mb-6">What Texas requires you to disclose.</h2>
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]">
-            <strong class="text-text">Texas Property Code Section 5.008</strong> requires sellers of previously occupied single-family residences to complete a Seller's Disclosure Notice. This form covers the condition of every major system — roof, foundation, plumbing, HVAC, electrical, appliances — as well as known defects, flooding history, environmental hazards, and HOA obligations.
+            <strong class="text-text">Texas Property Code Section 5.008</strong> requires sellers of previously occupied single-family residences to complete a Seller's Disclosure Notice. This form covers the condition of every major system: roof, foundation, plumbing, HVAC, electrical, appliances, as well as known defects, flooding history, environmental hazards, and HOA obligations.
           </p>
           <p class="text-muted leading-[1.75]">
-            The disclosure must be delivered to the buyer <strong class="text-gold-bright">before a binding contract</strong> is executed. If you deliver it late — after the contract is signed — the buyer has the right to <strong class="text-text">terminate within 7 days</strong> of receiving it. Honesty here protects you legally. Concealing known defects can result in lawsuits after closing.
+            The disclosure must be delivered to the buyer <strong class="text-gold-bright">before a binding contract</strong> is executed. If you deliver it late, after the contract is signed, the buyer has the right to <strong class="text-text">terminate within 7 days</strong> of receiving it. Honesty here protects you legally. Concealing known defects can result in lawsuits after closing.
           </p>
           <p class="text-muted leading-[1.75]">
-            Certain sales are exempt from the disclosure requirement: <strong class="text-text">foreclosure sales</strong>, transfers by a court-appointed trustee or <strong class="text-text">estate/trust</strong>, transfers between co-owners, and <strong class="text-text">new construction</strong> that has never been occupied. If none of those apply to you, fill the form out completely and accurately — Glen will walk you through every section.
+            Certain sales are exempt from the disclosure requirement: <strong class="text-text">foreclosure sales</strong>, transfers by a court-appointed trustee or <strong class="text-text">estate/trust</strong>, transfers between co-owners, and <strong class="text-text">new construction</strong> that has never been occupied. If none of those apply to you, fill the form out completely and accurately. Glen will walk you through every section.
           </p>
         </div>
       </div>
@@ -114,13 +119,13 @@ import CTABand from '../components/CTABand.astro';
         <h2 class="mb-6">Price is not the only number that matters.</h2>
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]">
-            When offers arrive, resist the urge to fixate on the top-line price. A strong offer is a combination of terms: <strong class="text-text">earnest money</strong> (typically 1-3% of the purchase price — more signals a serious buyer), <strong class="text-text">option period length</strong> (shorter is better for you), <strong class="text-text">appraisal gap coverage</strong> (the buyer agrees to cover a shortfall between appraised value and contract price), <strong class="text-text">leaseback terms</strong> (if you need time after closing), and <strong class="text-text">closing timeline flexibility</strong>.
+            When offers arrive, resist the urge to fixate on the top-line price. A strong offer is a combination of terms: <strong class="text-text">earnest money</strong> (typically 1-3% of the purchase price, more signals a serious buyer), <strong class="text-text">option period length</strong> (shorter is better for you), <strong class="text-text">appraisal gap coverage</strong> (the buyer agrees to cover a shortfall between appraised value and contract price), <strong class="text-text">leaseback terms</strong> (if you need time after closing), and <strong class="text-text">closing timeline flexibility</strong>.
           </p>
           <p class="text-muted leading-[1.75]">
             <strong class="text-gold-bright">59%</strong> of Texas listings still attract multiple offers. In a multiple-offer scenario, clean terms often beat the highest price. An offer at $5K over asking with no appraisal gap coverage, a long option period, and a pile of repair requests may net you less than a slightly lower offer with tight terms and a committed buyer.
           </p>
           <p class="text-muted leading-[1.75]">
-            Seller concessions — contributions toward the buyer's closing costs — are present in over <strong class="text-gold-bright">90%</strong> of transactions. Expect buyers to ask. Glen will advise you on which concessions are reasonable and which ones to push back on during negotiation.
+            Seller concessions, contributions toward the buyer's closing costs, are present in over <strong class="text-gold-bright">90%</strong> of transactions. Expect buyers to ask. Glen will advise you on which concessions are reasonable and which ones to push back on during negotiation.
           </p>
         </div>
       </div>
@@ -134,10 +139,10 @@ import CTABand from '../components/CTABand.astro';
         <h2 class="mb-6">The option period, explained.</h2>
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]">
-            The option period is a Texas-specific contract provision that gives the buyer the unrestricted right to terminate for <strong class="text-gold-bright">any reason</strong> during a set window — typically <strong class="text-gold-bright">3-10 days</strong>, with 5-7 being most common. In exchange, the buyer pays a non-refundable <strong class="text-text">option fee</strong> of <strong class="text-gold-bright">$100-$350</strong>, which goes directly to you, the seller, regardless of whether the deal closes.
+            The option period is a Texas-specific contract provision that gives the buyer the unrestricted right to terminate for <strong class="text-gold-bright">any reason</strong> during a set window, typically <strong class="text-gold-bright">3-10 days</strong>, with 5-7 being most common. In exchange, the buyer pays a non-refundable <strong class="text-text">option fee</strong> of <strong class="text-gold-bright">$100-$350</strong>, which goes directly to you, the seller, regardless of whether the deal closes.
           </p>
           <p class="text-muted leading-[1.75]">
-            From the seller's perspective, a <strong class="text-text">shorter option period</strong> means faster certainty. If the buyer is going to walk, you want to know on day 5, not day 10. A <strong class="text-text">higher option fee</strong> signals a more committed buyer — a buyer willing to put $350 on the line is less likely to walk than one who offered $100.
+            From the seller's perspective, a <strong class="text-text">shorter option period</strong> means faster certainty. If the buyer is going to walk, you want to know on day 5, not day 10. A <strong class="text-text">higher option fee</strong> signals a more committed buyer, a buyer willing to put $350 on the line is less likely to walk than one who offered $100.
           </p>
           <p class="text-muted leading-[1.75]">
             Most <strong class="text-text">inspections happen during the option period</strong>: general home inspection, termite/WDI, foundation, sewer scope, pool inspection. After the option period expires, the buyer's earnest money becomes at risk. If they terminate after that point without a contractual right (like a financing contingency or appraisal failure), you keep the earnest money.
@@ -191,7 +196,7 @@ import CTABand from '../components/CTABand.astro';
                 </tr>
                 <tr>
                   <td class="py-3 pr-4">State transfer tax</td>
-                  <td class="py-3"><strong class="text-gold-bright">$0</strong> — Texas has none</td>
+                  <td class="py-3"><strong class="text-gold-bright">$0</strong>. Texas has none</td>
                 </tr>
               </tbody>
             </table>
@@ -214,10 +219,10 @@ import CTABand from '../components/CTABand.astro';
             The 2024 NAR settlement changed how commissions are communicated, but the economics have barely moved. Total commissions in most Texas transactions remain around <strong class="text-gold-bright">5.5-6%</strong>, split roughly evenly between the listing agent and the buyer's agent.
           </p>
           <p class="text-muted leading-[1.75]">
-            The key change: <strong class="text-text">MLSs can no longer display offers of buyer-agent compensation</strong> in the listing. Before the settlement, a listing would show something like "2.5% to buyer's agent." That field is gone. However, sellers can still offer buyer-side concessions — and most do. In practice, sellers commonly offer <strong class="text-gold-bright">2.5-3%</strong> to attract buyer-agent cooperation, just as before. The offer is simply communicated off-MLS.
+            The key change: <strong class="text-text">MLSs can no longer display offers of buyer-agent compensation</strong> in the listing. Before the settlement, a listing would show something like "2.5% to buyer's agent." That field is gone. However, sellers can still offer buyer-side concessions, and most do. In practice, sellers commonly offer <strong class="text-gold-bright">2.5-3%</strong> to attract buyer-agent cooperation, just as before. The offer is simply communicated off-MLS.
           </p>
           <p class="text-muted leading-[1.75]">
-            Another change: buyers must now sign a <strong class="text-text">written buyer representation agreement</strong> with their agent before touring homes. This does not affect you as the seller, but it means buyers who show up at your door are represented and have already committed to their agent's terms. For sellers, the practical takeaway is straightforward — commission rates have not meaningfully changed, and offering competitive buyer-agent compensation remains the norm.
+            Another change: buyers must now sign a <strong class="text-text">written buyer representation agreement</strong> with their agent before touring homes. This does not affect you as the seller, but it means buyers who show up at your door are represented and have already committed to their agent's terms. For sellers, the practical takeaway is straightforward: commission rates have not meaningfully changed, and offering competitive buyer-agent compensation remains the norm.
           </p>
         </div>
       </div>
@@ -234,7 +239,7 @@ import CTABand from '../components/CTABand.astro';
             The federal government allows you to exclude up to <strong class="text-gold-bright">$250,000</strong> in capital gains from the sale of your primary residence if you are single, or <strong class="text-gold-bright">$500,000</strong> if married filing jointly. This exclusion comes from <strong class="text-text">Section 121 of the Internal Revenue Code</strong> and is one of the most generous tax benefits available to homeowners.
           </p>
           <p class="text-muted leading-[1.75]">
-            To qualify, you must have <strong class="text-text">owned and used the home as your primary residence</strong> for at least 2 of the last 5 years before the sale. The two years do not need to be consecutive. If you converted your home to a rental, you can rent it for up to <strong class="text-gold-bright">3 years</strong> and still qualify — as long as you lived in it for 2 of the prior 5 years.
+            To qualify, you must have <strong class="text-text">owned and used the home as your primary residence</strong> for at least 2 of the last 5 years before the sale. The two years do not need to be consecutive. If you converted your home to a rental, you can rent it for up to <strong class="text-gold-bright">3 years</strong> and still qualify, as long as you lived in it for 2 of the prior 5 years.
           </p>
           <p class="text-muted leading-[1.75]">
             <strong class="text-text">Texas has no state capital gains tax.</strong> Your only exposure is federal. If your gain exceeds the exclusion, the excess is taxed at the federal long-term capital gains rate: <strong class="text-gold-bright">0%, 15%, or 20%</strong> depending on your income bracket. For most homeowners in New Braunfels, the $250K/$500K exclusion covers the full gain. Glen recommends consulting a CPA for situations involving inherited property, partial-year occupancy, or 1031 exchange planning.
@@ -251,7 +256,7 @@ import CTABand from '../components/CTABand.astro';
         <h2 class="mb-6">From listing to closing, week by week.</h2>
         <div class="space-y-4">
           <p class="text-muted leading-[1.75]">
-            The selling timeline has two phases. <strong class="text-text">Listing to contract</strong> depends on pricing and market conditions — expect <strong class="text-gold-bright">2-12+ weeks</strong> in the current New Braunfels market, with well-priced homes landing a contract in the first two to three weeks. <strong class="text-text">Contract to closing</strong> typically takes <strong class="text-gold-bright">30-45 days</strong> for a financed buyer, or as few as <strong class="text-gold-bright">7-14 days</strong> for a cash buyer.
+            The selling timeline has two phases. <strong class="text-text">Listing to contract</strong> depends on pricing and market conditions, expect <strong class="text-gold-bright">2-12+ weeks</strong> in the current New Braunfels market, with well-priced homes landing a contract in the first two to three weeks. <strong class="text-text">Contract to closing</strong> typically takes <strong class="text-gold-bright">30-45 days</strong> for a financed buyer, or as few as <strong class="text-gold-bright">7-14 days</strong> for a cash buyer.
           </p>
           <p class="text-muted leading-[1.75]">
             Here is a week-by-week breakdown of the contract-to-close period:
@@ -263,7 +268,7 @@ import CTABand from '../components/CTABand.astro';
             </div>
             <div class="flex gap-4">
               <span class="text-gold-bright font-semibold whitespace-nowrap min-w-[5rem]">Days 3-10</span>
-              <p class="text-muted leading-[1.75]">Option period. Buyer conducts inspections (general, termite, foundation, etc.). Negotiation of repairs or credits. Option period expires — earnest money goes hard.</p>
+              <p class="text-muted leading-[1.75]">Option period. Buyer conducts inspections (general, termite, foundation, etc.). Negotiation of repairs or credits. Option period expires, earnest money goes hard.</p>
             </div>
             <div class="flex gap-4">
               <span class="text-gold-bright font-semibold whitespace-nowrap min-w-[5rem]">Days 10-20</span>
@@ -275,7 +280,7 @@ import CTABand from '../components/CTABand.astro';
             </div>
             <div class="flex gap-4">
               <span class="text-gold-bright font-semibold whitespace-nowrap min-w-[5rem]">Days 27-30</span>
-              <p class="text-muted leading-[1.75]">Closing disclosure issued (3-day review required by law). Final walkthrough. Signing at the title company. Funds wire and title records — you are officially closed.</p>
+              <p class="text-muted leading-[1.75]">Closing disclosure issued (3-day review required by law). Final walkthrough. Signing at the title company. Funds wire and title records, you are officially closed.</p>
             </div>
           </div>
           <p class="text-muted leading-[1.75] mt-4">
@@ -293,9 +298,14 @@ import CTABand from '../components/CTABand.astro';
     const gate = document.getElementById('gate');
     const content = document.getElementById('guide-content');
     const form = document.getElementById('gate-form');
+    const fade = document.getElementById('fade-overlay');
+    function unlock() {
+      gate?.classList.add('hidden');
+      fade?.classList.add('hidden');
+      content?.classList.remove('hidden');
+    }
     if (localStorage.getItem('guide_sellers')) {
-      gate.classList.add('hidden');
-      content.classList.remove('hidden');
+      unlock();
     }
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -310,9 +320,8 @@ import CTABand from '../components/CTABand.astro';
           body: JSON.stringify({ name: fd.get('name'), email: fd.get('email'), guide: 'sellers' }),
         });
         localStorage.setItem('guide_sellers', '1');
-        gate.classList.add('hidden');
-        content.classList.remove('hidden');
-        content.scrollIntoView({ behavior: 'smooth' });
+        unlock();
+        content?.scrollIntoView({ behavior: 'smooth' });
       } catch {
         btn.textContent = 'Unlock the Guide';
         btn.disabled = false;

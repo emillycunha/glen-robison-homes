@@ -1,4 +1,4 @@
-// Blog posts for Glen Robison Homes.
+// Blog posts for Glen Robison Real Estate.
 // Newest first. Each post is fully self-contained, see schema in [slug].astro.
 
 export const blogPosts = [

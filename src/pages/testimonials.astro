@@ -3,12 +3,34 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import CTABand from '../components/CTABand.astro';
 import { testimonials } from '../data/testimonials.js';
+
+const siteUrl = 'https://glenrobisonrealestate.com';
+const reviewSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  name: 'Glen Robison',
+  url: siteUrl,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    bestRating: '5',
+    ratingCount: String(testimonials.length),
+    reviewCount: String(testimonials.length),
+  },
+  review: testimonials.map(t => ({
+    '@type': 'Review',
+    reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+    author: { '@type': 'Person', name: t.author },
+    reviewBody: t.quote,
+  })),
+};
 ---
 
 <Layout
   title="Client Reviews & Testimonials | Glen Robison REALTOR"
   description="Real reviews from buyers and sellers who worked with Glen Robison in New Braunfels, Canyon Lake, and the Texas Hill Country."
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />
   <PageHero
     eyebrow="Testimonials"
     title="In their own words."

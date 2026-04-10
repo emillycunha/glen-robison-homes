@@ -29,12 +29,36 @@ const formatDate = (iso) =>
 
 const lead = pagePosts[0];
 const grid = pagePosts.slice(1);
+
+const siteUrl = 'https://glenrobisonrealestate.com';
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'The Glen Robison Report',
+  description: 'Market reports, neighborhood guides, and buyer insights for New Braunfels and the Texas Hill Country.',
+  url: `${siteUrl}/blog`,
+  publisher: {
+    '@type': 'RealEstateAgent',
+    name: 'Glen Robison',
+    url: siteUrl,
+  },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: sorted.slice(0, 7).map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${siteUrl}/blog/${p.slug}`,
+      name: p.title,
+    })),
+  },
+};
 ---
 
 <Layout
   title="The Glen Robison Report | Hill Country Real Estate Insights"
   description="Market reports, neighborhood guides, and buyer insights for New Braunfels, Canyon Lake, Garden Ridge, and the Texas Hill Country from REALTOR Glen Robison."
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
 
   <!-- MASTHEAD -->
   <section class="pt-24 pb-12 border-b border-hair">
