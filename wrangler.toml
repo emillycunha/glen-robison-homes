@@ -1,0 +1,7 @@
+name = "glen-robison-homes"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "glen-robison-leads"
+database_id = "6f65dcf2-7b51-4d99-85b6-7127031c6f36"

@@ -1,33 +1,223 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import CTABand from '../components/CTABand.astro';
 ---
 
-<Layout title="Free Buyer's Guide | New Braunfels TX | Glen Robison" description="Unlock Glen's complete buyer's guide for New Braunfels and the Texas Hill Country. Enter your email to access the full guide.">
+<Layout title="Free Buyer's Guide | New Braunfels TX | Glen Robison" description="Unlock Glen's complete buyer's guide for New Braunfels and the Texas Hill Country. Pre-approval, contracts, inspections, closing costs, and homestead exemptions.">
   <PageHero
     eyebrow="Free Guide"
     title="The New Braunfels Buyer's Guide."
     image="/images/hero-buyers.png"
-    intro="Everything you need to know about buying a home in New Braunfels and the Hill Country, financing, inspections, contracts, closing. Enter your email to unlock the full guide."
+    intro="Everything you need to know about buying a home in New Braunfels and the Hill Country — financing, inspections, contracts, closing. Enter your email to unlock the full guide."
   />
 
-  <section class="py-20">
+  <!-- GATE -->
+  <section id="gate" class="py-20">
     <div class="max-w-2xl mx-auto px-8">
       <div class="bg-card border border-hair p-10">
         <p class="eyebrow mb-4">Unlock the Guide</p>
-        <h2 class="mb-4">One email. Instant access.</h2>
-        <p class="text-muted leading-[1.65] mb-8">No downloads, no PDFs. Enter your email and the full guide unlocks on this page, ready to read.</p>
-        <form class="space-y-4">
-          <input type="text" placeholder="Name" class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
-          <input type="email" placeholder="Email" class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
+        <h2 class="mb-4">One email. <span class="text-gold-bright">Instant access.</span></h2>
+        <p class="text-muted leading-[1.65] mb-8">No downloads, no PDFs. Enter your email and the full guide unlocks right here.</p>
+        <form id="gate-form" class="space-y-4">
+          <input type="text" name="name" placeholder="Name" class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
+          <input type="email" name="email" placeholder="Email" required class="w-full bg-elevated border border-hair px-4 py-3 text-cream focus:border-[var(--color-gold)] outline-none" />
           <button type="submit" class="btn-gold w-full">Unlock the Guide</button>
-          <p class="text-dim text-xs text-center">TODO: Wire to GHL, set cookie, reveal full guide content below on submit.</p>
         </form>
       </div>
-
       <div class="mt-10 text-center text-dim text-sm">
-        Once unlocked, you'll see the full Buyer's Guide inline, financing, inspections, contracts, timelines, closing, plus any updates we publish.
+        Once unlocked, you'll see the full Buyer's Guide inline — financing, inspections, contracts, timelines, and closing.
       </div>
     </div>
   </section>
+
+  <!-- GUIDE CONTENT (hidden until unlocked) -->
+  <div id="guide-content" class="hidden">
+
+    <!-- 1. Get Pre-Approved First -->
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Step 1</p>
+        <h2 class="mb-6">Get Pre-Approved First</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">A pre-approval letter tells sellers you are a serious, qualified buyer. Without one, most listing agents in New Braunfels will not present your offer. It is not a formality — it is your entry ticket. Get it before you tour a single property.</p>
+          <p class="text-muted leading-[1.75]">The process takes <strong class="text-gold-bright">24 to 72 hours</strong>. Your lender will pull credit, verify income, review bank statements, and confirm employment. They need two years of W-2s or tax returns, two months of pay stubs, and two months of bank statements. With rates currently in the <strong class="text-gold-bright">6-7% range</strong>, your debt-to-income ratio needs to land under <strong class="text-text">43%</strong> to qualify for most conventional products.</p>
+          <p class="text-muted leading-[1.75]">A strong pre-approval also sets your ceiling. It tells you exactly what you can afford — not what a bank will lend you, which are two different numbers. Glen works with several local lenders who close on time and can turn around a pre-approval within a business day.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Know Your Budget -->
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Step 2</p>
+        <h2 class="mb-6">Know Your Budget</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">On a household income of <strong class="text-gold-bright">$150K</strong>, most buyers qualify in the <strong class="text-gold-bright">$400K-$500K</strong> range with <strong class="text-text">20-30% down</strong>. That puts your monthly payment — principal, interest, Texas property taxes, and homeowner's insurance — between <strong class="text-gold-bright">$2,800 and $3,500</strong>. The Comal County median sale price sits around <strong class="text-gold-bright">$445K</strong>, so most qualified buyers are shopping right in the core of the market.</p>
+          <p class="text-muted leading-[1.75]">Texas has no state income tax, but property taxes are higher than the national average. In Comal County, expect an effective rate around <strong class="text-text">1.8-2.2%</strong> depending on the jurisdiction and exemptions. Insurance runs <strong class="text-text">$2,500-$4,000/year</strong> depending on coverage and location. These are not optional line items — budget for them upfront.</p>
+          <p class="text-muted leading-[1.75]">Glen recommends running the numbers with a mortgage calculator before your first showing. Know what your monthly ceiling actually is, then back into a purchase price. That keeps you focused on the right homes from day one.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Understanding the Texas Contract -->
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Texas Rules</p>
+        <h2 class="mb-6">Understanding the Texas Contract</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">Texas uses standardized contract forms published by the <strong class="text-text">Texas Real Estate Commission (TREC)</strong>. Unlike many states, agents cannot draft custom contracts — they fill in the blanks on promulgated forms. This protects you. Every buyer in Texas works with the same legal framework, and your agent's job is to fill it in correctly and advise you on every provision.</p>
+          <p class="text-muted leading-[1.75]">The most important feature of a Texas contract is the <strong class="text-text">option period</strong>. This is a <strong class="text-gold-bright">7 to 10 day</strong> window after execution during which you can terminate the contract for any reason — inspections, cold feet, anything. You pay a non-refundable <strong class="text-text">option fee</strong> of <strong class="text-gold-bright">$100-$350</strong> directly to the seller to buy this right. It is the single best buyer protection in Texas real estate.</p>
+          <p class="text-muted leading-[1.75]"><strong class="text-text">Earnest money</strong> is separate. This is typically <strong class="text-gold-bright">1-3% of the purchase price</strong>, deposited with the title company within a few days of execution. It shows the seller you are committed. If you close, it applies toward your purchase. If you terminate during the option period, you get it back. Glen walks every buyer through each line of the contract before you sign.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. The IABS Form -->
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Disclosure</p>
+        <h2 class="mb-6">The IABS Form</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">Before any substantive conversation about real estate, Texas law requires your agent to provide the <strong class="text-text">Information About Brokerage Services (IABS)</strong> form. This is not a contract. It does not commit you to anything. It is a one-page disclosure that explains the three types of agency relationships in Texas: <strong class="text-text">buyer representation</strong>, <strong class="text-text">seller representation</strong>, and <strong class="text-text">intermediary</strong>.</p>
+          <p class="text-muted leading-[1.75]">The form explains what each role means, what duties your agent owes you, and the difference between a client and a customer. As Glen's buyer client, you receive full fiduciary representation — loyalty, confidentiality, and informed advocacy. The IABS ensures you understand that relationship before any business begins.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Buyer Agent Fees After the NAR Settlement -->
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Commissions</p>
+        <h2 class="mb-6">Buyer Agent Fees After the NAR Settlement</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">Since the 2024 NAR settlement, buyers must sign a <strong class="text-text">written buyer representation agreement</strong> before touring homes. This is now the law — no handshake deals, no informal arrangements. The agreement spells out what your agent will do, how long the relationship lasts, and exactly what compensation looks like.</p>
+          <p class="text-muted leading-[1.75]">In practice, sellers in New Braunfels still frequently offer a <strong class="text-gold-bright">2-3% buyer agent concession</strong> as part of the listing. That means in most transactions, the seller covers your agent's fee. When they do not, the buyer rep agreement defines your obligation clearly — no surprises. Glen writes the agreement in plain language so you know exactly what you would owe in every scenario before you commit.</p>
+          <p class="text-muted leading-[1.75]">The settlement changed the paperwork. It did not change Glen's approach: full transparency on compensation from the first conversation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Finding the Right Neighborhood -->
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Where to Live</p>
+        <h2 class="mb-6">Finding the Right Neighborhood</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">New Braunfels is served primarily by two districts: <strong class="text-text">Comal ISD</strong> (A-rated) and <strong class="text-text">New Braunfels ISD</strong>. School zones shift at the street level, and the district boundary does not always follow the lines you would expect. If schools matter to your family, verify the zone by address — do not rely on the listing description.</p>
+          <p class="text-muted leading-[1.75]">For luxury acreage and Hill Country views, <strong class="text-text">Vintage Oaks</strong> and <strong class="text-text">Copper Ridge</strong> lead the market. For new construction with strong resale, look at <strong class="text-text">Mayfair</strong> and <strong class="text-text">Havenwood</strong>. Each neighborhood has its own HOA structure, lot sizes, and build-out timeline. Glen knows which builders deliver and which ones cut corners — that knowledge saves you money and headaches.</p>
+          <p class="text-muted leading-[1.75]">Explore the full neighborhood breakdown on the <a href="/neighborhoods" class="text-gold-bright underline underline-offset-2 hover:text-gold">neighborhoods page</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Making an Offer -->
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">The Offer</p>
+        <h2 class="mb-6">Making an Offer</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">Price matters, but it is not the only lever. A strong offer includes the right <strong class="text-text">earnest money</strong> (1-3% of the purchase price), a reasonable <strong class="text-text">option fee</strong>, and terms that align with the seller's priorities. Closing timeline, leaseback provisions, and <strong class="text-text">appraisal gap coverage</strong> can make a lower-priced offer more attractive than a higher one with messy contingencies.</p>
+          <p class="text-muted leading-[1.75]">Glen pulls recent <strong class="text-text">comparable sales</strong> for every property before writing an offer. You will see what similar homes sold for, how long they sat, and whether the seller priced aggressively or left room. That data drives the strategy — not guesswork, not emotion. You will know exactly what the house is worth before you commit a number to paper.</p>
+          <p class="text-muted leading-[1.75]">In a competitive situation, Glen advises on escalation clauses, appraisal gap language, and timeline concessions. In a buyer's market, he negotiates repairs, closing cost credits, and rate buydowns. The strategy changes with the market. The preparation does not.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Inspections and the Option Period -->
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Inspections</p>
+        <h2 class="mb-6">Inspections and the Option Period</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">A standard home inspection in New Braunfels runs <strong class="text-gold-bright">$259-$314</strong> depending on square footage. Specialty inspections — <strong class="text-text">WDI (termite)</strong>, <strong class="text-text">foundation</strong>, <strong class="text-text">septic</strong>, <strong class="text-text">pool</strong> — add <strong class="text-gold-bright">$50-$200 each</strong>. Budget at least <strong class="text-gold-bright">$400+</strong> for inspections on a standard home. On older properties or acreage with a well and septic, plan for more.</p>
+          <p class="text-muted leading-[1.75]">All of this happens during the <strong class="text-text">option period</strong> — your protected window to discover problems and decide whether to proceed, negotiate repairs, or walk away with your earnest money intact. Glen schedules inspections within 48 hours of execution so you have maximum time to review results and negotiate.</p>
+          <p class="text-muted leading-[1.75]">Glen will not advise waiving inspections. Ever. The option period exists to protect you, and a few hundred dollars in inspection fees can save you tens of thousands in surprise repairs. Use the full window.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Closing Day -->
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">Closing</p>
+        <h2 class="mb-6">Closing Day</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">Timeline depends on your financing. <strong class="text-text">Conventional loans</strong> close in <strong class="text-gold-bright">30-45 days</strong>. <strong class="text-text">FHA and VA loans</strong> take longer — <strong class="text-gold-bright">71-77 days</strong> is typical due to additional appraisal and underwriting requirements. <strong class="text-text">Cash purchases</strong> can close in as few as <strong class="text-gold-bright">10-14 days</strong>. Your contract specifies the closing date, and Glen monitors every milestone to keep it on track.</p>
+          <p class="text-muted leading-[1.75]">Buyer closing costs in Texas typically run <strong class="text-gold-bright">2-5% of the purchase price</strong> — on a $400K home, that is <strong class="text-gold-bright">$8,000 to $20,000</strong>. This covers lender fees, title insurance, escrow setup, recording fees, and prepaid taxes and insurance. Your lender will provide a Closing Disclosure at least three days before closing so there are no surprises at the table.</p>
+          <p class="text-muted leading-[1.75]">Bring a <strong class="text-text">government-issued photo ID</strong>, a <strong class="text-text">cashier's check</strong> for the amount on your Closing Disclosure (or wire funds in advance), and <strong class="text-text">proof of homeowner's insurance</strong>. The title company handles escrow, the deed, and recording. You will sign, pick up the keys, and own a home in New Braunfels.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. File Your Homestead Exemption -->
+    <section class="py-20 bg-elevated border-y border-hair">
+      <div class="max-w-4xl mx-auto px-6">
+        <span class="gold-rule"></span>
+        <p class="eyebrow mb-3">After Closing</p>
+        <h2 class="mb-6">File Your Homestead Exemption</h2>
+        <div class="space-y-4">
+          <p class="text-muted leading-[1.75]">Texas offers a <strong class="text-gold-bright">$140,000</strong> school district homestead exemption that directly reduces your taxable value. File it with the <strong class="text-text">Comal Appraisal District</strong> as soon as you close. You can file online or by mail — it takes five minutes, and it saves you real money every year for as long as you own the home.</p>
+          <p class="text-muted leading-[1.75]">If you are <strong class="text-text">65 or older</strong>, additional exemptions apply, including a <strong class="text-text">school tax freeze</strong> that locks your school district taxes at the current level permanently. These exemptions stack. They are not automatic — you have to file for each one. Glen walks every buyer through the homestead form after closing to make sure nothing gets missed.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <CTABand
+    eyebrow="Ready to Start?"
+    title="Talk to Glen."
+    subtitle="Pre-approval, neighborhoods, strategy. One conversation covers it all."
+    primaryLabel="Contact Glen"
+    primaryHref="/contact"
+    secondaryLabel="Search Homes"
+    secondaryHref="/search"
+  />
+
+  <script>
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('guide-content');
+    const form = document.getElementById('gate-form');
+
+    if (localStorage.getItem('guide_buyers')) {
+      gate.classList.add('hidden');
+      content.classList.remove('hidden');
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const btn = form.querySelector('button');
+      btn.textContent = 'Unlocking...';
+      btn.disabled = true;
+      try {
+        await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: fd.get('name'),
+            email: fd.get('email'),
+            guide: 'buyers',
+          }),
+        });
+        localStorage.setItem('guide_buyers', '1');
+        gate.classList.add('hidden');
+        content.classList.remove('hidden');
+        content.scrollIntoView({ behavior: 'smooth' });
+      } catch {
+        btn.textContent = 'Unlock the Guide';
+        btn.disabled = false;
+      }
+    });
+  </script>
 </Layout>

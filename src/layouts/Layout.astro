@@ -21,7 +21,6 @@ const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
 const socialImage = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/hero-home.png`;
 
 const navLinks = [
-  { label: 'Search',        href: '/search' },
   { label: 'Buyers',        href: '/buyers' },
   { label: 'Sell',          href: '/sell' },
   { label: 'Neighborhoods', href: '/neighborhoods' },
@@ -134,7 +133,7 @@ const schema = {
           <a href="tel:+18307307677" class="hidden md:inline-block font-body text-sm text-gold-bright font-semibold tracking-wide">
             (830) 730-7677
           </a>
-          <a href="/contact" class="btn-gold inline-flex">
+          <a href="/contact" class="btn-gold hidden sm:inline-flex">
             Contact
           </a>
           <button id="mobile-menu-btn" class="lg:hidden text-gold p-1" aria-label="Toggle menu">
@@ -162,12 +161,8 @@ const schema = {
           {navLinks.map(l => (
             <a href={l.href} class="font-eyebrow text-sm text-muted hover:text-gold-bright tracking-[0.2em] py-4 border-b border-hair">{l.label}</a>
           ))}
-          <a href="/luxury" class="font-eyebrow text-sm text-muted hover:text-gold-bright tracking-[0.2em] py-4 border-b border-hair">Luxury</a>
-          <a href="/new-construction" class="font-eyebrow text-sm text-muted hover:text-gold-bright tracking-[0.2em] py-4 border-b border-hair">New Construction</a>
-          <a href="/tools" class="font-eyebrow text-sm text-muted hover:text-gold-bright tracking-[0.2em] py-4 border-b border-hair">Calculators</a>
-          <a href="/testimonials" class="font-eyebrow text-sm text-muted hover:text-gold-bright tracking-[0.2em] py-4 border-b border-hair">Reviews</a>
-          <a href="/blog" class="font-eyebrow text-sm text-muted hover:text-gold-bright tracking-[0.2em] py-4 border-b border-hair">Blog</a>
           <a href="/contact" class="btn-gold mt-8 justify-center">Contact</a>
+          <a href="tel:+18307307677" class="text-center font-body text-sm text-gold-bright font-semibold tracking-wide mt-4">(830) 730-7677</a>
         </nav>
       </div>
     </div>
