@@ -289,6 +289,16 @@ a:hover { color: var(--color-gold-bright); }
   outline-offset: 2px;
 }
 
+/* Marquee scroll */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
 /* Entrance animations */
 @keyframes rise {
   from { opacity: 0; transform: translateY(20px); }
