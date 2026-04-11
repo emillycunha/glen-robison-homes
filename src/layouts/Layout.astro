@@ -286,6 +286,15 @@ const schema = {
       btn?.addEventListener('click', open);
       close?.addEventListener('click', shut);
       backdrop?.addEventListener('click', shut);
+
+      // Pageview tracker
+      if (!location.pathname.startsWith('/admin')) {
+        fetch('/api/stats/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: location.pathname }),
+        }).catch(() => {});
+      }
     </script>
 
     <VIPModal />

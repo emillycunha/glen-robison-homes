@@ -1,0 +1,359 @@
+---
+// Admin SPA - no Layout wrapper, standalone page
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin | Glen Robison Real Estate</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0c0c0c; --bg2: #161616; --bg3: #1a1a1a;
+      --text: #f5f3ef; --muted: #b0aaa2; --dim: #6b665e;
+      --gold: #c19a57; --gold-b: #e0b974; --gold-d: #8a6d3a;
+      --border: #222; --red: #e55; --green: #5b5;
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Manrope', -apple-system, sans-serif; font-size: 15px; line-height: 1.5; }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold-b); }
+
+    /* Login */
+    #login { max-width: 360px; margin: 15vh auto; padding: 0 20px; }
+    #login h1 { font-size: 20px; font-weight: 700; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em; }
+    #login input { width: 100%; padding: 12px 16px; background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-size: 14px; margin-bottom: 12px; outline: none; }
+    #login input:focus { border-color: var(--gold); }
+    #login button { width: 100%; padding: 14px; background: var(--gold); color: #0a0a0a; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; border: none; cursor: pointer; }
+    #login button:hover { background: var(--gold-b); }
+    #login .err { color: var(--red); font-size: 13px; margin-top: 8px; }
+
+    /* Shell */
+    #app { display: none; }
+    .topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+    .topbar h1 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; }
+    .topbar .logout { font-size: 11px; color: var(--dim); cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; }
+    .topbar .logout:hover { color: var(--gold); }
+
+    .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .tab { padding: 14px 24px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--dim); cursor: pointer; border-bottom: 2px solid transparent; }
+    .tab:hover { color: var(--muted); }
+    .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .content { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+    /* Cards */
+    .card { background: var(--bg3); border: 1px solid var(--border); padding: 20px; margin-bottom: 12px; }
+    .card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .card .meta { font-size: 12px; color: var(--dim); }
+    .card .badge { display: inline-block; padding: 3px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid; }
+    .badge-draft { color: var(--gold); border-color: var(--gold-d); }
+    .badge-approved { color: var(--green); border-color: #3a5; }
+    .badge-published { color: var(--muted); border-color: var(--dim); }
+    .badge-new { color: var(--gold-b); border-color: var(--gold); }
+    .badge-contacted { color: #7af; border-color: #47a; }
+    .badge-trashed { color: var(--dim); border-color: var(--dim); }
+
+    .btn { padding: 8px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--gold-d); color: var(--gold); background: transparent; cursor: pointer; }
+    .btn:hover { border-color: var(--gold); color: var(--gold-b); }
+    .btn-sm { padding: 5px 10px; font-size: 10px; }
+    .btn-gold { background: var(--gold); color: #0a0a0a; border-color: var(--gold); }
+    .btn-gold:hover { background: var(--gold-b); }
+    .btn-danger { color: var(--red); border-color: #933; }
+    .btn-danger:hover { border-color: var(--red); }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+    /* Stats */
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
+    .stat-card { background: var(--bg3); border: 1px solid var(--border); padding: 24px; text-align: center; }
+    .stat-card .num { font-size: 36px; font-weight: 800; color: var(--gold-b); line-height: 1; }
+    .stat-card .label { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 8px; }
+
+    .table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .table th { text-align: left; padding: 10px 12px; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid var(--border); }
+    .table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--muted); }
+
+    /* Editor */
+    .editor { display: none; }
+    .editor textarea { width: 100%; min-height: 300px; background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 16px; font-family: monospace; font-size: 14px; line-height: 1.6; resize: vertical; outline: none; }
+    .editor textarea:focus { border-color: var(--gold); }
+    .editor input, .editor select { width: 100%; padding: 10px 14px; background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-size: 14px; margin-bottom: 12px; outline: none; }
+    .editor input:focus, .editor select:focus { border-color: var(--gold); }
+    .editor label { display: block; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; margin-top: 16px; }
+
+    .empty { text-align: center; padding: 60px 20px; color: var(--dim); }
+    .loading { text-align: center; padding: 40px; color: var(--dim); }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="login">
+    <h1>Admin</h1>
+    <input type="password" id="token-input" placeholder="Admin token" />
+    <button id="login-btn">Sign In</button>
+    <div class="err" id="login-err"></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app">
+    <div class="topbar">
+      <h1>Glen Robison <span style="color:var(--gold)">Admin</span></h1>
+      <span class="logout" id="logout-btn">Sign Out</span>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="stats">Stats</div>
+      <div class="tab" data-tab="leads">Leads</div>
+      <div class="tab" data-tab="blog">Blog Drafts</div>
+    </div>
+
+    <div class="content">
+      <div id="view-stats"></div>
+      <div id="view-leads" style="display:none"></div>
+      <div id="view-blog" style="display:none"></div>
+    </div>
+  </div>
+
+  <script is:inline>
+    let TOKEN = localStorage.getItem('admin_token') || '';
+    const API = '/api';
+
+    // Auth
+    function doLogin() {
+      TOKEN = document.getElementById('token-input').value.trim();
+      if (!TOKEN) return;
+      localStorage.setItem('admin_token', TOKEN);
+      fetch(`${API}/stats`, { headers: { Authorization: `Bearer ${TOKEN}` } })
+        .then(r => {
+          if (!r.ok) throw new Error();
+          document.getElementById('login').style.display = 'none';
+          document.getElementById('app').style.display = 'block';
+          loadStats();
+        })
+        .catch(() => {
+          document.getElementById('login-err').textContent = 'Invalid token';
+          localStorage.removeItem('admin_token');
+        });
+    }
+
+    function doLogout() {
+      TOKEN = '';
+      localStorage.removeItem('admin_token');
+      location.reload();
+    }
+
+    // Init
+    if (TOKEN) {
+      fetch(`${API}/stats`, { headers: { Authorization: `Bearer ${TOKEN}` } })
+        .then(r => {
+          if (r.ok) {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            loadStats();
+          }
+        });
+    }
+
+    // Tabs
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+      document.getElementById('view-stats').style.display = tab === 'stats' ? '' : 'none';
+      document.getElementById('view-leads').style.display = tab === 'leads' ? '' : 'none';
+      document.getElementById('view-blog').style.display = tab === 'blog' ? '' : 'none';
+
+      if (tab === 'stats') loadStats();
+      if (tab === 'leads') loadLeads();
+      if (tab === 'blog') loadDrafts();
+    }
+
+    // Helpers
+    function h(tag, attrs = {}, ...children) {
+      const el = document.createElement(tag);
+      Object.entries(attrs).forEach(([k, v]) => {
+        if (k === 'onclick') el.onclick = v;
+        else if (k === 'className') el.className = v;
+        else if (k === 'innerHTML') el.innerHTML = v;
+        else if (k === 'style') Object.assign(el.style, v);
+        else el.setAttribute(k, v);
+      });
+      children.flat().forEach(c => {
+        if (typeof c === 'string') el.appendChild(document.createTextNode(c));
+        else if (c) el.appendChild(c);
+      });
+      return el;
+    }
+
+    async function api(path, opts = {}) {
+      const r = await fetch(`${API}${path}`, {
+        ...opts,
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}`, ...opts.headers },
+      });
+      return r.json();
+    }
+
+    function fmtDate(d) { return d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''; }
+
+    // STATS
+    async function loadStats() {
+      const el = document.getElementById('view-stats');
+      el.innerHTML = '<div class="loading">Loading stats...</div>';
+      const data = await api('/stats?days=30');
+
+      el.innerHTML = '';
+      const grid = h('div', { className: 'stat-grid' },
+        h('div', { className: 'stat-card' }, h('div', { className: 'num' }, String(data.total || 0)), h('div', { className: 'label' }, 'Pageviews (30d)')),
+        h('div', { className: 'stat-card' }, h('div', { className: 'num' }, String(data.topPages?.length || 0)), h('div', { className: 'label' }, 'Unique Pages')),
+        h('div', { className: 'stat-card' }, h('div', { className: 'num' }, String(data.countries?.length || 0)), h('div', { className: 'label' }, 'Countries')),
+      );
+      el.appendChild(grid);
+
+      if (data.topPages?.length) {
+        el.appendChild(h('h3', { style: { marginBottom: '12px', fontSize: '13px', color: 'var(--dim)', textTransform: 'uppercase', letterSpacing: '0.1em' } }, 'Top Pages'));
+        const table = h('table', { className: 'table' },
+          h('thead', {}, h('tr', {}, h('th', {}, 'Page'), h('th', {}, 'Views'))),
+          h('tbody', {}, ...data.topPages.map(p =>
+            h('tr', {}, h('td', {}, p.path), h('td', {}, String(p.views)))
+          ))
+        );
+        el.appendChild(table);
+      }
+
+      if (data.referrers?.length) {
+        el.appendChild(h('h3', { style: { margin: '32px 0 12px', fontSize: '13px', color: 'var(--dim)', textTransform: 'uppercase', letterSpacing: '0.1em' } }, 'Top Referrers'));
+        const table = h('table', { className: 'table' },
+          h('thead', {}, h('tr', {}, h('th', {}, 'Referrer'), h('th', {}, 'Count'))),
+          h('tbody', {}, ...data.referrers.map(r =>
+            h('tr', {}, h('td', {}, r.referrer || '(direct)'), h('td', {}, String(r.count)))
+          ))
+        );
+        el.appendChild(table);
+      }
+    }
+
+    // LEADS
+    async function loadLeads() {
+      const el = document.getElementById('view-leads');
+      el.innerHTML = '<div class="loading">Loading leads...</div>';
+      const data = await api('/leads');
+
+      el.innerHTML = '';
+      if (!data.leads?.length) { el.innerHTML = '<div class="empty">No leads yet</div>'; return; }
+
+      const count = h('div', { style: { marginBottom: '16px', fontSize: '13px', color: 'var(--dim)' } }, `${data.count} leads`);
+      el.appendChild(count);
+
+      data.leads.forEach(lead => {
+        const badge = `badge-${lead.status || 'new'}`;
+        const card = h('div', { className: 'card' },
+          h('div', { className: 'card-row' },
+            h('div', {},
+              h('h3', {}, lead.name || '(no name)'),
+              h('div', { className: 'meta' }, `${lead.email} · ${lead.guide} guide · ${fmtDate(lead.created_at)}`),
+            ),
+            h('span', { className: `badge ${badge}` }, lead.status || 'new'),
+          ),
+          lead.notes ? h('p', { style: { fontSize: '13px', color: 'var(--muted)', marginTop: '8px' } }, lead.notes) : null,
+          h('div', { className: 'actions' },
+            h('button', { className: 'btn btn-sm', onclick: () => updateLead(lead.id, 'contacted') }, 'Contacted'),
+            h('button', { className: 'btn btn-sm', onclick: () => updateLead(lead.id, 'qualified') }, 'Qualified'),
+            h('button', { className: 'btn btn-sm', onclick: () => updateLead(lead.id, 'closed') }, 'Closed'),
+            h('button', { className: 'btn btn-sm btn-danger', onclick: () => updateLead(lead.id, 'trashed') }, 'Trash'),
+          ),
+        );
+        el.appendChild(card);
+      });
+    }
+
+    async function updateLead(id, status) {
+      await api('/leads', { method: 'PUT', body: JSON.stringify({ id, status }) });
+      loadLeads();
+    }
+
+    // BLOG DRAFTS
+    async function loadDrafts() {
+      const el = document.getElementById('view-blog');
+      el.innerHTML = '<div class="loading">Loading drafts...</div>';
+      const data = await api('/blog/drafts?status=all');
+
+      el.innerHTML = '';
+      if (!data.drafts?.length) { el.innerHTML = '<div class="empty">No drafts yet. OpenClaw will post drafts here.</div>'; return; }
+
+      const count = h('div', { style: { marginBottom: '16px', fontSize: '13px', color: 'var(--dim)' } }, `${data.count} drafts`);
+      el.appendChild(count);
+
+      data.drafts.forEach(draft => {
+        const badge = `badge-${draft.status}`;
+        const card = h('div', { className: 'card' },
+          h('div', { className: 'card-row' },
+            h('div', {},
+              h('h3', {}, draft.title),
+              h('div', { className: 'meta' }, `${draft.category} · ${draft.author} · ${fmtDate(draft.created_at)}`),
+            ),
+            h('span', { className: `badge ${badge}` }, draft.status),
+          ),
+          draft.excerpt ? h('p', { style: { fontSize: '13px', color: 'var(--muted)', marginTop: '8px' } }, draft.excerpt) : null,
+          h('div', { className: 'actions' },
+            h('button', { className: 'btn btn-sm', onclick: () => openEditor(draft.id) }, 'View / Edit'),
+            draft.status === 'draft' ? h('button', { className: 'btn btn-sm btn-gold', onclick: () => updateDraft(draft.id, 'approved') }, 'Approve') : null,
+            draft.status !== 'trashed' ? h('button', { className: 'btn btn-sm btn-danger', onclick: () => updateDraft(draft.id, 'trashed') }, 'Trash') : null,
+            draft.status === 'trashed' ? h('button', { className: 'btn btn-sm', onclick: () => updateDraft(draft.id, 'draft') }, 'Restore') : null,
+          ),
+        );
+        el.appendChild(card);
+      });
+    }
+
+    async function updateDraft(id, status) {
+      await api(`/blog/${id}`, { method: 'PUT', body: JSON.stringify({ status }) });
+      loadDrafts();
+    }
+
+    async function openEditor(id) {
+      const el = document.getElementById('view-blog');
+      const data = await api(`/blog/${id}`);
+      const d = data.draft;
+
+      el.innerHTML = '';
+      const editor = h('div', {},
+        h('button', { className: 'btn btn-sm', onclick: () => loadDrafts(), style: { marginBottom: '20px' } }, 'Back to Drafts'),
+        h('label', {}, 'Title'),
+        h('input', { id: 'ed-title', value: d.title }),
+        h('label', {}, 'Excerpt'),
+        h('input', { id: 'ed-excerpt', value: d.excerpt || '' }),
+        h('label', {}, 'Category'),
+        h('input', { id: 'ed-category', value: d.category || '' }),
+        h('label', {}, 'Content'),
+        h('textarea', { id: 'ed-content', innerHTML: d.content }),
+        h('div', { className: 'actions', style: { marginTop: '16px' } },
+          h('button', { className: 'btn btn-gold', onclick: () => saveDraft(id) }, 'Save Changes'),
+          d.status === 'draft' ? h('button', { className: 'btn', onclick: async () => { await updateDraft(id, 'approved'); loadDrafts(); } }, 'Approve') : null,
+        ),
+      );
+      el.appendChild(editor);
+    }
+
+    async function saveDraft(id) {
+      const title = document.getElementById('ed-title').value;
+      const excerpt = document.getElementById('ed-excerpt').value;
+      const category = document.getElementById('ed-category').value;
+      const content = document.getElementById('ed-content').value;
+      await api(`/blog/${id}`, { method: 'PUT', body: JSON.stringify({ title, excerpt, category, content }) });
+      loadDrafts();
+    }
+
+    // Wire events
+    document.getElementById('login-btn').addEventListener('click', doLogin);
+    document.getElementById('token-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('logout-btn').addEventListener('click', doLogout);
+    document.querySelectorAll('.tab').forEach(t => {
+      t.addEventListener('click', () => switchTab(t.dataset.tab));
+    });
+  </script>
+</body>
+</html>
