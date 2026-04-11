@@ -10,7 +10,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Buyer Guides',
     excerpt: 'A six-figure salary goes further in New Braunfels than in Austin, but Texas property taxes change the math more than most buyers expect.',
-    image: '/images/nb-family-neighborhood.png',
+    image: '/images/nb-family-neighborhood.webp',
     quickAnswer: 'On a $150,000 household income, most lenders will qualify you for a New Braunfels home priced between $480,000 and $560,000, assuming a 20% down payment, a 6.75% rate, and the 28% front-end DTI rule. That range narrows once you factor in Comal County property taxes, which run roughly 1.7% to 2.3% of assessed value depending on the taxing jurisdictions inside your address. In practice, most $150K buyers I work with land between $475K and $525K and keep their total monthly payment under $3,500.',
     content: [
       {
@@ -84,7 +84,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Relocation',
     excerpt: 'Austin homeowners are trading 5,000 square foot lots for half-acre Hill Country properties without giving up their tech jobs, and the math is more compelling in 2026 than ever.',
-    image: '/images/i35-new-braunfels.png',
+    image: '/images/i35-new-braunfels.webp',
     quickAnswer: 'For most Austin households, moving 45 minutes south to New Braunfels cuts housing costs by 15 to 25 percent for a comparable home, drops the median lot size up by a factor of two to four, and keeps you inside a reasonable commute to South Austin and ABIA. The trade-offs are real, fewer dining options, a slower nightlife, and a longer drive to downtown Austin during rush hour, but the equity, schools, and quality-of-life math favor the move for families and remote-first professionals.',
     content: [
       {
@@ -153,7 +153,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Neighborhoods',
     excerpt: 'Buyers ask me about gated communities every week, and most of the homes marketed that way in New Braunfels are not gated in the way Californians and East Coast buyers assume.',
-    image: '/images/copper-ridge.png',
+    image: '/images/copper-ridge.webp',
     quickAnswer: 'A small number of New Braunfels neighborhoods are truly gated with controlled vehicle access, and most of them are smaller custom home enclaves rather than the large master-planned communities that dominate the area. Copper Ridge is the most consistently cited gated luxury community in the New Braunfels market. Vintage Oaks, often described as gated, has gated amenity centers but open road access throughout most of the community. If a true 24/7 manned gate is non-negotiable for you, the list of options is short and worth a direct conversation.',
     content: [
       {
@@ -226,7 +226,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Relocation',
     excerpt: 'No state income tax, double the square footage, and a downtown with actual character. California relocators are the fastest-growing buyer segment in the Hill Country.',
-    image: '/images/hill-country-vista.png',
+    image: '/images/hill-country-vista.webp',
     quickAnswer: 'California households moving to New Braunfels typically save $15,000 to $25,000 a year in state income tax alone. That savings, combined with home prices 40-60% below comparable Bay Area or SoCal properties, is driving a steady wave of relocation into Comal County. Most California buyers land in Vintage Oaks, Copper Ridge, or Veramendi and keep their existing remote jobs.',
     content: [
       {
@@ -285,7 +285,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Taxes & Cost of Living',
     excerpt: 'Texas property taxes fund everything the state income tax does not. Here is how New Braunfels stacks up against Austin, rate by rate.',
-    image: '/images/downtown-nb.png',
+    image: '/images/downtown-nb.webp',
     quickAnswer: 'The typical all-in property tax rate in New Braunfels is about 1.79% of taxable value. Austin and Travis County run closer to 1.8% to 2.1% depending on the taxing districts. The difference is small on paper, but New Braunfels home prices are 15-25% lower than comparable Austin properties, so your actual dollar tax bill is meaningfully less on a similar home.',
     content: [
       {
@@ -342,7 +342,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Neighborhood Guides',
     excerpt: '24-hour gated and guarded entry, 1-3 acre custom lots, and Hill Country ridgetop views. Copper Ridge commands a premium. Here is whether it is worth it.',
-    image: '/images/copper-ridge.png',
+    image: '/images/copper-ridge.webp',
     quickAnswer: 'Copper Ridge is the only 24-hour gated and guarded community in New Braunfels, with 1-3 acre custom lots, stone and limestone homes, and a resort-style amenity center. Median listing prices run $818K to $1.06M with sales reaching $1.5M+. For buyers who value privacy, security, and custom Hill Country architecture, it is the top of the New Braunfels market.',
     content: [
       {
@@ -400,7 +400,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Neighborhood Guides',
     excerpt: '3,900 acres, 1-14 acre homesites, a 25-acre amenity park, and Comal ISD schools. Vintage Oaks is the Hill Country community everyone asks about first.',
-    image: '/images/vintage-oaks.png',
+    image: '/images/vintage-oaks.webp',
     quickAnswer: 'Vintage Oaks is a 3,900-acre master-planned community west of New Braunfels with 1-14 acre homesites, custom and semi-custom homes, and a 25-acre resort-style amenity park. It is served by Comal ISD with schools like Bill Brown Elementary (9/10 GreatSchools) and Canyon High. Home prices range from the mid-$500s to $2M+, with a median in the mid-$600s to low-$800s.',
     content: [
       {
@@ -458,7 +458,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Market Reports',
     excerpt: '66 communities, 29 builders, and prices from $192K to $800K. New construction in New Braunfels is outpacing resale for the first time in years.',
-    image: '/images/havenwood.png',
+    image: '/images/havenwood.webp',
     quickAnswer: 'Relocation growth and low resale inventory are driving new construction demand in New Braunfels. The 78130 and 78132 zip codes have 66 active communities with 29 builders and 1,400+ homes available. Prices range from roughly $192,000 to $800,000 with a median near $390,000. Builders like Perry, Coventry, Highland, Toll Brothers, and Scott Felder are offering rate buy-downs and closing cost credits to move standing inventory.',
     content: [
       {
@@ -516,7 +516,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Taxes & Cost of Living',
     excerpt: 'New Braunfels runs about 4% above the national average on cost of living. Austin and Dallas both run higher. Here is where the savings actually land.',
-    image: '/images/nb-aerial.png',
+    image: '/images/nb-aerial.webp',
     quickAnswer: 'New Braunfels has a cost-of-living index around 104 (national average = 100), making it about 4% above average. Austin runs closer to 115-140 depending on the neighborhood, and Dallas sits around 102-103. The biggest difference is housing: median home prices in New Braunfels are 15-25% below comparable Austin suburbs. No state income tax benefits all three cities equally, but New Braunfels adds lower housing costs, shorter commutes, and Hill Country lifestyle at no premium.',
     content: [
       {
@@ -566,7 +566,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Buyer Guides',
     excerpt: 'Spring has the most inventory. Winter has the most leverage. Here is how seasonality works in the New Braunfels market.',
-    image: '/images/for-sale.png',
+    image: '/images/for-sale.webp',
     quickAnswer: 'Spring, mid-April through May, offers the widest inventory and the most active buyer traffic in New Braunfels. Late fall and early winter offer the best negotiation leverage, when seller motivation climbs and builder incentives peak on standing inventory. For relocators, the best time to buy is when your timeline is ready, but understanding the seasonal rhythm helps you negotiate smarter.',
     content: [
       {
@@ -616,7 +616,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Lifestyle',
     excerpt: 'The postcard version is the rivers and Gruene Hall. The real version is the day-to-day texture that makes people want to stay.',
-    image: '/images/gruene-hall.png',
+    image: '/images/gruene-hall.webp',
     quickAnswer: 'New Braunfels sits on two rivers (the spring-fed Comal at 70 degrees year-round and the Guadalupe), 15 minutes from Canyon Lake, and home to Gruene Hall (the oldest dance hall in Texas, open since 1878), Schlitterbahn (the largest waterpark in Texas), and dozens of Hill Country wineries within a 30-mile drive. Daily life blends small-city Texas friendliness with outdoor recreation, real restaurants, and a downtown with actual history.',
     content: [
       {
@@ -670,7 +670,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Market Reports',
     excerpt: 'Limited inventory, steady relocation demand, and strong appreciation since 2020. Here is the investment case for New Braunfels luxury.',
-    image: '/images/luxury-living-room.png',
+    image: '/images/luxury-living-room.webp',
     quickAnswer: 'Yes. New Braunfels luxury homes ($1M+) have seen steady appreciation driven by limited inventory, strong relocation demand from California, Austin, and out-of-state buyers, and a constrained supply of buildable luxury lots in established communities like Vintage Oaks, Copper Ridge, and Riverforest. Comal County typically has 50+ homes listed above $1M at any time, with days-on-market running 95-100+ days. The market is not frantic, but it is appreciating.',
     content: [
       {

@@ -4,7 +4,7 @@ export const communities = [
   {
     slug: 'canyon-lake',
     name: 'Canyon Lake',
-    image: '/images/canyon-lake.png',
+    image: '/images/canyon-lake.webp',
     distance: '15 to 25 miles northwest',
     population: '32,924',
     medianIncome: '$93,114',
@@ -63,7 +63,7 @@ export const communities = [
   {
     slug: 'garden-ridge',
     name: 'Garden Ridge',
-    image: '/images/garden-ridge.png',
+    image: '/images/garden-ridge.webp',
     distance: '20 to 25 miles west / northwest',
     population: '4,243',
     medianIncome: '$157,824',

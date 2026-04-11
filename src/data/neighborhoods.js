@@ -5,7 +5,7 @@ export const neighborhoods = [
   {
     slug: 'copper-ridge',
     name: 'Copper Ridge',
-    image: '/images/copper-ridge.png',
+    image: '/images/copper-ridge.webp',
     segment: 'Luxury',
     priceRange: '$1.2M – $2.1M+',
     location: 'About 10 miles north/west of downtown along Highway 46, outside Loop 337',
@@ -68,7 +68,7 @@ export const neighborhoods = [
   {
     slug: 'vintage-oaks',
     name: 'Vintage Oaks',
-    image: '/images/vintage-oaks.png',
+    image: '/images/vintage-oaks.webp',
     segment: 'Luxury',
     priceRange: '$400Ks – $1M+',
     location: 'Immediately west/northwest of New Braunfels, near Highway 46 and just outside the city core',
@@ -133,7 +133,7 @@ export const neighborhoods = [
   {
     slug: 'riverforest',
     name: 'Riverforest',
-    image: '/images/riverforest.png',
+    image: '/images/riverforest.webp',
     segment: 'Luxury',
     priceRange: '$1M – $3M+',
     location: 'Minutes from Gruene and downtown, with quick access to the Guadalupe River corridor',
@@ -190,7 +190,7 @@ export const neighborhoods = [
   {
     slug: 'river-chase',
     name: 'River Chase',
-    image: '/images/river-chase.png',
+    image: '/images/river-chase.webp',
     segment: 'Luxury',
     priceRange: 'Mid-$300Ks – $1M+',
     location: 'Northwest of downtown, about 10 miles west of I-35, between New Braunfels and Canyon Lake',
@@ -254,7 +254,7 @@ export const neighborhoods = [
   {
     slug: 'havenwood-at-hunters-crossing',
     name: 'Havenwood at Hunters Crossing',
-    image: '/images/havenwood.png',
+    image: '/images/havenwood.webp',
     segment: 'Luxury / upper mid-market',
     priceRange: '$400Ks – $900K+',
     location: 'North of town off Hunter Road / FM 1102, just a couple miles from I-35',
@@ -312,7 +312,7 @@ export const neighborhoods = [
   {
     slug: 'manor-creek',
     name: 'Manor Creek',
-    image: '/images/manor-creek.png',
+    image: '/images/manor-creek.webp',
     segment: 'Mid-market gated',
     priceRange: '$385K – $636K',
     location: 'Northwest New Braunfels near Highway 46 and Loop 337',
@@ -368,7 +368,7 @@ export const neighborhoods = [
   {
     slug: 'john-newcombe-estate',
     name: 'John Newcombe Estate',
-    image: '/images/john-newcombe.png',
+    image: '/images/john-newcombe.webp',
     segment: 'Luxury',
     priceRange: '$385K – $1M+',
     location: 'Northwest New Braunfels / Hunter Road area, near Creekside and major retail',
@@ -424,7 +424,7 @@ export const neighborhoods = [
   {
     slug: 'mayfair',
     name: 'Mayfair',
-    image: '/images/mayfair.png',
+    image: '/images/mayfair.webp',
     segment: 'Master-planned · new construction',
     priceRange: '$361K – $700K+',
     location: 'North end of New Braunfels near historic Gruene',
@@ -491,7 +491,7 @@ export const neighborhoods = [
   {
     slug: 'veramendi',
     name: 'Veramendi',
-    image: '/images/veramendi.png',
+    image: '/images/veramendi.webp',
     segment: 'Master-planned · new construction',
     priceRange: '$390K – $950K',
     location: 'At Highway 46 and Loop 337, just minutes northwest of downtown New Braunfels',
