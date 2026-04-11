@@ -20,17 +20,17 @@
     <!-- STEP 1 -->
     <div id="vip-step-1" class="p-8 pt-10">
       <div class="text-center mb-8">
-        <p class="eyebrow text-gold-bright mb-4">Exclusive Access</p>
+        <p class="eyebrow text-gold-bright mb-4">New Braunfels Real Estate</p>
         <h3 class="mb-3" style="font-size: 1.6rem; line-height: 1.2;">
-          Get VIP Access to<br/>
-          <span class="text-gold-bright">Off-Market Listings</span>
+          How can Glen<br/>
+          <span class="text-gold-bright">help you today?</span>
         </h3>
         <p class="text-muted text-sm leading-[1.55]">
-          Join 500+ Hill Country buyers and sellers who get first look at luxury homes before they hit the market.
+          10 years in New Braunfels real estate. 20+ years negotiating contracts. Picks up the phone.
         </p>
       </div>
 
-      <p class="text-dim text-xs uppercase tracking-[0.18em] mb-4">What brings you here today?</p>
+      <p class="text-dim text-xs uppercase tracking-[0.18em] mb-4">What brings you here?</p>
 
       <div class="space-y-3">
         <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Buying a Home">
@@ -41,54 +41,57 @@
           <span class="text-cream font-medium text-sm">Selling My Home</span>
           <span class="text-gold group-hover:text-gold-bright">→</span>
         </button>
-        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Free Home Valuation (CMA)">
-          <span class="text-cream font-medium text-sm">Free Home Valuation (CMA)</span>
+        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Free Home Valuation">
+          <span class="text-cream font-medium text-sm">Free Home Valuation</span>
           <span class="text-gold group-hover:text-gold-bright">→</span>
         </button>
-        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Relocating to the Hill Country">
-          <span class="text-cream font-medium text-sm">Relocating to the Hill Country</span>
+        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Relocating to New Braunfels">
+          <span class="text-cream font-medium text-sm">Relocating to New Braunfels</span>
+          <span class="text-gold group-hover:text-gold-bright">→</span>
+        </button>
+        <button class="vip-interest w-full text-left bg-card border border-hair hover:border-[var(--color-gold-dim)] p-4 flex items-center justify-between transition-all group" data-interest="Just Browsing">
+          <span class="text-cream font-medium text-sm">Just Browsing</span>
           <span class="text-gold group-hover:text-gold-bright">→</span>
         </button>
       </div>
 
       <div class="text-center mt-6">
-        <button id="vip-dismiss" class="text-dim text-xs hover:text-muted">No thanks, I'll browse on my own</button>
+        <button id="vip-dismiss" class="text-dim text-xs hover:text-muted">No thanks, I'll look around on my own</button>
       </div>
     </div>
 
     <!-- STEP 2 -->
     <div id="vip-step-2" class="hidden p-8 pt-10">
       <div class="text-center mb-6">
-        <h3 class="mb-3" style="font-size: 1.5rem;">Almost There.</h3>
+        <h3 class="mb-3" style="font-size: 1.5rem;">Let's connect.</h3>
         <p class="text-muted text-sm">
-          Enter your details to get personalized listings for<br/>
+          Glen will follow up personally.<br/>
           <span id="vip-interest-label" class="text-gold-bright"></span>
         </p>
       </div>
 
       <form id="vip-form" class="space-y-3">
         <input type="hidden" id="vip-interest-input" name="interest" />
-        <input type="text" name="name" placeholder="Your Full Name" required class="w-full bg-card border border-hair px-4 py-3 text-cream text-sm focus:border-[var(--color-gold)] outline-none" />
-        <input type="email" name="email" placeholder="Your Email Address" required class="w-full bg-card border border-hair px-4 py-3 text-cream text-sm focus:border-[var(--color-gold)] outline-none" />
-        <button type="submit" class="btn-gold w-full">Get Exclusive Access</button>
+        <input type="text" name="name" placeholder="Your Name" required class="w-full bg-card border border-hair px-4 py-3 text-cream text-sm focus:border-[var(--color-gold)] outline-none" />
+        <input type="email" name="email" placeholder="Your Email" required class="w-full bg-card border border-hair px-4 py-3 text-cream text-sm focus:border-[var(--color-gold)] outline-none" />
+        <button type="submit" class="btn-gold w-full">Send My Info to Glen</button>
       </form>
 
       <div class="text-center mt-4">
-        <button id="vip-back" class="text-dim text-xs hover:text-muted">← Back to interests</button>
+        <button id="vip-back" class="text-dim text-xs hover:text-muted">← Back</button>
       </div>
 
       <div class="flex justify-center gap-5 text-dim text-[10px] uppercase tracking-wider mt-6 pt-5 border-t border-hair">
-        <span>🔒 Secure & Private</span>
-        <span>No Spam, Ever</span>
-        <span>Unsubscribe Anytime</span>
+        <span>No spam, ever</span>
+        <span>Glen responds same day</span>
       </div>
     </div>
 
     <!-- STEP 3 — thank you -->
     <div id="vip-step-3" class="hidden p-10 text-center">
-      <p class="eyebrow text-gold-bright mb-4">You're In</p>
+      <p class="eyebrow text-gold-bright mb-4">Got it</p>
       <h3 class="mb-4" style="font-size: 1.6rem;">Thanks. Glen will be in touch.</h3>
-      <p class="text-muted text-sm mb-6">Expect a same-day reply with your personalized listings and next steps.</p>
+      <p class="text-muted text-sm mb-6">He typically responds the same day. You can also call or text him directly at 830.730.7677.</p>
       <button id="vip-finish" class="btn-outline">Close</button>
     </div>
   </div>
