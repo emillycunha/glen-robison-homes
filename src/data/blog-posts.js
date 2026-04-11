@@ -10,6 +10,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Buyer Guides',
     excerpt: 'A six-figure salary goes further in New Braunfels than in Austin, but Texas property taxes change the math more than most buyers expect.',
+    image: '/images/nb-family-neighborhood.png',
     quickAnswer: 'On a $150,000 household income, most lenders will qualify you for a New Braunfels home priced between $480,000 and $560,000, assuming a 20% down payment, a 6.75% rate, and the 28% front-end DTI rule. That range narrows once you factor in Comal County property taxes, which run roughly 1.7% to 2.3% of assessed value depending on the taxing jurisdictions inside your address. In practice, most $150K buyers I work with land between $475K and $525K and keep their total monthly payment under $3,500.',
     content: [
       {
@@ -67,6 +68,11 @@ export const blogPosts = [
       { label: 'City of New Braunfels, Tax Rates', url: 'https://www.newbraunfels.gov/' },
       { label: 'Comal ISD', url: 'https://www.comalisd.org/' },
     ],
+    relatedLinks: [
+      { label: 'Mortgage Calculator', href: '/tools/mortgage-calculator', description: 'Model your actual monthly payment with Texas property taxes baked in.' },
+      { label: 'New Braunfels Buyer\'s Guide', href: '/buyers-guide', description: 'A plain-language walkthrough from pre-approval to closing day.' },
+      { label: 'Contact Glen', href: '/contact', description: 'Ready to run your real numbers? Call or text Glen.' },
+    ],
     tags: ['affordability', 'buyer guide', 'property tax', 'new braunfels'],
   },
 
@@ -78,6 +84,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Relocation',
     excerpt: 'Austin homeowners are trading 5,000 square foot lots for half-acre Hill Country properties without giving up their tech jobs, and the math is more compelling in 2026 than ever.',
+    image: '/images/i35-new-braunfels.png',
     quickAnswer: 'For most Austin households, moving 45 minutes south to New Braunfels cuts housing costs by 15 to 25 percent for a comparable home, drops the median lot size up by a factor of two to four, and keeps you inside a reasonable commute to South Austin and ABIA. The trade-offs are real, fewer dining options, a slower nightlife, and a longer drive to downtown Austin during rush hour, but the equity, schools, and quality-of-life math favor the move for families and remote-first professionals.',
     content: [
       {
@@ -130,6 +137,11 @@ export const blogPosts = [
       { label: 'New Braunfels ISD', url: 'https://www.nbisd.org/' },
       { label: 'TxDOT, I-35 Corridor', url: 'https://www.txdot.gov/' },
     ],
+    relatedLinks: [
+      { label: 'New Braunfels Relocation Guide', href: '/relocation-guide', description: 'Everything you need to know about moving to New Braunfels from out of town.' },
+      { label: 'Neighborhood Guides', href: '/neighborhoods', description: 'Vintage Oaks, Veramendi, River Chase, and more, side by side.' },
+      { label: 'Why Move to New Braunfels', href: '/living/why-move-to-new-braunfels', description: 'The real reasons people are choosing New Braunfels over Austin and San Antonio.' },
+    ],
     tags: ['relocation', 'austin', 'commute', 'cost of living'],
   },
 
@@ -141,6 +153,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Neighborhoods',
     excerpt: 'Buyers ask me about gated communities every week, and most of the homes marketed that way in New Braunfels are not gated in the way Californians and East Coast buyers assume.',
+    image: '/images/copper-ridge.png',
     quickAnswer: 'A small number of New Braunfels neighborhoods are truly gated with controlled vehicle access, and most of them are smaller custom home enclaves rather than the large master-planned communities that dominate the area. Copper Ridge is the most consistently cited gated luxury community in the New Braunfels market. Vintage Oaks, often described as gated, has gated amenity centers but open road access throughout most of the community. If a true 24/7 manned gate is non-negotiable for you, the list of options is short and worth a direct conversation.',
     content: [
       {
@@ -195,6 +208,11 @@ export const blogPosts = [
       { label: 'Comal County', url: 'https://www.co.comal.tx.us/' },
       { label: 'New Braunfels Chamber of Commerce', url: 'https://www.innewbraunfels.com/' },
     ],
+    relatedLinks: [
+      { label: 'New Braunfels Neighborhoods', href: '/neighborhoods', description: 'Compare every major community side by side, gated and open.' },
+      { label: 'Luxury Homes in New Braunfels', href: '/luxury', description: 'Custom homes, acreage lots, and Hill Country views at every price point.' },
+      { label: 'Contact Glen', href: '/contact', description: 'Want to see Copper Ridge or Vintage Oaks in person? Let\'s schedule a tour.' },
+    ],
     tags: ['gated communities', 'luxury', 'neighborhoods', 'copper ridge', 'vintage oaks'],
   },
 
@@ -208,6 +226,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Relocation',
     excerpt: 'No state income tax, double the square footage, and a downtown with actual character. California relocators are the fastest-growing buyer segment in the Hill Country.',
+    image: '/images/hill-country-vista.png',
     quickAnswer: 'California households moving to New Braunfels typically save $15,000 to $25,000 a year in state income tax alone. That savings, combined with home prices 40-60% below comparable Bay Area or SoCal properties, is driving a steady wave of relocation into Comal County. Most California buyers land in Vintage Oaks, Copper Ridge, or Veramendi and keep their existing remote jobs.',
     content: [
       {
@@ -250,6 +269,11 @@ export const blogPosts = [
       { label: 'Comal County 2025 Tax Rates', url: 'https://www.comalcounty.gov/DocumentCenter/View/4073/2025-Tax-Rates-for-all-Taxing-Units-PDF' },
       { label: 'U.S. Census, New Braunfels Growth', url: 'https://www.census.gov/quickfacts/newbraunfelscitytexas' },
     ],
+    relatedLinks: [
+      { label: 'New Braunfels Relocation Guide', href: '/relocation-guide', description: 'Your complete guide to moving from California, Austin, or out of state.' },
+      { label: 'Luxury Homes in New Braunfels', href: '/luxury', description: 'Copper Ridge, Vintage Oaks, Riverforest: the full luxury picture.' },
+      { label: 'Contact Glen', href: '/contact', description: 'Already planning a trip down? Glen does virtual tours before you fly in.' },
+    ],
     tags: ['relocation', 'california', 'taxes', 'luxury', 'new braunfels'],
   },
 
@@ -261,6 +285,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Taxes & Cost of Living',
     excerpt: 'Texas property taxes fund everything the state income tax does not. Here is how New Braunfels stacks up against Austin, rate by rate.',
+    image: '/images/downtown-nb.png',
     quickAnswer: 'The typical all-in property tax rate in New Braunfels is about 1.79% of taxable value. Austin and Travis County run closer to 1.8% to 2.1% depending on the taxing districts. The difference is small on paper, but New Braunfels home prices are 15-25% lower than comparable Austin properties, so your actual dollar tax bill is meaningfully less on a similar home.',
     content: [
       {
@@ -301,6 +326,11 @@ export const blogPosts = [
       { label: 'Texas Comptroller, Homestead Exemptions', url: 'https://comptroller.texas.gov/taxes/property-tax/exemptions/' },
       { label: 'Comal County Tax Estimator', url: 'https://property.co.comal.tx.us/TaxEstimator' },
     ],
+    relatedLinks: [
+      { label: 'Seller Net Sheet Calculator', href: '/tools/seller-net-sheet', description: 'See your true net proceeds after taxes, commission, and closing costs.' },
+      { label: 'Selling in New Braunfels', href: '/sell', description: 'What to expect when listing your home in Comal County.' },
+      { label: 'Cost of Living and Schools', href: '/living/cost-of-living-and-schools', description: 'Property taxes, school ratings, and everyday costs compared.' },
+    ],
     tags: ['property tax', 'taxes', 'austin', 'comal county', 'homestead exemption'],
   },
 
@@ -312,6 +342,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Neighborhood Guides',
     excerpt: '24-hour gated and guarded entry, 1-3 acre custom lots, and Hill Country ridgetop views. Copper Ridge commands a premium. Here is whether it is worth it.',
+    image: '/images/copper-ridge.png',
     quickAnswer: 'Copper Ridge is the only 24-hour gated and guarded community in New Braunfels, with 1-3 acre custom lots, stone and limestone homes, and a resort-style amenity center. Median listing prices run $818K to $1.06M with sales reaching $1.5M+. For buyers who value privacy, security, and custom Hill Country architecture, it is the top of the New Braunfels market.',
     content: [
       {
@@ -353,6 +384,11 @@ export const blogPosts = [
       { label: 'Copper Ridge research data', url: 'https://www.perplexity.ai/search/i-m-writing-a-real-estate-web-95neMyzSThKyjmM6bpyIoQ' },
       { label: 'Zillow, Copper Ridge listings', url: 'https://www.zillow.com/new-braunfels-tx/copper-ridge/' },
     ],
+    relatedLinks: [
+      { label: 'Luxury Homes in New Braunfels', href: '/luxury', description: 'The full luxury market picture, from Copper Ridge to Riverforest.' },
+      { label: 'New Braunfels Neighborhoods', href: '/neighborhoods', description: 'Compare Copper Ridge against every other major community in the area.' },
+      { label: 'Contact Glen', href: '/contact', description: 'Copper Ridge tours available any day. Call or text Glen to schedule.' },
+    ],
     tags: ['copper ridge', 'luxury', 'gated community', 'neighborhoods', 'new braunfels'],
   },
 
@@ -364,6 +400,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Neighborhood Guides',
     excerpt: '3,900 acres, 1-14 acre homesites, a 25-acre amenity park, and Comal ISD schools. Vintage Oaks is the Hill Country community everyone asks about first.',
+    image: '/images/vintage-oaks.png',
     quickAnswer: 'Vintage Oaks is a 3,900-acre master-planned community west of New Braunfels with 1-14 acre homesites, custom and semi-custom homes, and a 25-acre resort-style amenity park. It is served by Comal ISD with schools like Bill Brown Elementary (9/10 GreatSchools) and Canyon High. Home prices range from the mid-$500s to $2M+, with a median in the mid-$600s to low-$800s.',
     content: [
       {
@@ -405,6 +442,11 @@ export const blogPosts = [
       { label: 'Vintage Oaks research data', url: 'https://www.perplexity.ai/search/i-m-writing-a-real-estate-web-HyxUIXhiQOqzy0Hor58CZw' },
       { label: 'Vintage Oaks official site', url: 'https://www.vintageoakstexas.com/' },
     ],
+    relatedLinks: [
+      { label: 'Luxury Homes in New Braunfels', href: '/luxury', description: 'See how Vintage Oaks compares to other luxury communities in the Hill Country.' },
+      { label: 'New Construction', href: '/new-construction', description: 'Custom and semi-custom builds on 1+ acre lots throughout the area.' },
+      { label: 'Contact Glen', href: '/contact', description: 'Vintage Oaks tours available any weekend. Glen knows every section.' },
+    ],
     tags: ['vintage oaks', 'luxury', 'acreage', 'comal isd', 'new braunfels'],
   },
 
@@ -416,6 +458,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Market Reports',
     excerpt: '66 communities, 29 builders, and prices from $192K to $800K. New construction in New Braunfels is outpacing resale for the first time in years.',
+    image: '/images/havenwood.png',
     quickAnswer: 'Relocation growth and low resale inventory are driving new construction demand in New Braunfels. The 78130 and 78132 zip codes have 66 active communities with 29 builders and 1,400+ homes available. Prices range from roughly $192,000 to $800,000 with a median near $390,000. Builders like Perry, Coventry, Highland, Toll Brothers, and Scott Felder are offering rate buy-downs and closing cost credits to move standing inventory.',
     content: [
       {
@@ -457,6 +500,11 @@ export const blogPosts = [
       { label: 'New construction FAQ research', url: 'https://www.perplexity.ai/search/i-need-8-frequently-asked-ques-HTtWwJ8DSxW5ghWDm3v0Hg' },
       { label: 'Realtor.com, New Braunfels new construction', url: 'https://www.realtor.com/newhomes/New-Braunfels_TX/' },
     ],
+    relatedLinks: [
+      { label: 'New Construction Guide', href: '/new-construction', description: 'How to buy new construction in New Braunfels without getting burned by builder contracts.' },
+      { label: 'Mortgage Calculator', href: '/tools/mortgage-calculator', description: 'See how builder rate buy-downs change your real monthly payment.' },
+      { label: 'New Braunfels Buyer\'s Guide', href: '/buyers-guide', description: 'New construction vs. resale: how to decide before you tour.' },
+    ],
     tags: ['new construction', 'builders', 'market report', 'veramendi', 'mayfair'],
   },
 
@@ -468,6 +516,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Taxes & Cost of Living',
     excerpt: 'New Braunfels runs about 4% above the national average on cost of living. Austin and Dallas both run higher. Here is where the savings actually land.',
+    image: '/images/nb-aerial.png',
     quickAnswer: 'New Braunfels has a cost-of-living index around 104 (national average = 100), making it about 4% above average. Austin runs closer to 115-140 depending on the neighborhood, and Dallas sits around 102-103. The biggest difference is housing: median home prices in New Braunfels are 15-25% below comparable Austin suburbs. No state income tax benefits all three cities equally, but New Braunfels adds lower housing costs, shorter commutes, and Hill Country lifestyle at no premium.',
     content: [
       {
@@ -501,6 +550,11 @@ export const blogPosts = [
       { label: 'HomeSnacks, Cost of Living', url: 'https://www.homesnacks.com/new-braunfels-tx/' },
       { label: 'Comal County Tax Rates', url: 'https://www.comalcounty.gov/DocumentCenter/View/4073/2025-Tax-Rates-for-all-Taxing-Units-PDF' },
     ],
+    relatedLinks: [
+      { label: 'Cost of Living and Schools', href: '/living/cost-of-living-and-schools', description: 'Deep dive into New Braunfels taxes, school ratings, and everyday costs.' },
+      { label: 'New Braunfels Relocation Guide', href: '/relocation-guide', description: 'What to know before you move from Austin, Dallas, or out of state.' },
+      { label: 'Neighborhood Guides', href: '/neighborhoods', description: 'See which communities fit your budget and lifestyle.' },
+    ],
     tags: ['cost of living', 'austin', 'dallas', 'taxes', 'relocation'],
   },
 
@@ -512,6 +566,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Buyer Guides',
     excerpt: 'Spring has the most inventory. Winter has the most leverage. Here is how seasonality works in the New Braunfels market.',
+    image: '/images/for-sale.png',
     quickAnswer: 'Spring, mid-April through May, offers the widest inventory and the most active buyer traffic in New Braunfels. Late fall and early winter offer the best negotiation leverage, when seller motivation climbs and builder incentives peak on standing inventory. For relocators, the best time to buy is when your timeline is ready, but understanding the seasonal rhythm helps you negotiate smarter.',
     content: [
       {
@@ -545,6 +600,11 @@ export const blogPosts = [
       { label: 'Seller FAQ research, best time to list', url: 'https://www.perplexity.ai/search/i-need-10-frequently-asked-que-lCgiGnlFSzaTPuuDd0ETAA' },
       { label: 'Redfin, New Braunfels market data', url: 'https://www.redfin.com/city/13081/TX/New-Braunfels/housing-market' },
     ],
+    relatedLinks: [
+      { label: 'New Braunfels Buyer\'s Guide', href: '/buyers-guide', description: 'When to buy is just one piece. Here is the full picture.' },
+      { label: 'Mortgage Calculator', href: '/tools/mortgage-calculator', description: 'Run your payment at current rates before you start touring.' },
+      { label: 'Contact Glen', href: '/contact', description: 'Not sure if now is the right time for your situation? Let\'s talk it through.' },
+    ],
     tags: ['market timing', 'seasonality', 'buyer guide', 'new braunfels'],
   },
 
@@ -556,6 +616,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Lifestyle',
     excerpt: 'The postcard version is the rivers and Gruene Hall. The real version is the day-to-day texture that makes people want to stay.',
+    image: '/images/gruene-hall.png',
     quickAnswer: 'New Braunfels sits on two rivers (the spring-fed Comal at 70 degrees year-round and the Guadalupe), 15 minutes from Canyon Lake, and home to Gruene Hall (the oldest dance hall in Texas, open since 1878), Schlitterbahn (the largest waterpark in Texas), and dozens of Hill Country wineries within a 30-mile drive. Daily life blends small-city Texas friendliness with outdoor recreation, real restaurants, and a downtown with actual history.',
     content: [
       {
@@ -593,6 +654,11 @@ export const blogPosts = [
       { label: 'U.S. Climate Data, New Braunfels', url: 'https://www.usclimatedata.com/climate/new-braunfels/texas/united-states/ustx0960' },
       { label: 'Gruene Historic District', url: 'https://www.gruenetexas.com/' },
     ],
+    relatedLinks: [
+      { label: 'Things to Do in New Braunfels', href: '/living/things-to-do', description: 'The full list of what makes New Braunfels worth living in, not just visiting.' },
+      { label: 'Why Move to New Braunfels', href: '/living/why-move-to-new-braunfels', description: 'The practical case for choosing New Braunfels over Austin or San Antonio.' },
+      { label: 'Neighborhood Guides', href: '/neighborhoods', description: 'Find the neighborhood that matches the lifestyle you want.' },
+    ],
     tags: ['lifestyle', 'hill country', 'rivers', 'gruene hall', 'new braunfels'],
   },
 
@@ -604,6 +670,7 @@ export const blogPosts = [
     author: 'Glen Robison',
     category: 'Market Reports',
     excerpt: 'Limited inventory, steady relocation demand, and strong appreciation since 2020. Here is the investment case for New Braunfels luxury.',
+    image: '/images/luxury-living-room.png',
     quickAnswer: 'Yes. New Braunfels luxury homes ($1M+) have seen steady appreciation driven by limited inventory, strong relocation demand from California, Austin, and out-of-state buyers, and a constrained supply of buildable luxury lots in established communities like Vintage Oaks, Copper Ridge, and Riverforest. Comal County typically has 50+ homes listed above $1M at any time, with days-on-market running 95-100+ days. The market is not frantic, but it is appreciating.',
     content: [
       {
@@ -641,6 +708,11 @@ export const blogPosts = [
       { label: 'Luxury market FAQ research', url: 'https://www.perplexity.ai/search/i-need-8-frequently-asked-ques-SYim_iHaTTKskX5puDyoeQ' },
       { label: 'Redfin, New Braunfels housing market', url: 'https://www.redfin.com/city/13081/TX/New-Braunfels/housing-market' },
       { label: 'Zillow, New Braunfels luxury', url: 'https://www.zillow.com/new-braunfels-tx/' },
+    ],
+    relatedLinks: [
+      { label: 'Luxury Homes in New Braunfels', href: '/luxury', description: 'Copper Ridge, Vintage Oaks, Riverforest: what each community actually delivers.' },
+      { label: 'Neighborhood Guides', href: '/neighborhoods', description: 'Compare every major luxury community side by side.' },
+      { label: 'Contact Glen', href: '/contact', description: 'Looking to buy or sell luxury in New Braunfels? Glen specializes in this market.' },
     ],
     tags: ['luxury', 'investment', 'market report', 'appreciation', 'new braunfels'],
   },

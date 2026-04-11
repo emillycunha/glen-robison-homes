@@ -154,10 +154,21 @@
     // Back to step 1
     document.getElementById('vip-back')?.addEventListener('click', () => showStep(1));
 
-    // Submit → step 3 (TODO: wire to GHL)
-    document.getElementById('vip-form')?.addEventListener('submit', (e) => {
+    // Submit → save lead → step 3
+    document.getElementById('vip-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // TODO: POST to GHL form endpoint with name, email, interest
+      const fd = new FormData(e.target as HTMLFormElement);
+      try {
+        await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: fd.get('name'),
+            email: fd.get('email'),
+            guide: 'vip-' + (fd.get('interest') || 'general').toLowerCase().replace(/[^a-z]+/g, '-'),
+          }),
+        });
+      } catch {}
       showStep(3);
     });
   })();

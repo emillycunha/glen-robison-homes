@@ -243,6 +243,12 @@ a:hover { color: var(--color-gold-bright); }
 }
 
 /* Legal / long-form prose, smaller heading scale for privacy, terms, disclosures */
+/* Blog article headings, smaller scale */
+article h2 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  letter-spacing: -0.015em;
+}
+
 .legal-prose h1 {
   font-size: 1.875rem;          /* 30px */
   letter-spacing: -0.02em;

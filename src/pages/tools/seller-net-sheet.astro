@@ -1,6 +1,30 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
+import FAQSection from '../../components/FAQSection.astro';
+
+const faqs = [
+  {
+    q: "What closing costs does the seller pay in Texas?",
+    a: "Sellers in Texas typically pay 6-10% of the sale price in total closing costs. The largest item is agent commissions (5.5-6%), followed by owner's title insurance, prorated property taxes, HOA transfer fees, and escrow fees. Texas has no state transfer tax.",
+  },
+  {
+    q: "Who pays for the owner's title policy in Texas?",
+    a: "By custom in most Texas markets, the seller pays for the owner's title insurance policy. This is negotiable in the contract, but sellers should budget for it as a standard cost.",
+  },
+  {
+    q: "How much are real estate commissions after the NAR settlement?",
+    a: "Total commissions in Texas average 5.5-6% of the sale price, split between listing and buyer's agents. Post-NAR settlement, sellers are no longer required to offer buyer-agent compensation through the MLS, but most still do via concessions or credits.",
+  },
+  {
+    q: "What is the capital gains exemption for a primary residence?",
+    a: "If you owned and lived in the home for at least 2 of the past 5 years, you can exclude up to $250,000 in gain (single) or $500,000 (married filing jointly) from federal capital gains tax. Texas has no state capital gains tax.",
+  },
+  {
+    q: "How accurate is this estimate?",
+    a: "This gives you a solid ballpark. Your actual net proceeds depend on your specific contract terms, prorations, HOA fees, and final closing statement. For an accurate net sheet on your property, request a free CMA from Glen.",
+  },
+];
 ---
 
 <Layout title="Seller Net Sheet | New Braunfels TX | Glen Robison" description="Estimate your net proceeds from selling a home in New Braunfels. Free seller net sheet calculator.">
@@ -12,75 +36,280 @@ import PageHero from '../../components/PageHero.astro';
   />
 
   <section class="py-20">
-    <div class="max-w-3xl mx-auto px-6">
-      <div class="bg-card border border-subtle p-8">
-        <form id="ns-form" class="space-y-5">
-          <div>
-            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Estimated Sale Price</label>
-            <input type="number" id="sale" value="500000" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
-          </div>
-          <div>
-            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Mortgage Payoff Balance</label>
-            <input type="number" id="payoff" value="200000" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
-          </div>
-          <div>
-            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Total Commission (%)</label>
-            <input type="number" id="commission" step="0.1" value="6" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
-          </div>
-          <div>
-            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Title & Closing Costs (%)</label>
-            <input type="number" id="title" step="0.1" value="1.5" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
-          </div>
-          <div>
-            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Repairs / Concessions ($)</label>
-            <input type="number" id="repairs" value="0" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
-          </div>
-          <div>
-            <label class="block text-dim text-xs uppercase tracking-wider mb-2">Other Costs ($)</label>
-            <input type="number" id="other" value="0" class="w-full bg-elevated border border-subtle px-4 py-3 text-text focus:border-[var(--color-gold)] outline-none" />
-          </div>
-        </form>
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
-        <div class="mt-8 pt-8 border-t border-subtle">
-          <p class="text-dim text-xs uppercase tracking-wider mb-2">Estimated Net Proceeds</p>
-          <p class="font-display text-5xl text-gold-bright" id="net">$0</p>
-          <div class="mt-6 space-y-2 text-sm">
-            <div class="flex justify-between"><span class="text-dim">Sale Price</span><span class="text-text" id="d-sale">$0</span></div>
-            <div class="flex justify-between"><span class="text-dim">Commission</span><span class="text-text" id="d-comm">−$0</span></div>
-            <div class="flex justify-between"><span class="text-dim">Title & Closing</span><span class="text-text" id="d-title">−$0</span></div>
-            <div class="flex justify-between"><span class="text-dim">Repairs / Concessions</span><span class="text-text" id="d-rep">−$0</span></div>
-            <div class="flex justify-between"><span class="text-dim">Other</span><span class="text-text" id="d-oth">−$0</span></div>
-            <div class="flex justify-between"><span class="text-dim">Mortgage Payoff</span><span class="text-text" id="d-pay">−$0</span></div>
+        <!-- LEFT: Inputs -->
+        <div class="lg:col-span-3 bg-card border border-subtle p-8 md:p-10">
+          <h2 class="text-xl mb-8 flex items-center gap-3">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"/></svg>
+            Sale Details
+          </h2>
+
+          <!-- Sale Price -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955a1.126 1.126 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                Estimated Sale Price
+              </label>
+              <span class="font-display text-lg text-text font-bold" id="price-display">$500,000</span>
+            </div>
+            <input type="range" id="sale" min="100000" max="3000000" step="10000" value="500000" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>$100K</span><span>$3M</span>
+            </div>
+          </div>
+
+          <!-- Mortgage Payoff -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
+                Mortgage Payoff
+              </label>
+              <span class="font-display text-lg text-text font-bold" id="payoff-display">$200,000</span>
+            </div>
+            <input type="range" id="payoff" min="0" max="2000000" step="5000" value="200000" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>$0</span><span>$2M</span>
+            </div>
+          </div>
+
+          <!-- Commission -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+                Total Commission
+              </label>
+              <span class="font-display text-lg text-text font-bold" id="comm-display">6.0%</span>
+            </div>
+            <input type="range" id="commission" min="0" max="8" step="0.1" value="6" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>0%</span><span>8%</span>
+            </div>
+          </div>
+
+          <!-- Title & Closing -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider">Title & Closing Costs</label>
+              <span class="font-display text-lg text-text font-bold" id="title-display">1.5%</span>
+            </div>
+            <input type="range" id="title" min="0" max="4" step="0.1" value="1.5" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>0%</span><span>4%</span>
+            </div>
+          </div>
+
+          <!-- Repairs -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider">Repairs / Concessions</label>
+              <span class="font-display text-lg text-text font-bold" id="repairs-display">$0</span>
+            </div>
+            <input type="range" id="repairs" min="0" max="50000" step="500" value="0" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>$0</span><span>$50K</span>
+            </div>
+          </div>
+
+          <!-- Other -->
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-dim text-xs uppercase tracking-wider">Other Costs</label>
+              <span class="font-display text-lg text-text font-bold" id="other-display">$0</span>
+            </div>
+            <input type="range" id="other" min="0" max="25000" step="250" value="0" class="slider w-full" />
+            <div class="flex justify-between text-dim text-[10px] uppercase tracking-wider mt-1.5">
+              <span>$0</span><span>$25K</span>
+            </div>
           </div>
         </div>
+
+        <!-- RIGHT: Results -->
+        <div class="lg:col-span-2 flex flex-col gap-6 lg:h-full">
+
+          <!-- Net Proceeds -->
+          <div class="bg-card border border-gold/30 p-8">
+            <p class="text-dim text-xs uppercase tracking-[0.2em] mb-3">Estimated Net Proceeds</p>
+            <p class="font-display text-5xl md:text-[3.5rem] text-gold-bright font-bold leading-none" id="net">$0</p>
+            <div class="mt-6 space-y-3">
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Sale Price</span>
+                <span class="text-text font-semibold" id="d-sale">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Commission</span>
+                <span class="text-text font-semibold" id="d-comm">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Title & Closing</span>
+                <span class="text-text font-semibold" id="d-title">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Repairs / Concessions</span>
+                <span class="text-text font-semibold" id="d-rep">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Other Costs</span>
+                <span class="text-text font-semibold" id="d-oth">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-muted text-sm">Mortgage Payoff</span>
+                <span class="text-text font-semibold" id="d-pay">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cost Summary -->
+          <div class="bg-card border border-subtle p-8 flex-1">
+            <h3 class="text-base mb-5 flex items-center gap-2">
+              <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+              Cost Summary
+            </h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Total Closing Costs</span>
+                <span class="text-text font-semibold" id="d-total-costs">$0</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-hair">
+                <span class="text-muted text-sm">Costs as % of Sale</span>
+                <span class="text-text font-semibold" id="d-costs-pct">0%</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-muted text-sm">Equity After Sale</span>
+                <span class="text-text font-bold text-gold-bright" id="d-equity">$0</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <p class="text-dim text-xs mt-4">Estimates only. Actual proceeds depend on contract terms, prorations, and final closing statement. For an accurate net sheet on your specific property, request a free CMA from Glen.</p>
+
+      <p class="text-dim text-xs mt-8 text-center max-w-2xl mx-auto">Estimates only. Actual proceeds depend on contract terms, prorations, and final closing statement. For an accurate net sheet on your specific property, request a free CMA from Glen.</p>
     </div>
   </section>
 
+  <section class="py-24 border-t border-hair">
+    <div class="max-w-2xl mx-auto px-8 text-center">
+      <p class="eyebrow mb-5">Free CMA</p>
+      <h2 class="mb-4">Get Your Home's Real Value</h2>
+      <p class="text-muted text-base leading-[1.65] mb-10">Glen will run a full comparative market analysis on your property and give you an honest assessment of what it's worth in today's market.</p>
+      <a href="/contact" class="btn-gold">Request a Free CMA</a>
+    </div>
+  </section>
+
+  <FAQSection
+    faqs={faqs}
+    eyebrow="Seller FAQ"
+    title="Frequently Asked Questions"
+    subtitle="Common questions about selling costs in New Braunfels and Texas."
+  />
+
+  <style>
+    .slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: var(--color-border);
+      outline: none;
+      border-radius: 0;
+      cursor: pointer;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--color-gold);
+      border: 2px solid var(--color-bg-card);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(193, 154, 87, 0.3);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 14px rgba(193, 154, 87, 0.5);
+    }
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: var(--color-gold);
+      border: 2px solid var(--color-bg-card);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(193, 154, 87, 0.3);
+    }
+    .slider {
+      background: linear-gradient(
+        to right,
+        var(--color-gold) 0%,
+        var(--color-gold) var(--fill, 50%),
+        var(--color-border) var(--fill, 50%),
+        var(--color-border) 100%
+      );
+    }
+  </style>
+
   <script>
     const fmt = (n) => '$' + Math.round(n).toLocaleString();
+
+    const saleEl = document.getElementById('sale');
+    const payoffEl = document.getElementById('payoff');
+    const commEl = document.getElementById('commission');
+    const titleEl = document.getElementById('title');
+    const repairsEl = document.getElementById('repairs');
+    const otherEl = document.getElementById('other');
+
+    function updateSliderFill(el) {
+      const min = parseFloat(el.min);
+      const max = parseFloat(el.max);
+      const val = parseFloat(el.value);
+      const pct = ((val - min) / (max - min)) * 100;
+      el.style.setProperty('--fill', pct + '%');
+    }
+
     function calc() {
-      const sale = +(document.getElementById('sale') as HTMLInputElement).value || 0;
-      const payoff = +(document.getElementById('payoff') as HTMLInputElement).value || 0;
-      const commPct = +(document.getElementById('commission') as HTMLInputElement).value || 0;
-      const titlePct = +(document.getElementById('title') as HTMLInputElement).value || 0;
-      const repairs = +(document.getElementById('repairs') as HTMLInputElement).value || 0;
-      const other = +(document.getElementById('other') as HTMLInputElement).value || 0;
+      const sale = +saleEl.value || 0;
+      const payoff = +payoffEl.value || 0;
+      const commPct = +commEl.value || 0;
+      const titlePct = +titleEl.value || 0;
+      const repairs = +repairsEl.value || 0;
+      const other = +otherEl.value || 0;
 
       const comm = sale * (commPct / 100);
-      const title = sale * (titlePct / 100);
-      const net = sale - comm - title - repairs - other - payoff;
+      const titleCost = sale * (titlePct / 100);
+      const totalCosts = comm + titleCost + repairs + other;
+      const net = sale - totalCosts - payoff;
+      const costsPct = sale > 0 ? ((totalCosts / sale) * 100).toFixed(1) : '0';
+      const equity = sale - payoff;
 
-      document.getElementById('net')!.textContent = fmt(net);
-      document.getElementById('d-sale')!.textContent = fmt(sale);
-      document.getElementById('d-comm')!.textContent = '−' + fmt(comm);
-      document.getElementById('d-title')!.textContent = '−' + fmt(title);
-      document.getElementById('d-rep')!.textContent = '−' + fmt(repairs);
-      document.getElementById('d-oth')!.textContent = '−' + fmt(other);
-      document.getElementById('d-pay')!.textContent = '−' + fmt(payoff);
+      document.getElementById('price-display').textContent = fmt(sale);
+      document.getElementById('payoff-display').textContent = fmt(payoff);
+      document.getElementById('comm-display').textContent = commPct.toFixed(1) + '%';
+      document.getElementById('title-display').textContent = titlePct.toFixed(1) + '%';
+      document.getElementById('repairs-display').textContent = fmt(repairs);
+      document.getElementById('other-display').textContent = fmt(other);
+
+      document.getElementById('net').textContent = fmt(net);
+      document.getElementById('d-sale').textContent = fmt(sale);
+      document.getElementById('d-comm').textContent = '-' + fmt(comm);
+      document.getElementById('d-title').textContent = '-' + fmt(titleCost);
+      document.getElementById('d-rep').textContent = '-' + fmt(repairs);
+      document.getElementById('d-oth').textContent = '-' + fmt(other);
+      document.getElementById('d-pay').textContent = '-' + fmt(payoff);
+
+      document.getElementById('d-total-costs').textContent = fmt(totalCosts);
+      document.getElementById('d-costs-pct').textContent = costsPct + '%';
+      document.getElementById('d-equity').textContent = fmt(equity);
+
+      [saleEl, payoffEl, commEl, titleEl, repairsEl, otherEl].forEach(updateSliderFill);
     }
-    document.querySelectorAll('input').forEach(i => i.addEventListener('input', calc));
+
+    [saleEl, payoffEl, commEl, titleEl, repairsEl, otherEl].forEach(el => el.addEventListener('input', calc));
     calc();
   </script>
 </Layout>

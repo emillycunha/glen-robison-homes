@@ -1,5 +1,5 @@
 ---
-// Admin SPA - no Layout wrapper, standalone page
+// Admin SPA - standalone page, no Layout wrapper
 ---
 
 <!doctype html>
@@ -9,134 +9,335 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Admin | Glen Robison Real Estate</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style is:global>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #0c0c0c; --bg2: #161616; --bg3: #1a1a1a;
-      --text: #f5f3ef; --muted: #b0aaa2; --dim: #6b665e;
-      --gold: #c19a57; --gold-b: #e0b974; --gold-d: #8a6d3a;
-      --border: #222; --red: #e55; --green: #5b5;
+      --bg: #08090a; --surface: #111214; --surface2: #181a1d; --surface3: #1e2024;
+      --text: #eceae6; --muted: #c4bfb7; --dim: #7a756d;
+      --gold: #c19a57; --gold-b: #dbb978; --gold-d: #8a6d3a; --gold-glow: rgba(193,154,87,0.08);
+      --border: #232527; --border-light: #2e3033;
+      --red: #e8634a; --green: #4aba7a; --blue: #5b9cf5;
+      --radius: 10px; --radius-sm: 6px;
     }
-    body { background: var(--bg); color: var(--text); font-family: 'Manrope', -apple-system, sans-serif; font-size: 15px; line-height: 1.5; }
+    body { background: var(--bg); color: var(--text); font-family: 'Manrope', system-ui, sans-serif; font-size: 14px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
     a { color: var(--gold); text-decoration: none; }
-    a:hover { color: var(--gold-b); }
 
-    /* Login */
-    #login { max-width: 360px; margin: 15vh auto; padding: 0 20px; }
-    #login h1 { font-size: 20px; font-weight: 700; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em; }
-    #login input { width: 100%; padding: 12px 16px; background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-size: 14px; margin-bottom: 12px; outline: none; }
-    #login input:focus { border-color: var(--gold); }
-    #login button { width: 100%; padding: 14px; background: var(--gold); color: #0a0a0a; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; border: none; cursor: pointer; margin-top: 4px; }
-    #login button:hover { background: var(--gold-b); }
-    #login input[type="email"] { margin-bottom: 12px; }
-    #login .err { color: var(--red); font-size: 13px; margin-top: 8px; }
+    /* ── LOGIN ── */
+    #login {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at 50% 30%, rgba(193,154,87,0.04) 0%, transparent 70%);
+    }
+    .login-card {
+      width: 100%; max-width: 380px; padding: 48px 36px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius);
+    }
+    .login-card .brand { font-family: 'Manrope', system-ui, sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .login-card .brand span { color: var(--gold); }
+    .login-card .sub { font-size: 13px; color: var(--dim); margin-bottom: 32px; }
+    .login-card label { display: block; font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .login-card input {
+      width: 100%; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); font-size: 14px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .login-card input:focus { border-color: var(--gold); }
+    .login-card .field { margin-bottom: 16px; }
+    .login-card button {
+      width: 100%; padding: 14px; margin-top: 8px; background: var(--gold); color: #0a0a0a;
+      font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+      border: none; border-radius: var(--radius-sm); cursor: pointer; transition: background 0.2s;
+    }
+    .login-card button:hover { background: var(--gold-b); }
+    .err { color: var(--red); font-size: 12px; margin-top: 10px; min-height: 18px; }
 
-    /* Shell */
-    #app { display: none; }
-    .topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-    .topbar h1 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; }
-    .topbar .logout { font-size: 11px; color: var(--dim); cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; }
-    .topbar .logout:hover { color: var(--gold); }
+    /* ── SHELL ── */
+    #app { display: none; min-height: 100vh; }
+    .topbar {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 0 28px; height: 60px; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .topbar .brand { font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: -0.01em; }
+    .topbar .brand span { color: var(--gold); }
+    .topbar .right { display: flex; align-items: center; gap: 20px; }
+    .topbar .site-link { font-size: 12px; color: var(--dim); }
+    .topbar .site-link:hover { color: var(--gold); }
+    .topbar .logout {
+      font-size: 11px; color: var(--dim); cursor: pointer; text-transform: uppercase;
+      letter-spacing: 0.08em; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); transition: all 0.2s;
+    }
+    .topbar .logout:hover { color: var(--text); border-color: var(--border-light); }
 
-    .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--bg2); }
-    .tab { padding: 14px 24px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--dim); cursor: pointer; border-bottom: 2px solid transparent; }
+    .tabs {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 0 28px; display: flex; gap: 4px;
+    }
+    .tab {
+      padding: 14px 20px; font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--dim); cursor: pointer;
+      border-bottom: 2px solid transparent; transition: all 0.2s; position: relative;
+    }
     .tab:hover { color: var(--muted); }
     .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-    .content { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+    .content { max-width: 1100px; margin: 0 auto; padding: 32px 28px; }
 
-    /* Cards */
-    .card { background: var(--bg3); border: 1px solid var(--border); padding: 20px; margin-bottom: 12px; }
-    .card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
-    .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-    .card .meta { font-size: 12px; color: var(--dim); }
-    .card .badge { display: inline-block; padding: 3px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid; }
-    .badge-draft { color: var(--gold); border-color: var(--gold-d); }
-    .badge-approved { color: var(--green); border-color: #3a5; }
-    .badge-published { color: var(--muted); border-color: var(--dim); }
-    .badge-new { color: var(--gold-b); border-color: var(--gold); }
-    .badge-contacted { color: #7af; border-color: #47a; }
-    .badge-trashed { color: var(--dim); border-color: var(--dim); }
+    /* ── STAT CARDS ── */
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 36px; }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px 24px; position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-b));
+    }
+    .stat-card .num {
+      font-family: 'Manrope', system-ui, sans-serif; font-size: 40px; font-weight: 800;
+      color: var(--text); line-height: 1; letter-spacing: -0.03em;
+    }
+    .stat-card .label {
+      font-size: 11px; color: var(--dim); text-transform: uppercase;
+      letter-spacing: 0.12em; margin-top: 10px; font-weight: 600;
+    }
 
-    .btn { padding: 8px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--gold-d); color: var(--gold); background: transparent; cursor: pointer; }
-    .btn:hover { border-color: var(--gold); color: var(--gold-b); }
-    .btn-sm { padding: 5px 10px; font-size: 10px; }
-    .btn-gold { background: var(--gold); color: #0a0a0a; border-color: var(--gold); }
-    .btn-gold:hover { background: var(--gold-b); }
-    .btn-danger { color: var(--red); border-color: #933; }
-    .btn-danger:hover { border-color: var(--red); }
-    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-
-    /* Stats */
-    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
-    .stat-card { background: var(--bg3); border: 1px solid var(--border); padding: 24px; text-align: center; }
-    .stat-card .num { font-size: 36px; font-weight: 800; color: var(--gold-b); line-height: 1; }
-    .stat-card .label { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 8px; }
-
+    /* ── TABLES ── */
+    .section-title {
+      font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 14px; margin-top: 36px;
+    }
+    .section-title:first-child { margin-top: 0; }
+    .table-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
     .table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .table th { text-align: left; padding: 10px 12px; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid var(--border); }
-    .table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .table th {
+      text-align: left; padding: 12px 16px; font-size: 11px; font-weight: 700;
+      color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em;
+      background: var(--surface2); border-bottom: 1px solid var(--border);
+    }
+    .table td { padding: 11px 16px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .table tr:last-child td { border-bottom: none; }
+    .table tr:hover td { background: var(--gold-glow); }
+    .table .page-path { color: var(--text); font-weight: 500; }
+    .table .views-num { color: var(--gold-b); font-weight: 700; font-family: 'Manrope', system-ui, sans-serif; }
 
-    /* Editor */
-    .editor { display: none; }
-    .editor textarea { width: 100%; min-height: 300px; background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 16px; font-family: monospace; font-size: 14px; line-height: 1.6; resize: vertical; outline: none; }
-    .editor textarea:focus { border-color: var(--gold); }
-    .editor input, .editor select { width: 100%; padding: 10px 14px; background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-size: 14px; margin-bottom: 12px; outline: none; }
-    .editor input:focus, .editor select:focus { border-color: var(--gold); }
-    .editor label { display: block; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; margin-top: 16px; }
+    /* ── CARDS (leads, drafts) ── */
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px 24px; margin-bottom: 12px; transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--border-light); }
+    .card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+    .card .meta { font-size: 12px; color: var(--dim); font-weight: 500; }
+    .card .notes { font-size: 13px; color: var(--muted); margin-top: 10px; padding: 10px 14px; background: var(--surface2); border-radius: var(--radius-sm); border-left: 2px solid var(--gold-d); }
 
-    .empty { text-align: center; padding: 60px 20px; color: var(--dim); }
-    .loading { text-align: center; padding: 40px; color: var(--dim); }
+    /* ── BADGES ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 12px; font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; border-radius: 20px;
+    }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+    .badge-new { color: var(--gold-b); background: rgba(193,154,87,0.12); }
+    .badge-new::before { background: var(--gold); }
+    .badge-contacted { color: var(--blue); background: rgba(91,156,245,0.1); }
+    .badge-contacted::before { background: var(--blue); }
+    .badge-qualified { color: var(--green); background: rgba(74,186,122,0.1); }
+    .badge-qualified::before { background: var(--green); }
+    .badge-closed { color: var(--muted); background: rgba(154,149,142,0.1); }
+    .badge-closed::before { background: var(--muted); }
+    .badge-draft { color: var(--gold); background: rgba(193,154,87,0.1); }
+    .badge-draft::before { background: var(--gold); }
+    .badge-approved { color: var(--green); background: rgba(74,186,122,0.1); }
+    .badge-approved::before { background: var(--green); }
+    .badge-published { color: var(--blue); background: rgba(91,156,245,0.1); }
+    .badge-published::before { background: var(--blue); }
+    .badge-trashed { color: var(--dim); background: rgba(92,88,80,0.15); }
+    .badge-trashed::before { background: var(--dim); }
+
+    /* ── BUTTONS ── */
+    .btn {
+      padding: 7px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; border: 1px solid var(--border); color: var(--muted);
+      background: transparent; cursor: pointer; border-radius: var(--radius-sm); transition: all 0.2s;
+    }
+    .btn:hover { border-color: var(--gold-d); color: var(--gold); }
+    .btn-gold { background: var(--gold); color: #0a0a0a; border-color: var(--gold); }
+    .btn-gold:hover { background: var(--gold-b); border-color: var(--gold-b); }
+    .btn-danger { color: var(--red); border-color: rgba(232,99,74,0.3); }
+    .btn-danger:hover { border-color: var(--red); }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+
+    /* ── EDITOR ── */
+    .editor-field { margin-bottom: 16px; }
+    .editor-field label {
+      display: block; font-size: 11px; font-weight: 700; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
+    }
+    .editor-field input, .editor-field textarea {
+      width: 100%; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); font-size: 14px; outline: none; transition: border 0.2s;
+    }
+    .editor-field textarea { min-height: 360px; font-family: 'Manrope', monospace; line-height: 1.7; resize: vertical; }
+
+    /* ── DRAFT VIEW ── */
+    .draft-view { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .draft-view .draft-header { padding: 24px 28px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .draft-view .draft-header h2 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .draft-view .draft-header .meta { font-size: 12px; color: var(--dim); }
+    .draft-view .draft-body { padding: 28px; }
+    .draft-view .draft-excerpt { font-size: 15px; color: var(--muted); line-height: 1.7; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border); font-style: italic; }
+    .draft-view .draft-content { font-size: 14px; color: var(--muted); line-height: 1.8; white-space: pre-wrap; }
+    .draft-view .draft-footer { padding: 16px 28px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+    .editor-field input:focus, .editor-field textarea:focus { border-color: var(--gold); }
+
+    /* ── SUB TABS ── */
+    .sub-tabs { display: flex; gap: 6px; margin-bottom: 20px; }
+    .sub-tab {
+      padding: 7px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--dim); background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px; cursor: pointer; transition: all 0.2s;
+    }
+    .sub-tab:hover { color: var(--muted); border-color: var(--border-light); }
+    .sub-tab.active { color: var(--gold); border-color: var(--gold-d); background: var(--gold-glow); }
+
+    /* ── LEAD CARDS ── */
+    .lead-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 0; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s;
+    }
+    .lead-card:hover { border-color: var(--border-light); }
+    .lead-card .lead-top { padding: 20px 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .lead-card .lead-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+    .lead-card .lead-email { font-size: 13px; color: var(--gold); }
+    .lead-card .lead-meta { display: flex; gap: 16px; margin-top: 8px; font-size: 12px; color: var(--dim); }
+    .lead-card .lead-source {
+      display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      background: var(--surface2); border-radius: 4px; color: var(--muted);
+    }
+    .lead-card .lead-notes { padding: 0 24px 16px; }
+    .lead-card .lead-notes p {
+      font-size: 13px; color: var(--muted); padding: 10px 14px;
+      background: var(--surface2); border-radius: var(--radius-sm); border-left: 2px solid var(--gold-d);
+      white-space: pre-line;
+    }
+    .lead-card .lead-actions { padding: 12px 24px; border-top: 1px solid var(--border); display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 24px; }
+    .page-btn {
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--dim); background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s;
+    }
+    .page-btn:hover { color: var(--text); border-color: var(--border-light); }
+    .page-btn.active { color: var(--gold); border-color: var(--gold-d); background: var(--gold-glow); }
+    .page-btn.disabled { opacity: 0.3; pointer-events: none; }
+
+    .count-bar { font-size: 12px; color: var(--dim); font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .count-bar .pill { background: var(--surface2); padding: 3px 10px; border-radius: 12px; font-size: 11px; color: var(--gold); font-weight: 700; }
+    .empty { text-align: center; padding: 80px 20px; color: var(--dim); font-size: 14px; }
+    .loading { text-align: center; padding: 60px; color: var(--dim); font-size: 13px; letter-spacing: 0.05em; }
+
+    /* ── DATA SOURCES ── */
+    .date-filter {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
+    }
+    .date-filter .filter-label { font-size: 11px; color: var(--dim); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .date-filter select {
+      padding: 7px 12px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); font-size: 12px; font-weight: 600;
+      outline: none; cursor: pointer;
+    }
+    .date-filter select:focus { border-color: var(--gold); }
+    .source-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; margin-bottom: 16px; position: relative; overflow: hidden;
+    }
+    .source-card .source-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+      padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    }
+    .source-card .source-name { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .source-card .source-sub { font-size: 11px; color: var(--dim); }
+    .source-card .mini-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; }
+    .source-card .mini-stat .mini-num { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1; }
+    .source-card .mini-stat .mini-label { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; font-weight: 600; }
+
+    .toggle-btn {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 6px 14px;
+      font-size: 11px; font-weight: 600; color: var(--dim); background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 20px; cursor: pointer; transition: all 0.2s;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .toggle-btn:hover { color: var(--gold); border-color: var(--gold-d); }
+    .hidden-rows { display: none; }
+    .hidden-rows.show { display: table-row-group; }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <!-- LOGIN -->
   <div id="login">
-    <h1>Admin</h1>
-    <div id="login-form">
-      <input type="email" id="login-email" placeholder="Email" />
-      <input type="password" id="login-pass" placeholder="Password" />
-      <button id="login-btn">Sign In</button>
-      <div class="err" id="login-err"></div>
-    </div>
-    <div id="register-form" style="display:none">
-      <input type="text" id="reg-name" placeholder="Name" />
-      <input type="email" id="reg-email" placeholder="Email" />
-      <input type="password" id="reg-pass" placeholder="Password" />
-      <button id="register-btn">Create Account</button>
-      <div class="err" id="register-err"></div>
-      <p style="margin-top:16px;font-size:12px;color:var(--dim)"><a href="#" id="show-login" style="color:var(--gold)">Back to sign in</a></p>
+    <div class="login-card">
+      <div class="brand">Glen Robison <span>Admin</span></div>
+      <div class="sub">Sign in to manage your site</div>
+      <div id="login-form">
+        <div class="field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" />
+        </div>
+        <div class="field">
+          <label for="login-pass">Password</label>
+          <input type="password" id="login-pass" placeholder="Enter password" />
+        </div>
+        <button id="login-btn">Sign In</button>
+        <div class="err" id="login-err"></div>
+      </div>
+      <div id="register-form" style="display:none">
+        <div class="field"><label>Name</label><input type="text" id="reg-name" placeholder="Full name" /></div>
+        <div class="field"><label>Email</label><input type="email" id="reg-email" placeholder="you@example.com" /></div>
+        <div class="field"><label>Password</label><input type="password" id="reg-pass" placeholder="Choose a password" /></div>
+        <button id="register-btn">Create Account</button>
+        <div class="err" id="register-err"></div>
+      </div>
     </div>
   </div>
 
   <!-- APP -->
   <div id="app">
     <div class="topbar">
-      <h1>Glen Robison <span style="color:var(--gold)">Admin</span></h1>
-      <span class="logout" id="logout-btn">Sign Out</span>
+      <div class="brand">Glen Robison <span>Admin</span></div>
+      <div class="right">
+        <a href="/" class="site-link" target="_blank">View Site</a>
+        <span class="logout" id="logout-btn">Sign Out</span>
+      </div>
     </div>
 
     <div class="tabs">
       <div class="tab active" data-tab="stats">Stats</div>
       <div class="tab" data-tab="leads">Leads</div>
       <div class="tab" data-tab="blog">Blog Drafts</div>
+      <div class="tab" data-tab="settings">Blog Settings</div>
     </div>
 
     <div class="content">
       <div id="view-stats"></div>
       <div id="view-leads" style="display:none"></div>
       <div id="view-blog" style="display:none"></div>
+      <div id="view-settings" style="display:none"></div>
     </div>
   </div>
 
   <script is:inline>
     let TOKEN = localStorage.getItem('admin_token') || '';
     const API = '/api';
-
-    // Auth
     const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
     function showApp() {
@@ -149,92 +350,39 @@
       const email = document.getElementById('login-email').value.trim();
       const pass = document.getElementById('login-pass').value;
       if (!email || !pass) return;
-
-      if (isLocal) {
-        TOKEN = 'local-dev';
-        localStorage.setItem('admin_token', TOKEN);
-        showApp();
-        return;
-      }
-
-      fetch(`${API}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password: pass }),
-      })
-        .then(r => r.json())
-        .then(data => {
-          if (data.error) {
-            document.getElementById('login-err').textContent = data.error;
-            return;
-          }
-          TOKEN = data.token;
-          localStorage.setItem('admin_token', TOKEN);
-          showApp();
-        })
-        .catch(() => {
-          document.getElementById('login-err').textContent = 'Connection error';
-        });
+      if (isLocal) { TOKEN = 'local-dev'; localStorage.setItem('admin_token', TOKEN); showApp(); return; }
+      fetch(`${API}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password: pass }) })
+        .then(r => r.json()).then(data => {
+          if (data.error) { document.getElementById('login-err').textContent = data.error; return; }
+          TOKEN = data.token; localStorage.setItem('admin_token', TOKEN); showApp();
+        }).catch(() => { document.getElementById('login-err').textContent = 'Connection error'; });
     }
 
     function doRegister() {
-      const name = document.getElementById('reg-name').value.trim();
-      const email = document.getElementById('reg-email').value.trim();
-      const pass = document.getElementById('reg-pass').value;
+      const name = document.getElementById('reg-name')?.value.trim();
+      const email = document.getElementById('reg-email')?.value.trim();
+      const pass = document.getElementById('reg-pass')?.value;
       if (!email || !pass) return;
-
-      fetch(`${API}/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password: pass }),
-      })
-        .then(r => r.json())
-        .then(data => {
-          if (data.error) {
-            document.getElementById('register-err').textContent = data.error;
-            return;
-          }
+      fetch(`${API}/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password: pass }) })
+        .then(r => r.json()).then(data => {
+          if (data.error) { document.getElementById('register-err').textContent = data.error; return; }
           document.getElementById('register-form').style.display = 'none';
           document.getElementById('login-form').style.display = 'block';
-          document.getElementById('login-email').value = email;
-          document.getElementById('login-err').textContent = '';
-          document.getElementById('login-err').style.color = 'var(--green)';
-          document.getElementById('login-err').textContent = 'Account created. Sign in.';
-        })
-        .catch(() => {
-          document.getElementById('register-err').textContent = 'Connection error';
-        });
+          const err = document.getElementById('login-err'); err.style.color = 'var(--green)'; err.textContent = 'Account created. Sign in.';
+        }).catch(() => { document.getElementById('register-err').textContent = 'Connection error'; });
     }
 
-    function doLogout() {
-      TOKEN = '';
-      localStorage.removeItem('admin_token');
-      location.reload();
-    }
+    function doLogout() { TOKEN = ''; localStorage.removeItem('admin_token'); location.reload(); }
 
-    // Init: check existing session
-    if (TOKEN) {
-      if (isLocal) {
-        showApp();
-      } else {
-        fetch(`${API}/stats`, { headers: { Authorization: `Bearer ${TOKEN}` } })
-          .then(r => { if (r.ok) showApp(); });
-      }
-    }
-
-    // Tabs
     function switchTab(tab) {
       document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
-      document.getElementById('view-stats').style.display = tab === 'stats' ? '' : 'none';
-      document.getElementById('view-leads').style.display = tab === 'leads' ? '' : 'none';
-      document.getElementById('view-blog').style.display = tab === 'blog' ? '' : 'none';
-
+      ['stats','leads','blog','settings'].forEach(v => document.getElementById('view-'+v).style.display = v === tab ? '' : 'none');
       if (tab === 'stats') loadStats();
       if (tab === 'leads') loadLeads();
       if (tab === 'blog') loadDrafts();
+      if (tab === 'settings') loadSettings();
     }
 
-    // Helpers
     function h(tag, attrs = {}, ...children) {
       const el = document.createElement(tag);
       Object.entries(attrs).forEach(([k, v]) => {
@@ -244,92 +392,245 @@
         else if (k === 'style') Object.assign(el.style, v);
         else el.setAttribute(k, v);
       });
-      children.flat().forEach(c => {
-        if (typeof c === 'string') el.appendChild(document.createTextNode(c));
-        else if (c) el.appendChild(c);
-      });
+      children.flat().forEach(c => { if (typeof c === 'string') el.appendChild(document.createTextNode(c)); else if (c) el.appendChild(c); });
       return el;
     }
 
+    const MOCK = {
+      '/stats': { pageviews: 1247, unique_visitors: 843, avg_pageviews_per_visitor: 1.48, bounce_rate: 0.42, topPages: [
+        { path: '/', views: 312 }, { path: '/buyers', views: 187 }, { path: '/luxury', views: 143 },
+        { path: '/neighborhoods/vintage-oaks', views: 98 }, { path: '/sell', views: 89 },
+        { path: '/about', views: 76 }, { path: '/living/why-move-to-new-braunfels', views: 64 },
+        { path: '/contact', views: 58 }, { path: '/neighborhoods/copper-ridge', views: 45 },
+        { path: '/new-construction', views: 38 }, { path: '/testimonials', views: 32 },
+        { path: '/blog', views: 28 }, { path: '/living/things-to-do', views: 24 },
+        { path: '/neighborhoods/riverforest', views: 19 },
+      ], referrers: [
+        { referrer: 'google.com', count: 412 }, { referrer: 'facebook.com', count: 87 },
+        { referrer: 'zillow.com', count: 53 }, { referrer: 'instagram.com', count: 31 },
+        { referrer: 'realtor.com', count: 22 }, { referrer: 'linkedin.com', count: 14 },
+        { referrer: 'nextdoor.com', count: 11 }, { referrer: 'bing.com', count: 9 },
+        { referrer: 'twitter.com', count: 7 }, { referrer: 'reddit.com', count: 5 },
+        { referrer: 'pinterest.com', count: 3 },
+      ], countries: [
+        { country: 'US', count: 1104 }, { country: 'CA', count: 38 }, { country: 'MX', count: 22 },
+      ]},
+      '/stats/gsc': { clicks: 892, impressions: 14320, ctr: '6.2%', position: 12.4, topQueries: [
+        { query: 'new braunfels realtor', clicks: 124, impressions: 1890, ctr: '6.6%', position: 8.2 },
+        { query: 'luxury homes new braunfels', clicks: 98, impressions: 1420, ctr: '6.9%', position: 6.5 },
+        { query: 'glen robison realtor', clicks: 87, impressions: 340, ctr: '25.6%', position: 1.2 },
+        { query: 'vintage oaks homes for sale', clicks: 63, impressions: 980, ctr: '6.4%', position: 11.3 },
+        { query: 'copper ridge new braunfels', clicks: 52, impressions: 720, ctr: '7.2%', position: 9.1 },
+        { query: 'new braunfels real estate agent', clicks: 48, impressions: 1560, ctr: '3.1%', position: 14.7 },
+        { query: 'hill country homes texas', clicks: 41, impressions: 2100, ctr: '2.0%', position: 22.1 },
+        { query: 'moving to new braunfels', clicks: 38, impressions: 890, ctr: '4.3%', position: 13.5 },
+        { query: 'canyon lake real estate', clicks: 29, impressions: 670, ctr: '4.3%', position: 16.8 },
+        { query: 'new braunfels cost of living', clicks: 24, impressions: 540, ctr: '4.4%', position: 11.9 },
+        { query: 'comal county homes', clicks: 19, impressions: 430, ctr: '4.4%', position: 18.2 },
+        { query: 'garden ridge tx homes', clicks: 15, impressions: 310, ctr: '4.8%', position: 15.1 },
+      ]},
+      '/leads': { count: 6, leads: [
+        { id: 1, name: 'Sarah Mitchell', email: 'sarah.test@example.com', guide: 'buyers', status: 'new', created_at: '2026-04-08T14:30:00', notes: null },
+        { id: 2, name: 'James Cooper', email: 'james.test@example.com', guide: 'sellers', status: 'new', created_at: '2026-04-09T09:15:00', notes: null },
+        { id: 3, name: 'Rachel Kim', email: 'rachel.test@example.com', guide: 'relocation', status: 'contacted', created_at: '2026-04-09T16:45:00', notes: null },
+        { id: 4, name: 'David Martinez', email: 'david.test@example.com', phone: '(512) 555-0147', guide: 'contact', status: 'new', created_at: '2026-04-10T10:20:00', notes: 'Interested in Vintage Oaks listings above $800K' },
+        { id: 5, name: 'Amanda Torres', email: 'amanda.test@example.com', guide: 'vip-buying-a-home', status: 'new', created_at: '2026-04-10T11:05:00', notes: null },
+        { id: 6, name: 'Mike Chen', email: 'mike.test@example.com', guide: 'vip-relocating-to-the-hill-country', status: 'qualified', created_at: '2026-04-07T08:30:00', notes: null },
+      ]},
+      '/blog/drafts': { count: 2, drafts: [
+        { id: 1, title: 'Spring 2026 Market Update: New Braunfels', slug: 'spring-2026-market-update', excerpt: 'Inventory is rising, prices are stabilizing, and buyers have more leverage than they have had in three years.', category: 'Market Update', author: 'Glen Robison', status: 'draft', created_at: '2026-04-10T08:00:00' },
+        { id: 2, title: 'Why Veterans Choose New Braunfels', slug: 'why-veterans-choose-new-braunfels', excerpt: 'VA loan benefits, military-friendly communities, and proximity to JBSA make New Braunfels a top pick for retiring service members.', category: 'Relocation', author: 'Glen Robison', status: 'approved', created_at: '2026-04-09T12:00:00' },
+      ]},
+    };
+
     async function api(path, opts = {}) {
-      const r = await fetch(`${API}${path}`, {
-        ...opts,
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}`, ...opts.headers },
-      });
+      if (isLocal) { const key = Object.keys(MOCK).find(k => path.startsWith(k)); return key ? MOCK[key] : {}; }
+      const r = await fetch(`${API}${path}`, { ...opts, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}`, ...opts.headers } });
       return r.json();
     }
 
     function fmtDate(d) { return d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''; }
 
-    // STATS
+    // ── STATS ──
+    let toggleId = 0;
+    function buildTable(rows, col1, col2, col1Key, col2Key, limit = 10) {
+      const id = 'toggle-' + (++toggleId);
+      const top = rows.slice(0, limit);
+      const rest = rows.slice(limit);
+      const tbody1 = h('tbody', {}, ...top.map(r =>
+        h('tr', {}, h('td', { className: 'page-path' }, r[col1Key] || '(direct)'), h('td', { className: 'views-num', style: { textAlign: 'right' } }, String(r[col2Key])))
+      ));
+      const tbody2 = rest.length ? h('tbody', { className: 'hidden-rows', id }, ...rest.map(r =>
+        h('tr', {}, h('td', { className: 'page-path' }, r[col1Key] || '(direct)'), h('td', { className: 'views-num', style: { textAlign: 'right' } }, String(r[col2Key])))
+      )) : null;
+      const table = h('table', { className: 'table' },
+        h('thead', {}, h('tr', {}, h('th', {}, col1), h('th', { style: { textAlign: 'right' } }, col2))),
+        tbody1, tbody2
+      );
+      const wrap = h('div', {}, h('div', { className: 'table-wrap' }, table));
+      if (rest.length) {
+        const btn = h('button', { className: 'toggle-btn', onclick: () => {
+          const el = document.getElementById(id);
+          el.classList.toggle('show');
+          btn.textContent = el.classList.contains('show') ? 'Show less' : `Show ${rest.length} more`;
+        } }, `Show ${rest.length} more`);
+        wrap.appendChild(btn);
+      }
+      return wrap;
+    }
+
     async function loadStats() {
       const el = document.getElementById('view-stats');
       el.innerHTML = '<div class="loading">Loading stats...</div>';
-      const data = await api('/stats?days=30');
-
+      const days = document.getElementById('stats-days')?.value || '30';
+      const [data, gsc] = await Promise.all([api(`/stats?days=${days}`), api('/stats/gsc')]);
       el.innerHTML = '';
-      const grid = h('div', { className: 'stat-grid' },
-        h('div', { className: 'stat-card' }, h('div', { className: 'num' }, String(data.total || 0)), h('div', { className: 'label' }, 'Pageviews (30d)')),
-        h('div', { className: 'stat-card' }, h('div', { className: 'num' }, String(data.topPages?.length || 0)), h('div', { className: 'label' }, 'Unique Pages')),
-        h('div', { className: 'stat-card' }, h('div', { className: 'num' }, String(data.countries?.length || 0)), h('div', { className: 'label' }, 'Countries')),
-      );
-      el.appendChild(grid);
 
-      if (data.topPages?.length) {
-        el.appendChild(h('h3', { style: { marginBottom: '12px', fontSize: '13px', color: 'var(--dim)', textTransform: 'uppercase', letterSpacing: '0.1em' } }, 'Top Pages'));
-        const table = h('table', { className: 'table' },
-          h('thead', {}, h('tr', {}, h('th', {}, 'Page'), h('th', {}, 'Views'))),
-          h('tbody', {}, ...data.topPages.map(p =>
-            h('tr', {}, h('td', {}, p.path), h('td', {}, String(p.views)))
-          ))
-        );
-        el.appendChild(table);
+      // Date filter
+      const filter = h('div', { className: 'date-filter' },
+        h('span', { className: 'filter-label' }, 'Period'),
+        h('select', { id: 'stats-days', onchange: () => loadStats() },
+          ...[7, 14, 30, 90].map(d => {
+            const opt = h('option', { value: String(d) }, `${d} days`);
+            if (String(d) === days) opt.selected = true;
+            return opt;
+          })
+        ),
+      );
+      el.appendChild(filter);
+
+      // Claw Analytics card (full width)
+      const pv = data.pageviews || data.total || 0;
+      const uv = data.unique_visitors || 0;
+      const avgPv = data.avg_pageviews_per_visitor || (uv > 0 ? (pv / uv).toFixed(1) : '0');
+      const bounce = data.bounce_rate != null ? Math.round(data.bounce_rate * 100) + '%' : '0%';
+      el.appendChild(h('div', { className: 'source-card' },
+        h('div', { className: 'source-header' },
+          h('div', {}, h('div', { className: 'source-name' }, 'Site Traffic'), h('div', { className: 'source-sub' }, 'Claw Analytics')),
+        ),
+        h('div', { className: 'mini-stats' },
+          h('div', { className: 'mini-stat' }, h('div', { className: 'mini-num' }, String(pv)), h('div', { className: 'mini-label' }, 'Pageviews')),
+          h('div', { className: 'mini-stat' }, h('div', { className: 'mini-num' }, String(uv)), h('div', { className: 'mini-label' }, 'Visitors')),
+          h('div', { className: 'mini-stat' }, h('div', { className: 'mini-num' }, String(avgPv)), h('div', { className: 'mini-label' }, 'Pages / Visit')),
+          h('div', { className: 'mini-stat' }, h('div', { className: 'mini-num' }, bounce), h('div', { className: 'mini-label' }, 'Bounce Rate')),
+        ),
+      ));
+
+      // Google Search Console card (full width)
+      el.appendChild(h('div', { className: 'source-card' },
+        h('div', { className: 'source-header' },
+          h('div', {}, h('div', { className: 'source-name' }, 'Search Performance'), h('div', { className: 'source-sub' }, 'Google Search Console')),
+        ),
+        h('div', { className: 'mini-stats' },
+          h('div', { className: 'mini-stat' }, h('div', { className: 'mini-num' }, String(gsc.clicks || 0)), h('div', { className: 'mini-label' }, 'Clicks')),
+          h('div', { className: 'mini-stat' }, h('div', { className: 'mini-num' }, String(gsc.impressions || 0)), h('div', { className: 'mini-label' }, 'Impressions')),
+          h('div', { className: 'mini-stat' }, h('div', { className: 'mini-num' }, gsc.ctr || '0%'), h('div', { className: 'mini-label' }, 'CTR')),
+          h('div', { className: 'mini-stat' }, h('div', { className: 'mini-num' }, String(gsc.position ? gsc.position.toFixed(1) : '0')), h('div', { className: 'mini-label' }, 'Avg Position')),
+        ),
+      ));
+
+      // Top search queries (GSC)
+      if (gsc.topQueries?.length) {
+        el.appendChild(h('div', { className: 'section-title' }, 'Top Search Queries'));
+        const qRows = gsc.topQueries.map(q => ({ query: q.query, clicks: q.clicks }));
+        el.appendChild(buildTable(qRows, 'Query', 'Clicks', 'query', 'clicks', 10));
       }
 
+      // Top pages (Claw Analytics)
+      if (data.topPages?.length) {
+        el.appendChild(h('div', { className: 'section-title' }, 'Top Pages'));
+        el.appendChild(buildTable(data.topPages, 'Page', 'Views', 'path', 'views', 10));
+      }
+
+      // Top referrers
       if (data.referrers?.length) {
-        el.appendChild(h('h3', { style: { margin: '32px 0 12px', fontSize: '13px', color: 'var(--dim)', textTransform: 'uppercase', letterSpacing: '0.1em' } }, 'Top Referrers'));
-        const table = h('table', { className: 'table' },
-          h('thead', {}, h('tr', {}, h('th', {}, 'Referrer'), h('th', {}, 'Count'))),
-          h('tbody', {}, ...data.referrers.map(r =>
-            h('tr', {}, h('td', {}, r.referrer || '(direct)'), h('td', {}, String(r.count)))
-          ))
-        );
-        el.appendChild(table);
+        el.appendChild(h('div', { className: 'section-title' }, 'Top Referrers'));
+        el.appendChild(buildTable(data.referrers, 'Source', 'Visits', 'referrer', 'count', 10));
       }
     }
 
-    // LEADS
+    // ── LEADS ──
+    let leadFilter = 'new';
+    let leadPage = 1;
+    const LEADS_PER_PAGE = 9;
+
+    function formatSource(guide) {
+      if (!guide) return 'Unknown';
+      if (guide.startsWith('vip-')) return 'VIP: ' + guide.replace('vip-', '').replace(/-/g, ' ');
+      const labels = { buyers: "Buyer's Guide", sellers: "Seller's Guide", relocation: 'Relocation Guide', contact: 'Contact Form' };
+      return labels[guide] || guide;
+    }
+
     async function loadLeads() {
       const el = document.getElementById('view-leads');
       el.innerHTML = '<div class="loading">Loading leads...</div>';
       const data = await api('/leads');
-
       el.innerHTML = '';
       if (!data.leads?.length) { el.innerHTML = '<div class="empty">No leads yet</div>'; return; }
 
-      const count = h('div', { style: { marginBottom: '16px', fontSize: '13px', color: 'var(--dim)' } }, `${data.count} leads`);
-      el.appendChild(count);
+      const allLeads = data.leads;
+      const newLeads = allLeads.filter(l => l.status === 'new');
+      const openLeads = allLeads.filter(l => l.status !== 'new' && l.status !== 'trashed');
 
-      data.leads.forEach(lead => {
-        const badge = `badge-${lead.status || 'new'}`;
-        const card = h('div', { className: 'card' },
-          h('div', { className: 'card-row' },
+      // Sub tabs
+      const tabs = h('div', { className: 'sub-tabs' },
+        h('div', { className: `sub-tab ${leadFilter === 'new' ? 'active' : ''}`, onclick: () => { leadFilter = 'new'; leadPage = 1; loadLeads(); } }, `New (${newLeads.length})`),
+        h('div', { className: `sub-tab ${leadFilter === 'open' ? 'active' : ''}`, onclick: () => { leadFilter = 'open'; leadPage = 1; loadLeads(); } }, `Open (${openLeads.length})`),
+        h('div', { className: `sub-tab ${leadFilter === 'all' ? 'active' : ''}`, onclick: () => { leadFilter = 'all'; leadPage = 1; loadLeads(); } }, `All (${allLeads.length})`),
+      );
+      el.appendChild(tabs);
+
+      const filtered = leadFilter === 'new' ? newLeads : leadFilter === 'open' ? openLeads : allLeads;
+
+      if (!filtered.length) {
+        el.appendChild(h('div', { className: 'empty' }, leadFilter === 'new' ? 'No new leads' : 'No open leads'));
+        return;
+      }
+
+      const totalPages = Math.ceil(filtered.length / LEADS_PER_PAGE);
+      if (leadPage > totalPages) leadPage = totalPages;
+      const start = (leadPage - 1) * LEADS_PER_PAGE;
+      const paged = filtered.slice(start, start + LEADS_PER_PAGE);
+
+      const grid = h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' } });
+      el.appendChild(grid);
+
+      paged.forEach(lead => {
+        const card = h('div', { className: 'lead-card' },
+          h('div', { className: 'lead-top' },
             h('div', {},
-              h('h3', {}, lead.name || '(no name)'),
-              h('div', { className: 'meta' }, `${lead.email} · ${lead.guide} guide · ${fmtDate(lead.created_at)}`),
+              h('div', { className: 'lead-name' }, lead.name || '(no name)'),
+              h('a', { className: 'lead-email', href: 'mailto:' + lead.email }, lead.email),
+              lead.phone ? h('div', { style: { marginTop: '4px' } }, h('a', { href: 'tel:' + lead.phone, style: { fontSize: '13px', color: 'var(--text)' } }, lead.phone)) : null,
+              h('div', { className: 'lead-meta' },
+                h('span', { className: 'lead-source' }, formatSource(lead.guide)),
+                h('span', {}, fmtDate(lead.created_at)),
+              ),
             ),
-            h('span', { className: `badge ${badge}` }, lead.status || 'new'),
+            h('span', { className: `badge badge-${lead.status || 'new'}` }, lead.status || 'new'),
           ),
-          lead.notes ? h('p', { style: { fontSize: '13px', color: 'var(--muted)', marginTop: '8px' } }, lead.notes) : null,
-          h('div', { className: 'actions' },
-            h('button', { className: 'btn btn-sm', onclick: () => updateLead(lead.id, 'contacted') }, 'Contacted'),
-            h('button', { className: 'btn btn-sm', onclick: () => updateLead(lead.id, 'qualified') }, 'Qualified'),
-            h('button', { className: 'btn btn-sm', onclick: () => updateLead(lead.id, 'closed') }, 'Closed'),
-            h('button', { className: 'btn btn-sm btn-danger', onclick: () => updateLead(lead.id, 'trashed') }, 'Trash'),
+          lead.notes ? h('div', { className: 'lead-notes' }, h('p', {}, lead.notes)) : null,
+          h('div', { className: 'lead-actions' },
+            lead.status === 'new' ? h('button', { className: 'btn btn-gold', onclick: () => updateLead(lead.id, 'contacted') }, 'Mark Contacted') : null,
+            lead.status === 'contacted' ? h('button', { className: 'btn btn-gold', onclick: () => updateLead(lead.id, 'qualified') }, 'Qualified') : null,
+            lead.status !== 'closed' && lead.status !== 'new' ? h('button', { className: 'btn', onclick: () => updateLead(lead.id, 'closed') }, 'Closed') : null,
+            h('button', { className: 'btn btn-danger', onclick: () => updateLead(lead.id, 'trashed') }, 'Trash'),
           ),
         );
-        el.appendChild(card);
+        grid.appendChild(card);
       });
+
+      // Pagination
+      if (totalPages > 1) {
+        const pag = h('div', { className: 'pagination' },
+          h('div', { className: `page-btn ${leadPage === 1 ? 'disabled' : ''}`, onclick: () => { leadPage--; loadLeads(); } }, '<'),
+          ...Array.from({ length: totalPages }, (_, i) =>
+            h('div', { className: `page-btn ${leadPage === i + 1 ? 'active' : ''}`, onclick: () => { leadPage = i + 1; loadLeads(); } }, String(i + 1))
+          ),
+          h('div', { className: `page-btn ${leadPage === totalPages ? 'disabled' : ''}`, onclick: () => { leadPage++; loadLeads(); } }, '>'),
+        );
+        el.appendChild(pag);
+      }
     }
 
     async function updateLead(id, status) {
@@ -337,34 +638,31 @@
       loadLeads();
     }
 
-    // BLOG DRAFTS
+    // ── BLOG DRAFTS ──
     async function loadDrafts() {
       const el = document.getElementById('view-blog');
       el.innerHTML = '<div class="loading">Loading drafts...</div>';
       const data = await api('/blog/drafts?status=all');
-
       el.innerHTML = '';
       if (!data.drafts?.length) { el.innerHTML = '<div class="empty">No drafts yet. OpenClaw will post drafts here.</div>'; return; }
 
-      const count = h('div', { style: { marginBottom: '16px', fontSize: '13px', color: 'var(--dim)' } }, `${data.count} drafts`);
-      el.appendChild(count);
+      el.appendChild(h('div', { className: 'count-bar' }, 'Drafts ', h('span', { className: 'pill' }, String(data.count))));
 
       data.drafts.forEach(draft => {
-        const badge = `badge-${draft.status}`;
         const card = h('div', { className: 'card' },
           h('div', { className: 'card-row' },
             h('div', {},
               h('h3', {}, draft.title),
-              h('div', { className: 'meta' }, `${draft.category} · ${draft.author} · ${fmtDate(draft.created_at)}`),
+              h('div', { className: 'meta' }, `${draft.category}  ·  ${draft.author}  ·  ${fmtDate(draft.created_at)}`),
             ),
-            h('span', { className: `badge ${badge}` }, draft.status),
+            h('span', { className: `badge badge-${draft.status}` }, draft.status),
           ),
-          draft.excerpt ? h('p', { style: { fontSize: '13px', color: 'var(--muted)', marginTop: '8px' } }, draft.excerpt) : null,
+          draft.excerpt ? h('div', { className: 'notes' }, draft.excerpt) : null,
           h('div', { className: 'actions' },
-            h('button', { className: 'btn btn-sm', onclick: () => openEditor(draft.id) }, 'View / Edit'),
-            draft.status === 'draft' ? h('button', { className: 'btn btn-sm btn-gold', onclick: () => updateDraft(draft.id, 'approved') }, 'Approve') : null,
-            draft.status !== 'trashed' ? h('button', { className: 'btn btn-sm btn-danger', onclick: () => updateDraft(draft.id, 'trashed') }, 'Trash') : null,
-            draft.status === 'trashed' ? h('button', { className: 'btn btn-sm', onclick: () => updateDraft(draft.id, 'draft') }, 'Restore') : null,
+            h('button', { className: 'btn', onclick: () => viewDraft(draft.id) }, 'View / Edit'),
+            draft.status === 'draft' ? h('button', { className: 'btn btn-gold', onclick: () => updateDraft(draft.id, 'approved') }, 'Approve') : null,
+            draft.status !== 'trashed' ? h('button', { className: 'btn btn-danger', onclick: () => updateDraft(draft.id, 'trashed') }, 'Trash') : null,
+            draft.status === 'trashed' ? h('button', { className: 'btn', onclick: () => updateDraft(draft.id, 'draft') }, 'Restore') : null,
           ),
         );
         el.appendChild(card);
@@ -376,28 +674,56 @@
       loadDrafts();
     }
 
-    async function openEditor(id) {
-      const el = document.getElementById('view-blog');
+    async function getDraft(id) {
       const data = await api(`/blog/${id}`);
-      const d = data.draft;
+      return data.draft || MOCK['/blog/drafts'].drafts.find(x => x.id === id) || {};
+    }
 
+    async function viewDraft(id) {
+      const el = document.getElementById('view-blog');
+      el.innerHTML = '<div class="loading">Loading...</div>';
+      const d = await getDraft(id);
       el.innerHTML = '';
-      const editor = h('div', {},
-        h('button', { className: 'btn btn-sm', onclick: () => loadDrafts(), style: { marginBottom: '20px' } }, 'Back to Drafts'),
-        h('label', {}, 'Title'),
-        h('input', { id: 'ed-title', value: d.title }),
-        h('label', {}, 'Excerpt'),
-        h('input', { id: 'ed-excerpt', value: d.excerpt || '' }),
-        h('label', {}, 'Category'),
-        h('input', { id: 'ed-category', value: d.category || '' }),
-        h('label', {}, 'Content'),
-        h('textarea', { id: 'ed-content', innerHTML: d.content }),
-        h('div', { className: 'actions', style: { marginTop: '16px' } },
-          h('button', { className: 'btn btn-gold', onclick: () => saveDraft(id) }, 'Save Changes'),
-          d.status === 'draft' ? h('button', { className: 'btn', onclick: async () => { await updateDraft(id, 'approved'); loadDrafts(); } }, 'Approve') : null,
+
+      el.appendChild(h('button', { className: 'btn', onclick: () => loadDrafts(), style: { marginBottom: '20px' } }, 'Back to Drafts'));
+
+      el.appendChild(h('div', { className: 'draft-view' },
+        h('div', { className: 'draft-header' },
+          h('div', {},
+            h('h2', {}, d.title || 'Untitled'),
+            h('div', { className: 'meta' }, `${d.category || 'Uncategorized'}  ·  ${d.author || 'Glen Robison'}  ·  ${fmtDate(d.created_at)}`),
+          ),
+          h('span', { className: `badge badge-${d.status || 'draft'}` }, d.status || 'draft'),
         ),
-      );
-      el.appendChild(editor);
+        h('div', { className: 'draft-body' },
+          d.excerpt ? h('div', { className: 'draft-excerpt' }, d.excerpt) : null,
+          h('div', { className: 'draft-content' }, d.content || '(no content)'),
+        ),
+        h('div', { className: 'draft-footer' },
+          h('button', { className: 'btn btn-gold', onclick: () => editDraft(id) }, 'Edit'),
+          d.status === 'draft' ? h('button', { className: 'btn', onclick: async () => { await updateDraft(id, 'approved'); viewDraft(id); } }, 'Approve') : null,
+          d.status !== 'trashed' ? h('button', { className: 'btn btn-danger', onclick: async () => { await updateDraft(id, 'trashed'); loadDrafts(); } }, 'Trash') : null,
+        ),
+      ));
+    }
+
+    async function editDraft(id) {
+      const el = document.getElementById('view-blog');
+      el.innerHTML = '<div class="loading">Loading...</div>';
+      const d = await getDraft(id);
+      el.innerHTML = '';
+
+      el.appendChild(h('div', {},
+        h('button', { className: 'btn', onclick: () => viewDraft(id), style: { marginBottom: '20px' } }, 'Back to View'),
+        h('div', { className: 'editor-field' }, h('label', {}, 'Title'), h('input', { id: 'ed-title', value: d.title || '' })),
+        h('div', { className: 'editor-field' }, h('label', {}, 'Excerpt'), h('input', { id: 'ed-excerpt', value: d.excerpt || '' })),
+        h('div', { className: 'editor-field' }, h('label', {}, 'Category'), h('input', { id: 'ed-category', value: d.category || '' })),
+        h('div', { className: 'editor-field' }, h('label', {}, 'Content'), h('textarea', { id: 'ed-content', innerHTML: d.content || d.excerpt || '' })),
+        h('div', { className: 'actions', style: { marginTop: '8px' } },
+          h('button', { className: 'btn btn-gold', onclick: () => saveDraft(id) }, 'Save Changes'),
+          h('button', { className: 'btn', onclick: () => viewDraft(id) }, 'Cancel'),
+        ),
+      ));
     }
 
     async function saveDraft(id) {
@@ -406,28 +732,117 @@
       const category = document.getElementById('ed-category').value;
       const content = document.getElementById('ed-content').value;
       await api(`/blog/${id}`, { method: 'PUT', body: JSON.stringify({ title, excerpt, category, content }) });
-      loadDrafts();
+      viewDraft(id);
     }
 
-    // Wire events
+    // ── BLOG SETTINGS ──
+    const PERSONA = {"name":"Glen Robison","title":"New Braunfels TX REALTOR","tone":"Confident, direct, conversational. Write like a real person talking to a friend who asked for advice. No corporate speak, no AI-sounding filler, no fluff. Short sentences. Plain language. Say what you mean and move on.","target_audience":"Buyers, sellers, and relocating families in New Braunfels and the Texas Hill Country who want honest guidance from a local expert with 20+ years of contract negotiation experience.","bio":"Glen Robison is a trusted REALTOR with Popby Realty in New Braunfels. With 10 years in real estate and over 20 years negotiating with landowners and attorneys as an oil and gas landman, he brings contract discipline and strategic guidance to every transaction. While Glen has deep experience in luxury real estate, he is honored to work with anyone looking to buy or sell.","uvp":"20+ years of contract negotiation experience, luxury specialist who works with all price points, honest answers, picks up the phone.","keywords":"New Braunfels real estate, New Braunfels REALTOR, luxury homes New Braunfels, Hill Country real estate, Canyon Lake homes, Garden Ridge TX, New Braunfels relocation","word_count":"1800","cta_style":"direct, helpful, invite to call or text Glen; link to glenrobisonrealestate.com/contact","avoid":["em dashes","guarantees about prices or appreciation","fear-mongering or doom language","claims of being #1 unless verified","discerning clients, top-tier representation, or similar generic luxury language","legal or financial advice (offer general guidance + suggest speaking with pros)","Fair Housing Act violations, TREC violations, and permission-based marketing violations","copying MLS data verbatim behind paywalls","overly formal or salesy tone","AI-sounding phrases: 'in today's ever-changing market', 'navigating the landscape', 'comprehensive guide', 'dive deep into', 'leverage your', 'holistic approach'","filler transitions: 'furthermore', 'moreover', 'additionally', 'it is worth mentioning'","passive voice when active voice works"],"writing_rules":["No em dashes. Use periods, commas, or colons instead.","Sound natural, not salesy. Write like Glen talks to a client over coffee.","Use short declarative sentences. If a sentence has more than 20 words, split it.","Reference specific New Braunfels neighborhoods, streets, and landmarks.","Include real data points with sources.","Every post should answer a question someone would actually search for.","Internal link to at least 3 relevant pages on the site.","H2s should be phrased as questions for AEO/featured snippet targeting.","No AI crap. If it reads like ChatGPT wrote it, rewrite it. Real voice, real opinions, real takes.","Read it out loud. If you would not say it to a client sitting across from you, cut it.","Easy to scan. Short paragraphs (2-3 sentences max), bullets where they help, bold for key numbers."],"structure":{"hook":"Open with a question or bold statement","quick_answer":"2-3 sentence direct answer up front","body_sections":"3-5 sections with question-based H2 headings","faqs":"4-6 FAQs at the end","closing_cta":"Link to /contact with a direct invite to call","sources":"Cite data sources with URLs"}};
+
+    function loadSettings() {
+      const el = document.getElementById('view-settings');
+      el.innerHTML = '';
+
+      const p = PERSONA;
+
+      // Voice & Tone
+      el.appendChild(h('div', { className: 'source-card' },
+        h('div', { className: 'source-header' },
+          h('div', {}, h('div', { className: 'source-name' }, 'Voice & Tone'), h('div', { className: 'source-sub' }, 'How the AI writes as Glen')),
+        ),
+        h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' } },
+          h('div', {},
+            h('div', { className: 'section-title', style: { marginTop: '0' } }, 'Tone'),
+            h('p', { style: { color: 'var(--text)', fontSize: '14px' } }, p.tone),
+            h('div', { className: 'section-title' }, 'Target Audience'),
+            h('p', { style: { color: 'var(--muted)', fontSize: '13px', lineHeight: '1.6' } }, p.target_audience),
+          ),
+          h('div', {},
+            h('div', { className: 'section-title', style: { marginTop: '0' } }, 'Bio'),
+            h('p', { style: { color: 'var(--muted)', fontSize: '13px', lineHeight: '1.6' } }, p.bio),
+            h('div', { className: 'section-title' }, 'UVP'),
+            h('p', { style: { color: 'var(--muted)', fontSize: '13px', lineHeight: '1.6' } }, p.uvp),
+          ),
+        ),
+      ));
+
+      // Post Structure
+      el.appendChild(h('div', { className: 'source-card' },
+        h('div', { className: 'source-header' },
+          h('div', {}, h('div', { className: 'source-name' }, 'Post Structure'), h('div', { className: 'source-sub' }, 'How each blog post should be organized')),
+        ),
+        h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' } },
+          ...Object.entries(p.structure).map(([k, v]) =>
+            h('div', { style: { padding: '12px 16px', background: 'var(--surface2)', borderRadius: '6px' } },
+              h('div', { style: { fontSize: '10px', fontWeight: '700', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' } }, k.replace(/_/g, ' ')),
+              h('div', { style: { fontSize: '13px', color: 'var(--text)' } }, v),
+            )
+          ),
+        ),
+      ));
+
+      // Writing Rules
+      el.appendChild(h('div', { className: 'source-card' },
+        h('div', { className: 'source-header' },
+          h('div', {}, h('div', { className: 'source-name' }, 'Writing Rules'), h('div', { className: 'source-sub' }, 'Rules the AI must follow')),
+        ),
+        h('div', { style: { display: 'flex', flexDirection: 'column', gap: '8px' } },
+          ...p.writing_rules.map(rule =>
+            h('div', { style: { display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '10px 14px', background: 'var(--surface2)', borderRadius: '6px' } },
+              h('span', { style: { color: 'var(--green)', fontSize: '12px', marginTop: '1px' } }, '+'),
+              h('span', { style: { fontSize: '13px', color: 'var(--text)' } }, rule),
+            )
+          ),
+        ),
+      ));
+
+      // Avoid
+      el.appendChild(h('div', { className: 'source-card' },
+        h('div', { className: 'source-header' },
+          h('div', {}, h('div', { className: 'source-name' }, 'Avoid'), h('div', { className: 'source-sub' }, 'Things the AI must never do')),
+        ),
+        h('div', { style: { display: 'flex', flexDirection: 'column', gap: '8px' } },
+          ...p.avoid.map(item =>
+            h('div', { style: { display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '10px 14px', background: 'var(--surface2)', borderRadius: '6px' } },
+              h('span', { style: { color: 'var(--red)', fontSize: '12px', marginTop: '1px' } }, 'x'),
+              h('span', { style: { fontSize: '13px', color: 'var(--text)' } }, item),
+            )
+          ),
+        ),
+      ));
+
+      // SEO
+      el.appendChild(h('div', { className: 'source-card' },
+        h('div', { className: 'source-header' },
+          h('div', {}, h('div', { className: 'source-name' }, 'SEO & Content'), h('div', { className: 'source-sub' }, 'Keywords, length, CTA')),
+        ),
+        h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' } },
+          h('div', { style: { padding: '12px 16px', background: 'var(--surface2)', borderRadius: '6px' } },
+            h('div', { style: { fontSize: '10px', fontWeight: '700', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' } }, 'Word Count'),
+            h('div', { style: { fontSize: '20px', fontWeight: '800', color: 'var(--text)' } }, p.word_count),
+          ),
+          h('div', { style: { padding: '12px 16px', background: 'var(--surface2)', borderRadius: '6px' } },
+            h('div', { style: { fontSize: '10px', fontWeight: '700', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' } }, 'CTA Style'),
+            h('div', { style: { fontSize: '13px', color: 'var(--text)' } }, p.cta_style),
+          ),
+          h('div', { style: { padding: '12px 16px', background: 'var(--surface2)', borderRadius: '6px' } },
+            h('div', { style: { fontSize: '10px', fontWeight: '700', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' } }, 'Keywords'),
+            h('div', { style: { fontSize: '13px', color: 'var(--text)' } }, p.keywords),
+          ),
+        ),
+      ));
+    }
+
+    // ── WIRE EVENTS ──
     document.getElementById('login-btn').addEventListener('click', doLogin);
     document.getElementById('login-pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
-    document.getElementById('register-btn').addEventListener('click', doRegister);
-    document.getElementById('reg-pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') doRegister(); });
     document.getElementById('logout-btn').addEventListener('click', doLogout);
-    document.getElementById('show-register').addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('login-form').style.display = 'none';
-      document.getElementById('register-form').style.display = 'block';
-    });
-    document.getElementById('show-login').addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('register-form').style.display = 'none';
-      document.getElementById('login-form').style.display = 'block';
-    });
-    document.querySelectorAll('.tab').forEach(t => {
-      t.addEventListener('click', () => switchTab(t.dataset.tab));
-    });
+    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+
+    // ── INIT ──
+    if (TOKEN) {
+      if (isLocal) { showApp(); }
+      else { fetch(`${API}/stats`, { headers: { Authorization: `Bearer ${TOKEN}` } }).then(r => { if (r.ok) showApp(); }); }
+    }
   </script>
 </body>
 </html>
