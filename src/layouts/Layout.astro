@@ -103,6 +103,9 @@ const schema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <script data-site="glenrobisonrealestate.com" src="https://claw-analytics.emilly-whiteboston.workers.dev/tracker.js" defer></script>
+    <script is:inline>
+      fetch('/api/stats/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:location.pathname})}).catch(function(){});
+    </script>
     <slot name="head" />
   </head>
   <body>
