@@ -3,7 +3,7 @@ export async function onRequestPost(context) {
 
   try {
     const body = await request.json();
-    const { name, email, guide } = body;
+    const { name, email, phone, guide } = body;
 
     if (!email || !guide) {
       return new Response(JSON.stringify({ error: 'Email and guide are required' }), {
@@ -13,8 +13,8 @@ export async function onRequestPost(context) {
     }
 
     await env.DB.prepare(
-      'INSERT INTO leads (name, email, guide) VALUES (?, ?, ?)'
-    ).bind(name || '', email, guide).run();
+      'INSERT INTO leads (name, email, phone, guide) VALUES (?, ?, ?, ?)'
+    ).bind(name || '', email, phone || '', guide).run();
 
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,

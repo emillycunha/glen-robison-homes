@@ -307,20 +307,22 @@ const faqs = [
       });
     });
 
-    // Report form
+    // Report form -> D1
     const reportForm = document.getElementById('report-form') as HTMLFormElement;
-    reportForm?.addEventListener('submit', (e) => {
+    reportForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const data = new FormData(reportForm);
-      const name = data.get('first_name');
-      const email = data.get('email');
-      const phone = data.get('phone') || '';
-      const subject = encodeURIComponent('Mortgage Calculator Report Request');
-      const body = encodeURIComponent(
-        `Name: ${data.get('first_name')} ${data.get('last_name')}\nEmail: ${email}\nPhone: ${phone}\n\nRequesting a personalized mortgage estimate from the calculator page.`
-      );
-      window.location.href = `mailto:glenrobison@gmail.com?subject=${subject}&body=${body}`;
-      reportForm.reset();
+      const fd = new FormData(reportForm);
+      const name = `${fd.get('first_name')} ${fd.get('last_name')}`.trim();
+      const email = fd.get('email');
+      const phone = fd.get('phone') || '';
+      try {
+        await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, phone, guide: 'mortgage-calculator' }),
+        });
+      } catch {}
+      reportForm.innerHTML = '<p class="text-gold-bright text-lg font-semibold mb-2">Got it. Glen will be in touch.</p><p class="text-muted text-sm">He typically responds the same day. You can also call or text him at 830.730.7677.</p>';
     });
 
     calc();

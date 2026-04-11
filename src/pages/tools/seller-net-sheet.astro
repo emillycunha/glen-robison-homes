@@ -196,8 +196,24 @@ const faqs = [
     <div class="max-w-2xl mx-auto px-8 text-center">
       <p class="eyebrow mb-5">Free CMA</p>
       <h2 class="mb-4">Get Your Home's Real Value</h2>
-      <p class="text-muted text-base leading-[1.65] mb-10">Glen will run a full comparative market analysis on your property and give you an honest assessment of what it's worth in today's market.</p>
-      <a href="/contact" class="btn-gold">Request a Free CMA</a>
+      <p class="text-muted text-base leading-[1.65] mb-10">Enter your details and Glen will run a full comparative market analysis on your property. He will give you an honest assessment of what it is worth in today's market.</p>
+
+      <form id="cma-form" class="max-w-lg mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <input type="text" name="first_name" placeholder="First Name" required class="w-full bg-elevated border border-subtle px-4 py-3 text-text text-sm placeholder:text-dim focus:border-[var(--color-gold)] outline-none" />
+          <input type="text" name="last_name" placeholder="Last Name" required class="w-full bg-elevated border border-subtle px-4 py-3 text-text text-sm placeholder:text-dim focus:border-[var(--color-gold)] outline-none" />
+        </div>
+        <input type="email" name="email" placeholder="Email Address" required class="w-full bg-elevated border border-subtle px-4 py-3 text-text text-sm placeholder:text-dim focus:border-[var(--color-gold)] outline-none mb-4" />
+        <input type="tel" name="phone" placeholder="Phone (optional)" class="w-full bg-elevated border border-subtle px-4 py-3 text-text text-sm placeholder:text-dim focus:border-[var(--color-gold)] outline-none mb-6" />
+        <button type="submit" class="btn-gold w-full justify-center">Request My Free CMA</button>
+      </form>
+
+      <div id="cma-success" class="hidden">
+        <p class="text-gold-bright text-lg font-semibold mb-2">Got it. Glen will be in touch.</p>
+        <p class="text-muted text-sm">He typically responds the same day. You can also call or text him at 830.730.7677.</p>
+      </div>
+
+      <p class="text-dim text-xs mt-6">Glen responds within 24 hours. No spam, no pressure.</p>
     </div>
   </section>
 
@@ -311,5 +327,24 @@ const faqs = [
 
     [saleEl, payoffEl, commEl, titleEl, repairsEl, otherEl].forEach(el => el.addEventListener('input', calc));
     calc();
+
+    // CMA form -> D1
+    const cmaForm = document.getElementById('cma-form') as HTMLFormElement;
+    cmaForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(cmaForm);
+      const name = `${fd.get('first_name')} ${fd.get('last_name')}`.trim();
+      const email = fd.get('email');
+      const phone = fd.get('phone') || '';
+      try {
+        await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, phone, guide: 'seller-net-sheet-cma' }),
+        });
+      } catch {}
+      cmaForm.classList.add('hidden');
+      document.getElementById('cma-success')?.classList.remove('hidden');
+    });
   </script>
 </Layout>
