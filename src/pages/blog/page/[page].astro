@@ -61,8 +61,8 @@ const formatDate = (iso) =>
       <div class="max-w-7xl mx-auto px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
           {pagePosts.map((post, i) => (
-            <a href={`/blog/${post.slug}`} class="group block">
-              <div class="bg-[var(--color-bg)] border border-hair overflow-hidden hover:border-[var(--color-gold-dim)] transition-colors">
+            <a href={`/blog/${post.slug}`} class="group flex">
+              <div class="bg-[var(--color-bg)] border border-hair overflow-hidden hover:border-[var(--color-gold-dim)] transition-colors flex flex-col w-full">
                 <div class="relative overflow-hidden aspect-[4/3]">
                   <img
                     src={post.image ?? getImage(i)}
@@ -70,10 +70,11 @@ const formatDate = (iso) =>
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[800ms]"
                   />
                 </div>
-                <div class="p-5">
+                <div class="p-5 flex flex-col flex-1">
                   <p class="eyebrow mb-3 text-[10px]" style="color: var(--color-text-dim);">{post.category} · {formatDate(post.pubDate)}</p>
                   <h3 class="mb-3 group-hover:text-gold-bright transition-colors" style="font-size: 1.2rem; line-height: 1.25; color: var(--color-text);">{post.title}</h3>
-                  <p class="text-sm leading-[1.65]" style="color: var(--color-text-muted);">{post.excerpt}</p>
+                  <p class="text-sm leading-[1.65] mb-5" style="color: var(--color-text-muted);">{post.excerpt}</p>
+                  <span class="mt-auto eyebrow text-gold group-hover:text-gold-bright text-[11px]">Read More →</span>
                 </div>
               </div>
             </a>
