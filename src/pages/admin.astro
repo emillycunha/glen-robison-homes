@@ -108,6 +108,7 @@
     .mobile-nav-item:hover { color: var(--text); background: var(--surface2); }
     .mobile-nav-item.active { color: var(--gold); background: var(--gold-glow); }
 
+    .leads-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .settings-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .settings-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
 
@@ -120,6 +121,7 @@
       .source-card { padding: 16px; }
       .source-card .mini-stats { grid-template-columns: 1fr 1fr; }
       .source-card .mini-stat .mini-num { font-size: 22px; }
+      .leads-grid { grid-template-columns: 1fr; }
       .settings-grid-2 { grid-template-columns: 1fr; }
       .settings-grid-3 { grid-template-columns: 1fr; }
     }
@@ -650,7 +652,7 @@
       const start = (leadPage - 1) * LEADS_PER_PAGE;
       const paged = filtered.slice(start, start + LEADS_PER_PAGE);
 
-      const grid = h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' } });
+      const grid = h('div', { className: 'leads-grid' });
       el.appendChild(grid);
 
       paged.forEach(lead => {
