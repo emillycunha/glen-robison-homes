@@ -83,6 +83,47 @@
     .tab:hover { color: var(--muted); }
     .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
 
+    /* Mobile burger menu */
+    .burger-btn {
+      display: none; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      color: var(--muted); cursor: pointer; padding: 6px 10px; transition: all 0.2s;
+    }
+    .burger-btn:hover { color: var(--gold); border-color: var(--gold-d); }
+    .burger-btn svg { width: 20px; height: 20px; }
+    .mobile-nav {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+    }
+    .mobile-nav.open { display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; }
+    .mobile-nav-inner {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 8px; width: calc(100% - 32px); max-width: 320px;
+    }
+    .mobile-nav-item {
+      display: block; width: 100%; text-align: left; padding: 14px 18px; font-size: 13px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--dim); background: none; border: none; cursor: pointer;
+      border-radius: var(--radius-sm); transition: all 0.15s;
+    }
+    .mobile-nav-item:hover { color: var(--text); background: var(--surface2); }
+    .mobile-nav-item.active { color: var(--gold); background: var(--gold-glow); }
+
+    .settings-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .settings-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+    @media (max-width: 640px) {
+      .tabs { display: none; }
+      .burger-btn { display: flex; }
+      .topbar { padding: 0 16px; }
+      .content { padding: 20px 16px; }
+      .lead-card .lead-top { flex-direction: column; gap: 10px; }
+      .source-card { padding: 16px; }
+      .source-card .mini-stats { grid-template-columns: 1fr 1fr; }
+      .source-card .mini-stat .mini-num { font-size: 22px; }
+      .settings-grid-2 { grid-template-columns: 1fr; }
+      .settings-grid-3 { grid-template-columns: 1fr; }
+    }
+
     .content { max-width: 1100px; margin: 0 auto; padding: 32px 28px; }
 
     /* ── STAT CARDS ── */
@@ -317,6 +358,9 @@
       <div class="right">
         <a href="/" class="site-link" target="_blank">View Site</a>
         <span class="logout" id="logout-btn">Sign Out</span>
+        <button class="burger-btn" id="burger-btn" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
       </div>
     </div>
 
@@ -325,6 +369,16 @@
       <div class="tab" data-tab="leads">Leads</div>
       <div class="tab" data-tab="blog">Blog Drafts</div>
       <div class="tab" data-tab="settings">Blog Settings</div>
+    </div>
+
+    <!-- Mobile nav overlay -->
+    <div class="mobile-nav" id="mobile-nav">
+      <div class="mobile-nav-inner">
+        <button class="mobile-nav-item active" data-tab="stats">Stats</button>
+        <button class="mobile-nav-item" data-tab="leads">Leads</button>
+        <button class="mobile-nav-item" data-tab="blog">Blog Drafts</button>
+        <button class="mobile-nav-item" data-tab="settings">Blog Settings</button>
+      </div>
     </div>
 
     <div class="content">
@@ -376,11 +430,14 @@
 
     function switchTab(tab) {
       document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+      document.querySelectorAll('.mobile-nav-item').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
       ['stats','leads','blog','settings'].forEach(v => document.getElementById('view-'+v).style.display = v === tab ? '' : 'none');
       if (tab === 'stats') loadStats();
       if (tab === 'leads') loadLeads();
       if (tab === 'blog') loadDrafts();
       if (tab === 'settings') loadSettings();
+      // Close mobile nav
+      document.getElementById('mobile-nav')?.classList.remove('open');
     }
 
     function h(tag, attrs = {}, ...children) {
@@ -750,7 +807,7 @@
         h('div', { className: 'source-header' },
           h('div', {}, h('div', { className: 'source-name' }, 'Voice & Tone'), h('div', { className: 'source-sub' }, 'How the AI writes as Glen')),
         ),
-        h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' } },
+        h('div', { className: 'settings-grid-2' },
           h('div', {},
             h('div', { className: 'section-title', style: { marginTop: '0' } }, 'Tone'),
             h('p', { style: { color: 'var(--text)', fontSize: '14px' } }, p.tone),
@@ -771,7 +828,7 @@
         h('div', { className: 'source-header' },
           h('div', {}, h('div', { className: 'source-name' }, 'Post Structure'), h('div', { className: 'source-sub' }, 'How each blog post should be organized')),
         ),
-        h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' } },
+        h('div', { className: 'settings-grid-2' },
           ...Object.entries(p.structure).map(([k, v]) =>
             h('div', { style: { padding: '12px 16px', background: 'var(--surface2)', borderRadius: '6px' } },
               h('div', { style: { fontSize: '10px', fontWeight: '700', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' } }, k.replace(/_/g, ' ')),
@@ -816,7 +873,7 @@
         h('div', { className: 'source-header' },
           h('div', {}, h('div', { className: 'source-name' }, 'SEO & Content'), h('div', { className: 'source-sub' }, 'Keywords, length, CTA')),
         ),
-        h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' } },
+        h('div', { className: 'settings-grid-3' },
           h('div', { style: { padding: '12px 16px', background: 'var(--surface2)', borderRadius: '6px' } },
             h('div', { style: { fontSize: '10px', fontWeight: '700', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' } }, 'Word Count'),
             h('div', { style: { fontSize: '20px', fontWeight: '800', color: 'var(--text)' } }, p.word_count),
@@ -838,6 +895,9 @@
     document.getElementById('login-pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
     document.getElementById('logout-btn').addEventListener('click', doLogout);
     document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+    document.querySelectorAll('.mobile-nav-item').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+    document.getElementById('burger-btn')?.addEventListener('click', () => document.getElementById('mobile-nav')?.classList.toggle('open'));
+    document.getElementById('mobile-nav')?.addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
 
     // ── INIT ──
     if (TOKEN) {
