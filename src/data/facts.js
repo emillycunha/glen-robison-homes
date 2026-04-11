@@ -1,9 +1,9 @@
-// New Braunfels relocation facts, verified via Perplexity 2026-04-08
+// New Braunfels relocation facts, verified via Perplexity 2026-04-11
 
 export const facts = {
   population: {
-    current: '116,477',
-    year: 2024,
+    current: '128,874',
+    year: 2026,
     growthSince2020: '40.56%',
     metro: '2.813 million (San Antonio–New Braunfels metro, 2025)',
     sources: [
@@ -13,9 +13,9 @@ export const facts = {
     ],
   },
   housing: {
-    medianRealtor: '$379,950',
-    medianZillow: '$345,084',
-    daysOnMarket: 84,
+    medianRealtor: '$394,000',
+    medianZillow: '$307,000',
+    daysOnMarket: 108,
     sources: [
       { label: 'Realtor.com', url: 'https://www.realtor.com/local/market/texas/comal-county/new-braunfels' },
       { label: 'Zillow', url: 'https://www.zillow.com/home-values/39966/new-braunfels-tx/' },
@@ -89,7 +89,7 @@ export const facts = {
     nbisd: '$1.0377 per $100',
     typicalEffective: '~1.79% (in-city)',
     homesteadExemption: '$140,000 state-mandated school district homestead (2026)',
-    seniorExemption: 'Additional $40K-$50K on school taxes for 65+, plus local options',
+    seniorExemption: 'Additional $60K on school taxes for 65+ (total $200K school exemption), plus local options',
     protestDeadline: 'May 15 or within 30 days of Notice of Appraised Value',
     sources: [
       { label: 'Comal County 2025 Tax Rates', url: 'https://www.comalcounty.gov/DocumentCenter/View/4073/2025-Tax-Rates-for-all-Taxing-Units-PDF' },
