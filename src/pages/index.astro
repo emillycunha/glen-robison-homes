@@ -4,7 +4,7 @@ import CTABand from '../components/CTABand.astro';
 import { neighborhoods } from '../data/neighborhoods.js';
 import { testimonials } from '../data/testimonials.js';
 
-const luxuryNeighborhoods = neighborhoods.slice(0, 6);
+const luxuryNeighborhoods = [...neighborhoods.slice(0, 5), neighborhoods.find(n => n.slug === 'john-newcombe-estate')];
 const featuredTestimonials = testimonials.slice(0, 4);
 ---
 
@@ -141,7 +141,7 @@ const featuredTestimonials = testimonials.slice(0, 4);
         </div>
       </div>
       <div class="mt-14 text-center text-dim text-xs uppercase tracking-[0.2em]">
-        Price range $183K – $1.8M · 14 sales in the last 12 months · Verified on <a href="https://www.zillow.com/profile/Glen%20Robison#reviews" target="_blank" rel="noopener" class="text-gold hover:text-gold-bright">Zillow</a>
+        Top Agent on Zillow · Price range $183K – $1.8M · 14 sales in the last 12 months · Verified on <a href="https://www.zillow.com/profile/Glen%20Robison#reviews" target="_blank" rel="noopener" class="text-gold hover:text-gold-bright">Zillow</a>
       </div>
     </div>
   </section>
@@ -230,7 +230,7 @@ const featuredTestimonials = testimonials.slice(0, 4);
       </div>
 
       <div class="mt-16 text-center">
-        <a href="/neighborhoods" class="btn-outline">Full Index →</a>
+        <a href="/neighborhoods" class="btn-outline">More Neighborhoods</a>
       </div>
     </div>
   </section>
@@ -251,10 +251,10 @@ const featuredTestimonials = testimonials.slice(0, 4);
           A REALTOR <span class="text-gold">who answers.</span>
         </h2>
         <p class="text-base md:text-lg leading-[1.7] mb-5">
-          Glen is a REALTOR with Popby Realty in New Braunfels. Before real estate, he worked oil and gas as a landman, running research and contract work. He was good at it. But he missed helping real people. In 2016 he moved into homes and hasn't looked back.
+          Glen is a trusted REALTOR with Popby Realty in New Braunfels. With 10 years in real estate and over 20 years negotiating with landowners and attorneys as an oil and gas landman, he brings contract discipline and strategic guidance to every deal.
         </p>
         <p class="text-base md:text-lg leading-[1.7] mb-10">
-          Today Glen focuses on luxury homes in the Hill Country. The custom builds, the bigger stakes, and the harder deals are the part he loves. Outside of work he's a husband, a dad to three daughters, and active in his church and community.
+          While Glen has deep experience in luxury real estate, he is honored to work with anyone looking to buy or sell: first-time buyers, Veterans, relocating families, and clients at every price point. Outside of work he's a husband, a dad to three daughters, and active in his church and community.
         </p>
         <a href="/about" class="btn-outline">Read More</a>
       </div>
@@ -295,7 +295,7 @@ const featuredTestimonials = testimonials.slice(0, 4);
       </div>
 
       <div class="mt-12 text-center flex flex-wrap gap-4 justify-center">
-        <a href="/testimonials" class="btn-gold">Read All Reviews</a>
+        <a href="/testimonials" class="btn-gold">Read More Reviews</a>
         <a href="https://www.zillow.com/profile/Glen%20Robison#reviews" target="_blank" rel="noopener" class="btn-outline">Verified on Zillow →</a>
       </div>
     </div>

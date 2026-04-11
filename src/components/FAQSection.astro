@@ -9,12 +9,14 @@ interface Props {
   eyebrow?: string;
   title?: string;
   subtitle?: string;
+  light?: boolean;
 }
 const {
   faqs,
   eyebrow = 'FAQ',
   title = 'Frequently Asked Questions',
   subtitle,
+  light = true,
 } = Astro.props;
 
 const schema = {
@@ -30,7 +32,7 @@ const schema = {
 
 <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-<section class="py-24 border-t border-hair">
+<section class={`py-24 border-t ${light ? 'light-section border-[#d8d3cb]' : 'border-hair'}`}>
   <div class="max-w-4xl mx-auto px-8">
     <div class="mb-12">
       <p class="eyebrow mb-5">{eyebrow}</p>
@@ -40,7 +42,7 @@ const schema = {
 
     <div class="space-y-8">
       {faqs.map(f => (
-        <div class="border-b border-hair pb-8">
+        <div class={`border-b pb-8 ${light ? 'border-[#d8d3cb]' : 'border-hair'}`}>
           <h3 class="mb-4 text-gold-bright">{f.q}</h3>
           <p class="text-muted leading-[1.75] mb-4">{f.a}</p>
           {f.sources && f.sources.length > 0 && (

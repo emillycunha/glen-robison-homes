@@ -8,9 +8,9 @@ export const testimonials = [
     context: "Relocation · virtual process",
   },
   {
-    quote: "Glen was a life saver during our home buying process. He had not worked with a contingency contract before ours but was great at helping us navigate selling our home with a contingency and purchasing our new home on a contingency. He is knowledgeable and operates with a high level of integrity.",
-    author: "Rob W.",
-    context: "Dual contingency transaction",
+    quote: "Glen did a great job acting as our buyer's agent during our recent home purchase. After hearing our criteria, he immediately identified a subdivision. Of course, we initially ignored his recommendation and looked at houses in other areas. Once we looked at a home he recommended in the subdivision he originally suggested, with his help, we bought it. So, don't ignore his suggestions. He's very good at what he does and that extends to the offer contract and price negotiations. We highly recommend Glen.",
+    author: "James B.",
+    context: "Buyer representation · 2025",
   },
   {
     quote: "Glen was very responsive in helping us negotiate the New Braunfels / San Antonio housing market. He suggested properties based upon our requirements and was quick to arrange showings. Once we made an offer, Glen was instrumental in working with the sellers to resolve septic system and cloudy window issues.",

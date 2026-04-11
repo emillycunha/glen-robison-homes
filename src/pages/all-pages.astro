@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pages = [
+  { label: 'Homepage', href: '/' },
+  { label: 'Buyers', href: '/buyers' },
+  { label: 'Sell', href: '/sell' },
+  { label: 'Luxury', href: '/luxury' },
+  { label: 'New Construction', href: '/new-construction' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Search', href: '/search' },
+  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Neighborhoods Index', href: '/neighborhoods' },
+  { label: 'Copper Ridge', href: '/neighborhoods/copper-ridge' },
+  { label: 'Vintage Oaks', href: '/neighborhoods/vintage-oaks' },
+  { label: 'Riverforest', href: '/neighborhoods/riverforest' },
+  { label: 'River Chase', href: '/neighborhoods/river-chase' },
+  { label: 'Havenwood', href: '/neighborhoods/havenwood-at-hunters-crossing' },
+  { label: 'Manor Creek', href: '/neighborhoods/manor-creek' },
+  { label: 'John Newcombe Estate', href: '/neighborhoods/john-newcombe-estate' },
+  { label: 'Mayfair', href: '/neighborhoods/mayfair' },
+  { label: 'Veramendi', href: '/neighborhoods/veramendi' },
+  { label: 'Canyon Lake', href: '/communities/canyon-lake' },
+  { label: 'Garden Ridge', href: '/communities/garden-ridge' },
+  { label: 'Living / Guides Index', href: '/living' },
+  { label: 'Why Move to NB', href: '/living/why-move-to-new-braunfels' },
+  { label: 'Cost of Living & Schools', href: '/living/cost-of-living-and-schools' },
+  { label: 'Things to Do', href: '/living/things-to-do' },
+  { label: "Buyer's Guide", href: '/buyers-guide' },
+  { label: "Seller's Guide", href: '/sellers-guide' },
+  { label: 'Relocation Guide', href: '/relocation-guide' },
+  { label: 'Mortgage Calculator', href: '/tools/mortgage-calculator' },
+  { label: 'Seller Net Sheet', href: '/tools/seller-net-sheet' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Privacy', href: '/privacy' },
+  { label: 'Terms', href: '/terms' },
+  { label: '404', href: '/404' },
+];
+---
+
+<Layout title="All Pages (Test)" description="Temporary page index for testing.">
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-8">
+      <h1 class="mb-4" style="font-size: 2rem;">All Pages</h1>
+      <p class="text-muted mb-10">{pages.length} pages. Click to test, use the back button below on each page.</p>
+      <div class="space-y-2">
+        {pages.map((p, i) => (
+          <a href={p.href} class="flex items-center gap-4 py-3 px-4 border-b border-hair hover:bg-elevated transition-colors group">
+            <span class="text-gold text-sm font-mono w-8">{String(i + 1).padStart(2, '0')}</span>
+            <span class="text-cream group-hover:text-gold-bright">{p.label}</span>
+            <span class="text-dim text-sm ml-auto">{p.href}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

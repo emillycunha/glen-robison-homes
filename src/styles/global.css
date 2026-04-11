@@ -110,6 +110,9 @@ p { color: var(--color-text); font-weight: 400; }
 .light-section .text-gold-bright,
 .light-section .text-gold { color: #a07d45; }
 .light-section .gold-rule { background: #a07d45; }
+.light-section .bg-gold-deep { background: #d8d3cb; }
+.light-section .text-muted { color: #4a4540; }
+.light-section .text-dim { color: #8a8580; }
 .light-section .btn-outline {
   color: #8a6d3a;
   border-color: #8a6d3a;
