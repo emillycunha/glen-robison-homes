@@ -45,7 +45,8 @@ const blogPostingSchema = {
   '@type': 'BlogPosting',
   headline: post.title,
   description: post.description,
-  datePublished: post.pubDate,
+  datePublished: `${post.pubDate}T06:00:00-05:00`,
+  image: post.image ? `${siteUrl}${post.image}` : `${siteUrl}/images/hero-blog.webp`,
   author: {
     '@type': 'Person',
     name: post.author,
