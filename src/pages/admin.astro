@@ -446,7 +446,8 @@
     async function api(path, opts = {}) {
       if (isLocal) { const key = Object.keys(MOCK).find(k => path.startsWith(k)); return key ? MOCK[key] : {}; }
       const r = await fetch(`${API}${path}`, { ...opts, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}`, ...opts.headers } });
-      return r.json();
+      if (!r.ok) return {};
+      return r.json().catch(() => ({}));
     }
 
     function fmtDate(d) { return d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''; }
@@ -483,7 +484,7 @@
       const el = document.getElementById('view-stats');
       el.innerHTML = '<div class="loading">Loading stats...</div>';
       const days = document.getElementById('stats-days')?.value || '30';
-      const [data, gsc] = await Promise.all([api(`/stats?days=${days}`), api('/stats/gsc')]);
+      const [data, gsc] = await Promise.all([api(`/stats?days=${days}`).catch(() => ({})), api('/stats/gsc').catch(() => ({}))]);
       el.innerHTML = '';
 
       // Date filter
