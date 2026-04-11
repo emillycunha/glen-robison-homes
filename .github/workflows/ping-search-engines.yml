@@ -1,0 +1,55 @@
+name: Ping Search Engines
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/data/blog-posts.js'
+      - 'src/pages/blog/**'
+      - 'src/pages/neighborhoods/**'
+      - 'src/pages/communities/**'
+      - 'src/pages/living/**'
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Cloudflare Pages deploy
+        run: sleep 120
+
+      - name: Fetch sitemap and ping IndexNow
+        env:
+          SITE: https://glenrobisonrealestate.com
+          KEY: dc6986b3ccd8d34107555bd0b59d0e13
+        run: |
+          # Extract URLs from live sitemap
+          URLS=$(curl -s "$SITE/sitemap-0.xml" | grep -oP '(?<=<loc>)[^<]+')
+          URL_COUNT=$(echo "$URLS" | wc -l)
+          echo "Found $URL_COUNT URLs"
+
+          # Build JSON payload
+          URL_JSON=$(echo "$URLS" | jq -R . | jq -s .)
+          PAYLOAD=$(jq -n \
+            --arg host "glenrobisonrealestate.com" \
+            --arg key "$KEY" \
+            --arg keyLocation "$SITE/$KEY.txt" \
+            --argjson urlList "$URL_JSON" \
+            '{host: $host, key: $key, keyLocation: $keyLocation, urlList: $urlList}')
+
+          # IndexNow
+          echo "--- IndexNow (api.indexnow.org) ---"
+          curl -s -o /dev/null -w "HTTP %{http_code}\n" -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$PAYLOAD"
+
+          echo "--- IndexNow (Bing) ---"
+          curl -s -o /dev/null -w "HTTP %{http_code}\n" -X POST "https://www.bing.com/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$PAYLOAD"
+
+          echo "--- IndexNow (Yandex) ---"
+          curl -s -o /dev/null -w "HTTP %{http_code}\n" -X POST "https://yandex.com/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$PAYLOAD"
+
+          echo "Done. $URL_COUNT URLs submitted."
