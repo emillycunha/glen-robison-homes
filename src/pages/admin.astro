@@ -26,8 +26,9 @@
     #login h1 { font-size: 20px; font-weight: 700; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em; }
     #login input { width: 100%; padding: 12px 16px; background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-size: 14px; margin-bottom: 12px; outline: none; }
     #login input:focus { border-color: var(--gold); }
-    #login button { width: 100%; padding: 14px; background: var(--gold); color: #0a0a0a; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; border: none; cursor: pointer; }
+    #login button { width: 100%; padding: 14px; background: var(--gold); color: #0a0a0a; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; border: none; cursor: pointer; margin-top: 4px; }
     #login button:hover { background: var(--gold-b); }
+    #login input[type="email"] { margin-bottom: 12px; }
     #login .err { color: var(--red); font-size: 13px; margin-top: 8px; }
 
     /* Shell */
@@ -95,9 +96,20 @@
   <!-- LOGIN -->
   <div id="login">
     <h1>Admin</h1>
-    <input type="password" id="token-input" placeholder="Admin token" />
-    <button id="login-btn">Sign In</button>
-    <div class="err" id="login-err"></div>
+    <div id="login-form">
+      <input type="email" id="login-email" placeholder="Email" />
+      <input type="password" id="login-pass" placeholder="Password" />
+      <button id="login-btn">Sign In</button>
+      <div class="err" id="login-err"></div>
+    </div>
+    <div id="register-form" style="display:none">
+      <input type="text" id="reg-name" placeholder="Name" />
+      <input type="email" id="reg-email" placeholder="Email" />
+      <input type="password" id="reg-pass" placeholder="Password" />
+      <button id="register-btn">Create Account</button>
+      <div class="err" id="register-err"></div>
+      <p style="margin-top:16px;font-size:12px;color:var(--dim)"><a href="#" id="show-login" style="color:var(--gold)">Back to sign in</a></p>
+    </div>
   </div>
 
   <!-- APP -->
@@ -125,20 +137,72 @@
     const API = '/api';
 
     // Auth
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+    function showApp() {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      loadStats();
+    }
+
     function doLogin() {
-      TOKEN = document.getElementById('token-input').value.trim();
-      if (!TOKEN) return;
-      localStorage.setItem('admin_token', TOKEN);
-      fetch(`${API}/stats`, { headers: { Authorization: `Bearer ${TOKEN}` } })
-        .then(r => {
-          if (!r.ok) throw new Error();
-          document.getElementById('login').style.display = 'none';
-          document.getElementById('app').style.display = 'block';
-          loadStats();
+      const email = document.getElementById('login-email').value.trim();
+      const pass = document.getElementById('login-pass').value;
+      if (!email || !pass) return;
+
+      if (isLocal) {
+        TOKEN = 'local-dev';
+        localStorage.setItem('admin_token', TOKEN);
+        showApp();
+        return;
+      }
+
+      fetch(`${API}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass }),
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) {
+            document.getElementById('login-err').textContent = data.error;
+            return;
+          }
+          TOKEN = data.token;
+          localStorage.setItem('admin_token', TOKEN);
+          showApp();
         })
         .catch(() => {
-          document.getElementById('login-err').textContent = 'Invalid token';
-          localStorage.removeItem('admin_token');
+          document.getElementById('login-err').textContent = 'Connection error';
+        });
+    }
+
+    function doRegister() {
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const pass = document.getElementById('reg-pass').value;
+      if (!email || !pass) return;
+
+      fetch(`${API}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password: pass }),
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) {
+            document.getElementById('register-err').textContent = data.error;
+            return;
+          }
+          document.getElementById('register-form').style.display = 'none';
+          document.getElementById('login-form').style.display = 'block';
+          document.getElementById('login-email').value = email;
+          document.getElementById('login-err').textContent = '';
+          document.getElementById('login-err').style.color = 'var(--green)';
+          document.getElementById('login-err').textContent = 'Account created. Sign in.';
+        })
+        .catch(() => {
+          document.getElementById('register-err').textContent = 'Connection error';
         });
     }
 
@@ -148,16 +212,14 @@
       location.reload();
     }
 
-    // Init
+    // Init: check existing session
     if (TOKEN) {
-      fetch(`${API}/stats`, { headers: { Authorization: `Bearer ${TOKEN}` } })
-        .then(r => {
-          if (r.ok) {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('app').style.display = 'block';
-            loadStats();
-          }
-        });
+      if (isLocal) {
+        showApp();
+      } else {
+        fetch(`${API}/stats`, { headers: { Authorization: `Bearer ${TOKEN}` } })
+          .then(r => { if (r.ok) showApp(); });
+      }
     }
 
     // Tabs
@@ -349,8 +411,20 @@
 
     // Wire events
     document.getElementById('login-btn').addEventListener('click', doLogin);
-    document.getElementById('token-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('login-pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('register-btn').addEventListener('click', doRegister);
+    document.getElementById('reg-pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') doRegister(); });
     document.getElementById('logout-btn').addEventListener('click', doLogout);
+    document.getElementById('show-register').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('register-form').style.display = 'block';
+    });
+    document.getElementById('show-login').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('register-form').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    });
     document.querySelectorAll('.tab').forEach(t => {
       t.addEventListener('click', () => switchTab(t.dataset.tab));
     });

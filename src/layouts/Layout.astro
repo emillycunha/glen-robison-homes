@@ -100,6 +100,7 @@ const schema = {
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script data-site="glenrobisonrealestate.com" src="https://claw-analytics.emilly-whiteboston.workers.dev/tracker.js" defer></script>
     <slot name="head" />
   </head>
   <body>
@@ -287,14 +288,6 @@ const schema = {
       close?.addEventListener('click', shut);
       backdrop?.addEventListener('click', shut);
 
-      // Pageview tracker
-      if (!location.pathname.startsWith('/admin')) {
-        fetch('/api/stats/track', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ path: location.pathname }),
-        }).catch(() => {});
-      }
     </script>
 
     <VIPModal />

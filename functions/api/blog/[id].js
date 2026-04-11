@@ -6,7 +6,7 @@ export async function onRequestOptions() {
 
 // GET single draft (full content)
 export async function onRequestGet(context) {
-  const auth = checkAuth(context.request, context.env);
+  const auth = await checkAuth(context.request, context.env);
   if (auth) return auth;
 
   const id = context.params.id;
@@ -20,7 +20,7 @@ export async function onRequestGet(context) {
 
 // PUT update draft
 export async function onRequestPut(context) {
-  const auth = checkAuth(context.request, context.env);
+  const auth = await checkAuth(context.request, context.env);
   if (auth) return auth;
 
   const id = context.params.id;

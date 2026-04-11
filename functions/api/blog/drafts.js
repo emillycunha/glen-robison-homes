@@ -5,7 +5,7 @@ export async function onRequestOptions() {
 }
 
 export async function onRequestGet(context) {
-  const auth = checkAuth(context.request, context.env);
+  const auth = await checkAuth(context.request, context.env);
   if (auth) return auth;
 
   const url = new URL(context.request.url);

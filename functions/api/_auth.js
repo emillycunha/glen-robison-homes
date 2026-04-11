@@ -1,12 +1,26 @@
-export function checkAuth(request, env) {
+export async function checkAuth(request, env) {
   const token = request.headers.get('Authorization')?.replace('Bearer ', '');
-  if (!token || token !== env.ADMIN_TOKEN) {
+  if (!token) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
     });
   }
-  return null;
+
+  // Check API token (OpenClaw)
+  if (token === env.ADMIN_TOKEN) return null;
+
+  // Check session token (admin UI)
+  const session = await env.DB.prepare(
+    'SELECT * FROM admin_sessions WHERE token = ?'
+  ).bind(token).first();
+
+  if (session) return null;
+
+  return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+    status: 401,
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
 
 export function cors(response) {
